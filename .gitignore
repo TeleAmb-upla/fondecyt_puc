@@ -1,15 +1,15 @@
-# Python
+# --- Solo frontend en GitHub (TeleAmb) ---
+# Pipeline y datos pesados quedan en local; no subir:
+scripts/
+requirements.txt
+config.yaml
+data/
+
+# Python local
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 
-# GeoTIFF (pesados; se regeneran con scripts/gee/download_s2_weekly.py)
-data/sentinel2/**/*.tif
-data/sentinel2/**/*.tiff
-
-# WebP generados (regenerar con build_sentinel2_local.py)
-data_static/sentinel2/rasters/
-
-# Estado local de sincronización Drive
+# Estado local de sincronización Drive (si existe en scripts/)
 scripts/gee/drive_sync_keys_state.json
