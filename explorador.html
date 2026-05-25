@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pumahuida · Fondecyt PUC</title>
+  <link rel="icon" href="assets/img/puc_escudo.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --puc-blue: #003366;
+      --puc-gold: #ffc72c;
+      --accent: #1d6b4a;
+      --ink: #122018;
+      --muted: #4a5c4e;
+      --panel-w: clamp(300px, 32vw, 400px);
+      --map-chrome-inset-left: calc(var(--panel-w) + 28px);
+      --chart-dock-offset: calc(36vh + 72px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; font-family: 'Source Sans 3', system-ui, sans-serif; color: var(--ink); }
+    .app { position: relative; width: 100%; height: 100dvh; background: #0d120f; }
+    #map { position: absolute; inset: 0; z-index: 0; }
+    .panel {
+      position: absolute; z-index: 500;
+      left: max(12px, env(safe-area-inset-left));
+      top: max(12px, env(safe-area-inset-top));
+      bottom: max(12px, env(safe-area-inset-bottom));
+      width: var(--panel-w);
+      min-height: 0;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      background: linear-gradient(175deg, #fbfdf9 0%, #f3f8f3 38%, #ebf3ec 100%);
+      border: 1px solid rgba(0, 51, 102, 0.12);
+      border-radius: 22px;
+      box-shadow: 0 12px 48px rgba(18, 42, 28, 0.18);
+      padding: 12px 16px 14px;
+    }
+    .panel__scroll {
+      flex: 0 0 auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    .panel__spacer {
+      flex: 1 1 auto;
+      min-height: 0;
+      width: 100%;
+    }
+    .brand-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid rgba(0,51,102,.1); }
+    .brand-row img { height: 44px; width: auto; max-width: 88px; object-fit: contain; }
+    .brand-row .brand-text h1 { font-family: Outfit, sans-serif; font-size: 1rem; color: var(--puc-blue); }
+    .brand-row .brand-text p { font-size: 0.75rem; color: var(--muted); }
+    label, .lbl { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 10px 0 4px; }
+    select { width: 100%; padding: 8px 10px; border-radius: 10px; border: 1px solid rgba(0,51,102,.15); font: inherit; background: #fff; }
+    .source-box { margin-top: 8px; padding: 10px; border-radius: 14px; background: rgba(0,51,102,.04); border: 1px solid rgba(0,51,102,.08); }
+    .source-box__title { font-size: 0.72rem; font-weight: 700; color: var(--puc-blue); margin-bottom: 8px; }
+    .source-pills { display: flex; gap: 8px; }
+    .source-pill {
+      flex: 1; display: flex; align-items: center; justify-content: center; padding: 8px;
+      border-radius: 14px; border: 2px solid rgba(0,51,102,.12); background: #fff; cursor: pointer;
+      transition: border-color .12s, box-shadow .12s, opacity .12s;
+    }
+    .source-pill img { width: 48px; height: 48px; object-fit: contain; opacity: .75; }
+    .source-pill--active { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(29,107,74,.2); }
+    .source-pill--active img { opacity: 1; }
+    .source-pill:disabled { opacity: .45; cursor: not-allowed; }
+    .hint { font-size: 0.78rem; color: var(--muted); margin-top: 6px; line-height: 1.35; }
+    .hint--warn { color: #9a6700; background: #fff8e6; padding: 8px 10px; border-radius: 10px; margin-top: 8px; }
+    #droneFields[hidden] { display: none !important; }
+    .map-zoom-pills {
+      position: absolute; z-index: 600; top: 12px; right: 12px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .map-zoom-pills button {
+      width: 40px; height: 40px; border: none; border-radius: 999px;
+      background: rgba(255,255,255,.96); color: var(--puc-blue); font-size: 1.25rem; font-weight: 700;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.18);
+    }
+    .map-zoom-pills button:hover { background: #fff; }
+    .map-zoom-pills button.fit { font-size: 0.95rem; }
+    .bottom-stack {
+      position: absolute; z-index: 500;
+      left: calc(var(--panel-w) + 24px); right: 12px; bottom: 12px;
+      display: flex; flex-direction: column; gap: 0; pointer-events: none;
+    }
+    .bottom-stack > * { pointer-events: auto; }
+    .sat-period-float {
+      width: 100%;
+      padding: 8px 12px 10px;
+      background: linear-gradient(165deg, rgba(255,255,255,.98) 0%, rgba(251,253,250,.95) 100%);
+      border: 1px solid rgba(0, 51, 102, 0.14);
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 8px 28px rgba(18, 42, 28, 0.12), inset 0 1px 0 rgba(255,255,255,.92);
+    }
+    .sat-period-toolbar { width: 100%; }
+    .sat-period-toolbar__row { display: flex; align-items: center; gap: 8px; width: 100%; }
+    .sat-period-custom-slider {
+      flex: 1; min-width: 0; position: relative; height: 36px;
+      display: flex; align-items: center; touch-action: none;
+    }
+    .sat-period-custom-slider__track {
+      position: relative; width: 100%; height: 7px; border-radius: 999px;
+      background: rgba(0, 51, 102, 0.14); cursor: pointer;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,.06);
+    }
+    .sat-period-custom-slider__fill {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(45, 157, 110, 0.35), rgba(0, 51, 102, 0.5));
+      pointer-events: none;
+    }
+    .sat-period-custom-slider__thumb {
+      position: absolute; left: 0%; top: 50%; transform: translate(-50%, -50%);
+      min-width: 4.75rem; max-width: min(40vw, 10rem);
+      padding: 6px 11px 7px; border-radius: 12px;
+      background: var(--puc-blue); color: #fff;
+      font-size: 0.72rem; font-weight: 800; text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 51, 102, 0.35);
+      pointer-events: none; z-index: 2;
+      border: 1.5px solid rgba(255,255,255,.35);
+    }
+    .sat-period-custom-slider__thumb-label {
+      display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .sat-period-step {
+      flex: 0 0 auto; width: 38px; height: 38px; border-radius: 12px;
+      border: 1.5px solid rgba(0, 51, 102, 0.28);
+      background: rgba(255,255,255,.96); color: var(--puc-blue);
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0; cursor: pointer; font-family: inherit;
+    }
+    .sat-period-step:hover:not(:disabled) { background: #eef5f0; border-color: var(--accent); }
+    .sat-period-step:disabled { opacity: 0.45; cursor: default; }
+    .sat-period-step svg { display: block; }
+    .chart-wrap {
+      background: rgba(255,255,255,0.97); border-radius: 0 0 16px 16px;
+      border: 1px solid rgba(0, 51, 102, 0.14); border-top: none;
+      padding: 12px 14px 10px; box-shadow: 0 8px 32px rgba(0,0,0,.2); max-height: 36vh;
+    }
+    .chart-wrap h2 { font-family: Outfit, sans-serif; font-size: 0.95rem; color: var(--puc-blue); }
+    .chart-wrap .sub { font-size: 0.75rem; color: var(--muted); margin: 2px 0 8px; }
+    .chart-canvas { height: min(26vh, 200px); }
+    .drone-opacity {
+      position: absolute; z-index: 550; right: 12px; bottom: calc(36vh + 120px);
+      background: rgba(255,255,255,.96); padding: 10px 12px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
+      min-width: 200px;
+    }
+    .drone-opacity[hidden] { display: none !important; }
+    .drone-opacity input { width: 100%; margin-top: 4px; }
+    .colorbar-box {
+      position: absolute; z-index: 550;
+      left: calc(var(--map-chrome-inset-left) + max(10px, env(safe-area-inset-left)));
+      bottom: var(--chart-dock-offset);
+      top: auto;
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(0, 51, 102, 0.12);
+      border-radius: 18px;
+      padding: 10px 12px 11px;
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      width: 5.25rem;
+      box-shadow: 0 8px 28px rgba(0,0,0,.1);
+      pointer-events: none;
+    }
+    .colorbar-title {
+      font-size: 0.72rem; font-weight: 700; color: var(--muted);
+      text-align: center; line-height: 1.25;
+      width: 100%;
+    }
+    .colorbar-scale {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+    }
+    .colorbar-value {
+      font-size: 0.74rem;
+      color: var(--ink);
+      font-weight: 700;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+      width: 100%;
+    }
+    .colorbar-gradient-wrap {
+      position: relative;
+      width: 16px;
+      flex-shrink: 0;
+    }
+    .colorbar-gradient {
+      display: block;
+      height: 148px;
+      width: 16px;
+      border-radius: 999px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+    }
+    .colorbar-value--center {
+      position: absolute;
+      left: calc(100% + 5px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: auto;
+      min-width: 2rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-align: left;
+    }
+    .colorbar-value--center[hidden] { display: none; }
+    @media (max-width: 720px) {
+      :root {
+        --panel-w: min(100% - 24px, 400px);
+        --chart-dock-offset: calc(42vh + 80px);
+      }
+      .bottom-stack { left: 12px; margin-left: 0; }
+      .map-zoom-pills { top: 12px; bottom: auto; right: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div id="map"></div>
+    <div class="colorbar-box" id="colorbarBox" aria-hidden="true">
+      <div class="colorbar-title" id="cbTitle">NDVI</div>
+      <div class="colorbar-scale">
+        <span class="colorbar-value" id="cbMax"></span>
+        <div class="colorbar-gradient-wrap">
+          <div class="colorbar-gradient" id="cbGradient" role="img" aria-hidden="true"></div>
+          <span class="colorbar-value colorbar-value--center" id="cbCenter" hidden></span>
+        </div>
+        <span class="colorbar-value" id="cbMin"></span>
+      </div>
+    </div>
+    <div class="map-zoom-pills" aria-label="Zoom del mapa">
+      <button type="button" id="zoomIn" title="Acercar">+</button>
+      <button type="button" id="zoomOut" title="Alejar">−</button>
+      <button type="button" id="zoomFit" class="fit" title="Encuadrar vista">⌂</button>
+    </div>
+    <aside class="panel">
+      <div class="brand-row">
+        <img src="assets/img/puc_logo.png" alt="Pontificia Universidad Católica de Chile" onerror="this.onerror=null;this.src='assets/img/puc_escudo.svg'">
+        <img src="assets/img/teleamb_logo.png" alt="Teleamb UPLA">
+        <div class="brand-text">
+          <h1>Pumahuida</h1>
+          <p>Fondecyt · PUC &amp; Teleamb</p>
+        </div>
+      </div>
+      <div class="panel__scroll">
+      <div class="source-box">
+        <div class="source-box__title">Origen</div>
+        <div class="source-pills" role="group" aria-label="Origen del mapa">
+          <button type="button" class="source-pill source-pill--active" id="pillSat" aria-pressed="true" title="Satélite semanal">
+            <img src="assets/img/satelite.png" alt="">
+          </button>
+          <button type="button" class="source-pill" id="pillDrone" aria-pressed="false" title="Ortofoto dron" disabled>
+            <img src="assets/img/dron.png" alt="">
+          </button>
+        </div>
+      </div>
+      <p class="hint" id="sourceHint">Satélite: semanas ISO y todos los índices del compuesto S2.</p>
+      <p class="hint hint--warn" id="dronePendingHint" hidden>Aún no hay ortofotos de dron en <code>data/drone/</code>. Cuando las cargues, habilitaremos este origen.</p>
+      <label for="selParcel">Parcela</label>
+      <select id="selParcel"></select>
+      <div id="satFields">
+        <label for="selBand">Índice / banda</label>
+        <select id="selBand"></select>
+      </div>
+      <div id="droneFields" hidden>
+        <label for="selDroneDate">Fecha de vuelo</label>
+        <select id="selDroneDate"><option value="">— Sin vuelos —</option></select>
+        <label for="selDroneLayer">Capa</label>
+        <select id="selDroneLayer">
+          <option value="rgb">RGB</option>
+          <option value="ndvi">NDVI</option>
+          <option value="ndwi">NDWI</option>
+        </select>
+      </div>
+      </div>
+      <div class="panel__spacer" aria-hidden="true"></div>
+    </aside>
+    <div class="drone-opacity" id="droneOpacityWrap" hidden>
+      <label class="lbl" for="droneOpacity">Transparencia índice sobre RGB</label>
+      <input type="range" id="droneOpacity" min="0" max="100" value="85">
+    </div>
+    <div class="bottom-stack" id="satBottom" aria-hidden="false">
+      <div class="sat-period-float" id="periodFloat">
+        <div class="sat-period-toolbar" id="periodToolbar"></div>
+      </div>
+      <section class="chart-wrap">
+        <h2>Seguimiento semanal (media por parcela)</h2>
+        <p class="sub">Tres parcelas · eje Y ajustado a los datos del índice seleccionado</p>
+        <div class="chart-canvas"><canvas id="weeklyChart"></canvas></div>
+      </section>
+    </div>
+  </div>
+  <script>
+(function () {
+  const BASE = 'data_static/';
+  const MAP_MAX_ZOOM = 22;
+  /** Vista por defecto: parcelas ~centro-derecha, autopista al oeste, gráfico abajo (≈ zoom 17). */
+  const DEFAULT_MAP_FIT = {
+    paddingTopLeft: [220, 48],
+    paddingBottomRight: [48, 230],
+    maxZoom: 18
+  };
+  const state = {
+    manifest: null, meta: null, ts: null, aoi: null,
+    droneMeta: null, droneTs: null,
+    source: 'sentinel2',
+    parcel: null, band: 'NDVI', tIndex: 0,
+    droneDate: '', droneLayer: 'rgb', droneOpacity: 0.85,
+    map: null, rasterLayers: [],
+    aoiLayer: null, chart: null
+  };
+
+  async function fetchJson(path) {
+    const r = await fetch(BASE + path);
+    if (!r.ok) throw new Error(path + ' → ' + r.status);
+    return r.json();
+  }
+
+  const PARCEL_ALL = '__all__';
+
+  const PUC_CMAP = {
+    RdYlGn: 'linear-gradient(to top,#a50026,#d73027,#f46d43,#fdae61,#fee08b,#ffffbf,#d9ef8b,#a6d96a,#66bd63,#1a9850,#006837)',
+    RdYlBu: 'linear-gradient(to top,#a50026,#d73027,#f46d43,#fdae61,#fee090,#ffffbf,#e0f3f8,#abd9e9,#74add1,#4575b4,#313695)',
+    YlGn: 'linear-gradient(to top,#ffffcc,#d9f0a3,#addd8e,#78c679,#41ab5d,#238443,#005a32)',
+    Blues: 'linear-gradient(to top,#f7fbff,#deebf7,#c6dbef,#9ecae1,#6baed6,#3182bd,#08519c,#08306b)',
+    RdPu: 'linear-gradient(to top,#fff7f3,#fde0dd,#fcc5c0,#fa9fb5,#f768a1,#dd3497,#ae017e,#7a0177,#49006a)',
+    viridis: 'linear-gradient(to top,#440154,#482575,#414487,#355f8d,#2a788e,#21908d,#22a884,#44bf70,#7ad151,#bdd26c,#fde725)',
+    RdYlGn_r: 'linear-gradient(to top,#006837,#1a9850,#66bd63,#a6d96a,#d9ef8b,#ffffbf,#fee08b,#fdae61,#f46d43,#d73027,#a50026)',
+    RdYlBu_r: 'linear-gradient(to top,#313695,#4575b4,#74add1,#abd9e9,#e0f3f8,#ffffbf,#fee090,#fdae61,#f46d43,#d73027,#a50026)'
+  };
+  const PUC_CMAP_DEFAULT = PUC_CMAP.RdYlGn;
+
+  function parcelIds() {
+    const w = state.meta && state.meta.wetlands;
+    return w ? Object.keys(w) : [];
+  }
+
+  function isAllParcels() {
+    return state.parcel === PARCEL_ALL;
+  }
+
+  function stretchWetlandKey() {
+    return isAllParcels() ? PARCEL_ALL : state.parcel;
+  }
+
+  function indexMeta(band) {
+    const ix = (state.meta && state.meta.indices) || {};
+    if (ix[band]) return ix[band];
+    const u = String(band || '').toUpperCase();
+    if (ix[u]) return ix[u];
+    return null;
+  }
+
+  function stretchForBand(band) {
+    const stretch = (state.meta && state.meta.stretch_by_wetland) || {};
+    const key = stretchWetlandKey();
+    const lim = (stretch[key] || {})[band];
+    const im = indexMeta(band);
+    const symmetric = !!(lim && lim.symmetric) || !!(im && im.symmetric);
+    if (lim && lim.vmin != null && lim.vmax != null) {
+      const out = {
+        symmetric,
+        vmin: Number(lim.vmin),
+        vmax: Number(lim.vmax),
+        p0: Number(lim.p0),
+        p100: Number(lim.p100)
+      };
+      if (symmetric) {
+        out.center = Number(lim.center != null ? lim.center : (im && im.center) || 0);
+        out.spread = Number(lim.spread != null ? lim.spread : Math.max(
+          Math.abs(out.p0 - out.center), Math.abs(out.p100 - out.center)
+        ));
+      }
+      return out;
+    }
+    if (im && im.fallback_vmin != null) {
+      const vmin = Number(im.fallback_vmin);
+      const vmax = Number(im.fallback_vmax);
+      if (symmetric) {
+        const center = Number(im.center != null ? im.center : 0);
+        const spread = Math.max(Math.abs(vmin - center), Math.abs(vmax - center), 1e-4);
+        return { symmetric: true, center, spread, vmin: center - spread, vmax: center + spread, p0: vmin, p100: vmax };
+      }
+      return { symmetric: false, vmin, vmax, p0: vmin, p100: vmax };
+    }
+    return { symmetric: true, center: 0, spread: 1, vmin: -1, vmax: 1, p0: -1, p100: 1 };
+  }
+
+  function colormapToGradient(name) {
+    const n = name != null ? String(name).trim() : '';
+    if (!n) return PUC_CMAP_DEFAULT;
+    if (PUC_CMAP[n]) return PUC_CMAP[n];
+    const nl = n.toLowerCase();
+    for (const k of Object.keys(PUC_CMAP)) {
+      if (k.toLowerCase() === nl) return PUC_CMAP[k];
+    }
+    if (n.length > 2 && n.slice(-2).toLowerCase() === '_r') {
+      const base = n.slice(0, -2);
+      const g = PUC_CMAP[base];
+      if (g) {
+        const stops = g.replace(/^linear-gradient\(\s*to\s+top\s*,\s*/i, '').replace(/\)\s*$/, '')
+          .split(',').map(s => s.trim()).filter(Boolean).reverse();
+        return 'linear-gradient(to top,' + stops.join(',') + ')';
+      }
+    }
+    return PUC_CMAP_DEFAULT;
+  }
+
+  function formatLegendScalar(v) {
+    if (v == null || v === '') return '';
+    const n = Number(v);
+    if (!Number.isFinite(n)) return String(v);
+    if (n === 0) return '0';
+    const a = Math.abs(n);
+    if (a >= 10000 || (a < 0.001 && a > 0)) return n.toExponential(2).replace('+', '');
+    return (Math.round(n * 10000) / 10000).toString();
+  }
+
+  function applyColorbar() {
+    const box = document.getElementById('colorbarBox');
+    const gEl = document.getElementById('cbGradient');
+    const tEl = document.getElementById('cbTitle');
+    const minEl = document.getElementById('cbMin');
+    const maxEl = document.getElementById('cbMax');
+    const centerEl = document.getElementById('cbCenter');
+    if (!box || !gEl) return;
+    if (state.source !== 'sentinel2') {
+      box.style.display = 'none';
+      box.setAttribute('aria-hidden', 'true');
+      return;
+    }
+    const band = state.band;
+    const im = indexMeta(band);
+    if (!im || im.visual_only) {
+      box.style.display = 'none';
+      box.setAttribute('aria-hidden', 'true');
+      return;
+    }
+    const lim = stretchForBand(band);
+    if (!Number.isFinite(lim.vmin) || !Number.isFinite(lim.vmax)) {
+      box.style.display = 'none';
+      box.setAttribute('aria-hidden', 'true');
+      return;
+    }
+    gEl.style.background = colormapToGradient(im.colormap);
+    tEl.textContent = im.label || band;
+    maxEl.textContent = formatLegendScalar(lim.vmax);
+    minEl.textContent = formatLegendScalar(lim.vmin);
+    if (centerEl) {
+      if (lim.symmetric && lim.center != null && Number.isFinite(lim.center)) {
+        centerEl.textContent = formatLegendScalar(lim.center);
+        centerEl.hidden = false;
+      } else {
+        centerEl.hidden = true;
+      }
+    }
+    box.style.display = 'flex';
+    box.setAttribute('aria-hidden', 'false');
+  }
+
+  function rasterKey(wid, tKey, band) {
+    return wid + '_' + tKey + '_' + band.toLowerCase();
+  }
+
+  function currentTimeline() {
+    return state.meta.timeline[state.tIndex] || null;
+  }
+
+  function yLimitsForBand(band) {
+    const vals = [];
+    parcelIds().forEach(wid => {
+      const arr = (state.ts.series[band] && state.ts.series[band][wid]) || [];
+      arr.forEach(v => {
+        if (v != null && Number.isFinite(v)) vals.push(v);
+      });
+    });
+    if (!vals.length) return {};
+    let lo = Math.min(...vals), hi = Math.max(...vals);
+    if (lo === hi) {
+      const eps = Math.max(Math.abs(lo) * 0.05, 0.02);
+      lo -= eps; hi += eps;
+    } else {
+      const pad = (hi - lo) * 0.06;
+      lo -= pad; hi += pad;
+    }
+    return { min: lo, max: hi };
+  }
+
+  function fillSelectors() {
+    const pSel = document.getElementById('selParcel');
+    pSel.innerHTML = '';
+    const oAll = document.createElement('option');
+    oAll.value = PARCEL_ALL;
+    oAll.textContent = 'Todas las parcelas';
+    pSel.appendChild(oAll);
+    parcelIds().forEach(id => {
+      const o = document.createElement('option');
+      o.value = id;
+      o.textContent = state.meta.wetlands[id].name || id;
+      pSel.appendChild(o);
+    });
+    const bSel = document.getElementById('selBand');
+    bSel.innerHTML = '';
+    Object.keys(state.meta.indices || {}).sort().forEach(b => {
+      const o = document.createElement('option');
+      o.value = b;
+      o.textContent = state.meta.indices[b].label || b;
+      bSel.appendChild(o);
+    });
+    state.parcel = pSel.value || parcelIds()[0];
+    state.band = state.ts.default_band || 'NDVI';
+    pSel.value = state.parcel;
+    bSel.value = state.band;
+    const last = state.meta.last_timeline_key;
+    const idx = state.meta.timeline.findIndex(t => t.key === last);
+    state.tIndex = idx >= 0 ? idx : state.meta.timeline.length - 1;
+    buildPeriodToolbar();
+  }
+
+  function periodStepArrowSvg(pointLeft) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('width', '20');
+    svg.setAttribute('height', '20');
+    svg.setAttribute('aria-hidden', 'true');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', 'currentColor');
+    path.setAttribute('stroke-width', '2.2');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute('d', pointLeft ? 'M14 7l-5 5 5 5' : 'M10 7l5 5-5 5');
+    svg.appendChild(path);
+    return svg;
+  }
+
+  function formatWeekThumb(t) {
+    if (!t) return '—';
+    return 'Sem. ' + String(t.week).padStart(2, '0');
+  }
+
+  function buildPeriodToolbar() {
+    const toolbar = document.getElementById('periodToolbar');
+    if (!toolbar || !state.meta || !state.meta.timeline.length) return;
+    toolbar.innerHTML = '';
+    const items = state.meta.timeline;
+    const n = items.length;
+    const row = document.createElement('div');
+    row.className = 'sat-period-toolbar__row';
+    const btnMinus = document.createElement('button');
+    btnMinus.type = 'button';
+    btnMinus.className = 'sat-period-step';
+    btnMinus.setAttribute('aria-label', 'Semana anterior');
+    btnMinus.appendChild(periodStepArrowSvg(true));
+    const wrap = document.createElement('div');
+    wrap.className = 'sat-period-custom-slider';
+    const track = document.createElement('div');
+    track.className = 'sat-period-custom-slider__track';
+    track.tabIndex = 0;
+    track.setAttribute('role', 'slider');
+    track.setAttribute('aria-label', 'Semana ISO');
+    const fill = document.createElement('div');
+    fill.className = 'sat-period-custom-slider__fill';
+    const thumb = document.createElement('div');
+    thumb.className = 'sat-period-custom-slider__thumb';
+    const thumbLabel = document.createElement('span');
+    thumbLabel.className = 'sat-period-custom-slider__thumb-label';
+    thumb.appendChild(thumbLabel);
+    track.appendChild(fill);
+    track.appendChild(thumb);
+    const btnPlus = document.createElement('button');
+    btnPlus.type = 'button';
+    btnPlus.className = 'sat-period-step';
+    btnPlus.setAttribute('aria-label', 'Semana siguiente');
+    btnPlus.appendChild(periodStepArrowSvg(false));
+    function pctForIdx(i) {
+      if (n <= 1) return 50;
+      return (i / (n - 1)) * 100;
+    }
+    function syncUi() {
+      const i = Math.max(0, Math.min(n - 1, state.tIndex));
+      const pct = pctForIdx(i);
+      thumb.style.left = pct + '%';
+      fill.style.width = pct + '%';
+      const t = items[i];
+      thumbLabel.textContent = formatWeekThumb(t);
+      track.setAttribute('aria-valuenow', String(t.week));
+      track.setAttribute('aria-valuemin', String(items[0].week));
+      track.setAttribute('aria-valuemax', String(items[n - 1].week));
+      track.setAttribute('aria-valuetext', thumbLabel.textContent);
+      btnMinus.disabled = i <= 0;
+      btnPlus.disabled = i >= n - 1;
+    }
+    function applyIndex(i, doMap) {
+      state.tIndex = Math.max(0, Math.min(n - 1, i));
+      syncUi();
+      if (doMap) updateWeekUi();
+    }
+    function idxFromClientX(cx) {
+      const r = track.getBoundingClientRect();
+      const t = Math.max(0, Math.min(1, (cx - r.left) / Math.max(1, r.width)));
+      return n <= 1 ? 0 : Math.round(t * (n - 1));
+    }
+    let dragActive = false;
+    track.addEventListener('pointerdown', ev => {
+      dragActive = true;
+      try { track.setPointerCapture(ev.pointerId); } catch (_) {}
+      applyIndex(idxFromClientX(ev.clientX), true);
+    });
+    track.addEventListener('pointermove', ev => {
+      if (!dragActive || !track.hasPointerCapture(ev.pointerId)) return;
+      applyIndex(idxFromClientX(ev.clientX), true);
+    });
+    function endDrag(ev) {
+      if (!dragActive) return;
+      dragActive = false;
+      try { track.releasePointerCapture(ev.pointerId); } catch (_) {}
+      updateWeekUi();
+    }
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    track.addEventListener('lostpointercapture', () => {
+      if (dragActive) {
+        dragActive = false;
+        updateWeekUi();
+      }
+    });
+    track.addEventListener('keydown', ev => {
+      if (ev.key === 'ArrowLeft' || ev.key === 'ArrowDown') { ev.preventDefault(); applyIndex(state.tIndex - 1, true); }
+      else if (ev.key === 'ArrowRight' || ev.key === 'ArrowUp') { ev.preventDefault(); applyIndex(state.tIndex + 1, true); }
+      else if (ev.key === 'Home') { ev.preventDefault(); applyIndex(0, true); }
+      else if (ev.key === 'End') { ev.preventDefault(); applyIndex(n - 1, true); }
+    });
+    btnMinus.addEventListener('click', () => applyIndex(state.tIndex - 1, true));
+    btnPlus.addEventListener('click', () => applyIndex(state.tIndex + 1, true));
+    row.appendChild(btnMinus);
+    row.appendChild(wrap);
+    row.appendChild(btnPlus);
+    wrap.appendChild(track);
+    toolbar.appendChild(row);
+    syncUi();
+  }
+
+  function setDefaultMapView() {
+    if (!state.map || !state.aoiLayer) return;
+    const b = state.aoiLayer.getBounds();
+    const ptl = DEFAULT_MAP_FIT.paddingTopLeft;
+    const pbr = DEFAULT_MAP_FIT.paddingBottomRight;
+    state.map.fitBounds(b, {
+      paddingTopLeft: L.point(ptl[0], ptl[1]),
+      paddingBottomRight: L.point(pbr[0], pbr[1]),
+      maxZoom: DEFAULT_MAP_FIT.maxZoom,
+      animate: false
+    });
+    if (state.map.getZoom() < state.map.getMaxZoom()) {
+      state.map.zoomIn(1);
+    }
+  }
+
+  function initMap() {
+    state.map = L.map('map', {
+      zoomControl: false,
+      scrollWheelZoom: true,
+      doubleClickZoom: true,
+      maxZoom: MAP_MAX_ZOOM
+    });
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Esri',
+      maxZoom: MAP_MAX_ZOOM,
+      maxNativeZoom: 19
+    }).addTo(state.map);
+    if (state.aoi && state.aoi.features) {
+      state.aoiLayer = L.geoJSON(state.aoi, {
+        style: f => ({
+          color: (state.meta.wetlands[f.properties.wetland_id] || {}).color || '#1d6b4a',
+          weight: 2, fillOpacity: 0.06
+        })
+      }).addTo(state.map);
+      setDefaultMapView();
+    }
+    document.getElementById('zoomIn').onclick = () => state.map.zoomIn();
+    document.getElementById('zoomOut').onclick = () => state.map.zoomOut();
+    document.getElementById('zoomFit').onclick = () => setDefaultMapView();
+  }
+
+  function applyParcelHighlight() {
+    if (!state.aoiLayer) return;
+    const all = isAllParcels();
+    state.aoiLayer.eachLayer(l => {
+      const id = l.feature.properties.wetland_id;
+      const col = (state.meta.wetlands[id] || {}).color || '#888';
+      const active = all || id === state.parcel;
+      l.setStyle({
+        color: col,
+        weight: active ? (all ? 3 : 4) : 2,
+        fillOpacity: active ? (all ? 0.12 : 0.15) : 0.04
+      });
+    });
+  }
+
+  function clearRasterLayers() {
+    state.rasterLayers.forEach(ly => { if (ly && state.map) state.map.removeLayer(ly); });
+    state.rasterLayers = [];
+  }
+
+  function updateSatelliteRaster() {
+    clearRasterLayers();
+    const t = currentTimeline();
+    if (!t) return;
+    const targets = isAllParcels() ? parcelIds() : [state.parcel];
+    targets.forEach(wid => {
+      const key = rasterKey(wid, t.key, state.band);
+      const r = state.meta.rasters[key];
+      const w = state.meta.wetlands[wid];
+      if (!r || !r.p || !w || !w.leaflet_bounds) return;
+      const op = isAllParcels() ? 0.72 : 0.92;
+      const ly = L.imageOverlay(BASE + r.p, w.leaflet_bounds, { opacity: op, interactive: false });
+      ly.addTo(state.map);
+      state.rasterLayers.push(ly);
+    });
+  }
+
+  function updateDroneRaster() {
+    clearRasterLayers();
+    if (!state.droneMeta || !state.droneDate) return;
+    const targets = isAllParcels() ? parcelIds() : [state.parcel];
+    const layer = state.droneLayer;
+    const rasters = state.droneMeta.rasters || {};
+    let anyIdx = false;
+    targets.forEach(wid => {
+      let rgbKey = null, idxKey = null;
+      Object.keys(rasters).forEach(k => {
+        const r = rasters[k];
+        if (String(r.wetland_id).toLowerCase() !== wid) return;
+        if (r.period_key !== state.droneDate) return;
+        if (String(r.index).toLowerCase() === 'rgb') rgbKey = k;
+        if (String(r.index).toLowerCase() === layer && layer !== 'rgb') idxKey = k;
+      });
+      const w = state.meta.wetlands[wid];
+      const bounds = (state.droneMeta.wetlands[wid] && state.droneMeta.wetlands[wid].leaflet_bounds) || (w && w.leaflet_bounds);
+      if (!bounds) return;
+      const opBase = isAllParcels() ? 0.85 : 1;
+      if (rgbKey && rasters[rgbKey].p) {
+        const ly = L.imageOverlay(BASE + rasters[rgbKey].p, bounds, { opacity: opBase, interactive: false });
+        ly.addTo(state.map);
+        state.rasterLayers.push(ly);
+      }
+      if (layer !== 'rgb' && idxKey && rasters[idxKey].p) {
+        const ly = L.imageOverlay(BASE + rasters[idxKey].p, bounds, {
+          opacity: state.droneOpacity * (isAllParcels() ? 0.9 : 1), interactive: false
+        });
+        ly.addTo(state.map);
+        state.rasterLayers.push(ly);
+        anyIdx = true;
+      }
+    });
+    document.getElementById('droneOpacityWrap').hidden = !(layer !== 'rgb' && anyIdx);
+  }
+
+  function updateMapLayers() {
+    if (state.source === 'drone') updateDroneRaster();
+    else updateSatelliteRaster();
+  }
+
+  function updateWeekUi() {
+    if (state.source !== 'sentinel2') return;
+    const t = currentTimeline();
+    if (state.chart) {
+      state.chart.options.plugins.pucWeekLine.index = state.tIndex;
+      state.chart.update('none');
+    }
+    updateMapLayers();
+    applyColorbar();
+  }
+
+  function buildChart() {
+    const ctx = document.getElementById('weeklyChart');
+    const labels = state.meta.timeline.map(t => t.label);
+    const band = state.band;
+    const yLim = yLimitsForBand(band);
+    const datasets = parcelIds().map(wid => {
+      const vals = (state.ts.series[band] && state.ts.series[band][wid]) || [];
+      const col = state.meta.wetlands[wid].color || '#333';
+      return {
+        label: state.meta.wetlands[wid].name || wid,
+        data: vals,
+        borderColor: col,
+        backgroundColor: col + '44',
+        borderWidth: 2,
+        pointRadius: 2,
+        pointHoverRadius: 5,
+        spanGaps: false,
+        tension: 0.12
+      };
+    });
+    if (state.chart) state.chart.destroy();
+    state.chart = new Chart(ctx, {
+      type: 'line',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } },
+          pucWeekLine: { index: state.tIndex }
+        },
+        scales: {
+          x: { ticks: { maxTicksLimit: 12, font: { size: 10 } } },
+          y: {
+            title: { display: true, text: (state.meta.indices[band] && state.meta.indices[band].label) || band },
+            min: yLim.min,
+            max: yLim.max
+          }
+        },
+        onClick: (_, elems) => {
+          if (elems.length && state.source === 'sentinel2') {
+            state.tIndex = elems[0].index;
+            buildPeriodToolbar();
+            updateWeekUi();
+          }
+        }
+      },
+      plugins: [{
+        id: 'pucWeekLine',
+        afterDraw(chart) {
+          const idx = chart.options.plugins.pucWeekLine.index;
+          if (idx == null || idx < 0) return;
+          const x = chart.scales.x.getPixelForValue(idx);
+          const { top, bottom } = chart.chartArea;
+          const c = chart.ctx;
+          c.save();
+          c.strokeStyle = '#003366';
+          c.lineWidth = 2;
+          c.setLineDash([4, 4]);
+          c.beginPath();
+          c.moveTo(x, top);
+          c.lineTo(x, bottom);
+          c.stroke();
+          c.restore();
+        }
+      }]
+    });
+  }
+
+  function fillDroneDates() {
+    const sel = document.getElementById('selDroneDate');
+    sel.innerHTML = '';
+    if (!state.droneMeta || !state.droneMeta.periods) {
+      const o = document.createElement('option');
+      o.value = '';
+      o.textContent = '— Sin vuelos —';
+      sel.appendChild(o);
+      return;
+    }
+    state.droneMeta.periods.forEach(p => {
+      const o = document.createElement('option');
+      o.value = p.key;
+      o.textContent = p.label || p.key;
+      sel.appendChild(o);
+    });
+    state.droneDate = sel.value || (state.droneMeta.periods[0] && state.droneMeta.periods[0].key) || '';
+    sel.value = state.droneDate;
+  }
+
+  function setSource(src) {
+    state.source = src;
+    const sat = src === 'sentinel2';
+    document.getElementById('pillSat').classList.toggle('source-pill--active', sat);
+    document.getElementById('pillDrone').classList.toggle('source-pill--active', !sat);
+    document.getElementById('pillSat').setAttribute('aria-pressed', sat ? 'true' : 'false');
+    document.getElementById('pillDrone').setAttribute('aria-pressed', sat ? 'false' : 'true');
+    document.getElementById('satFields').hidden = !sat;
+    document.getElementById('droneFields').hidden = sat;
+    document.getElementById('satBottom').hidden = !sat;
+    document.getElementById('satBottom').setAttribute('aria-hidden', sat ? 'false' : 'true');
+    document.getElementById('sourceHint').textContent = sat
+      ? 'Satélite: semanas ISO y todos los índices del compuesto S2.'
+      : 'Dron: ortofoto RGB e índices por fecha de vuelo.';
+    updateMapLayers();
+    applyColorbar();
+  }
+
+  function onBandChange() {
+    state.band = document.getElementById('selBand').value;
+    buildChart();
+    updateMapLayers();
+    applyColorbar();
+  }
+
+  function onParcelChange() {
+    state.parcel = document.getElementById('selParcel').value;
+    applyParcelHighlight();
+    updateMapLayers();
+    applyColorbar();
+  }
+
+  async function boot() {
+    try {
+      state.manifest = await fetchJson('sources_manifest.json');
+      const s2 = state.manifest.sources.sentinel2;
+      const [meta, ts, aoi] = await Promise.all([
+        fetchJson(s2.metadata_path),
+        fetchJson(s2.timeseries_path),
+        fetchJson(state.manifest.aoi_path)
+      ]);
+      state.meta = meta;
+      state.ts = ts;
+      state.aoi = aoi;
+
+      const droneSrc = state.manifest.sources.drone;
+      const droneReady = droneSrc && droneSrc.has_data && droneSrc.metadata_path;
+      document.getElementById('dronePendingHint').hidden = droneReady;
+      const pillDrone = document.getElementById('pillDrone');
+      if (droneReady) {
+        pillDrone.disabled = false;
+        state.droneMeta = await fetchJson(droneSrc.metadata_path);
+        if (droneSrc.timeseries_path) {
+          try { state.droneTs = await fetchJson(droneSrc.timeseries_path); } catch (_) {}
+        }
+        fillDroneDates();
+      } else {
+        pillDrone.disabled = true;
+      }
+
+      fillSelectors();
+      initMap();
+      applyParcelHighlight();
+      buildChart();
+      updateWeekUi();
+      applyColorbar();
+
+      document.getElementById('selParcel').addEventListener('change', onParcelChange);
+      document.getElementById('selBand').addEventListener('change', onBandChange);
+      document.getElementById('pillSat').addEventListener('click', () => setSource('sentinel2'));
+      document.getElementById('pillDrone').addEventListener('click', () => {
+        if (!pillDrone.disabled) setSource('drone');
+      });
+      document.getElementById('selDroneDate').addEventListener('change', e => {
+        state.droneDate = e.target.value;
+        updateMapLayers();
+      });
+      document.getElementById('selDroneLayer').addEventListener('change', e => {
+        state.droneLayer = e.target.value;
+        updateMapLayers();
+      });
+      document.getElementById('droneOpacity').addEventListener('input', e => {
+        state.droneOpacity = Number(e.target.value) / 100;
+        if (state.source === 'drone') updateMapLayers();
+      });
+    } catch (e) {
+      document.body.innerHTML = '<p style="padding:2rem;color:#fff">Error: ' + e.message +
+        '. Ejecuta <code>python scripts/static_site/build_sentinel2_local.py</code> y sirve con HTTP.</p>';
+    }
+  }
+
+  boot();
+})();
+  </script>
+</body>
+</html>

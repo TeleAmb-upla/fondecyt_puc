@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="PUC Chile">
+  <rect width="120" height="120" rx="12" fill="#003366"/>
+  <circle cx="60" cy="52" r="28" fill="none" stroke="#FFC72C" stroke-width="4"/>
+  <text x="60" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#FFC72C">PUC</text>
+  <text x="60" y="98" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#ffffff">Chile</text>
+</svg>

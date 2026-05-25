@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# GeoTIFF (pesados; se regeneran con scripts/gee/download_s2_weekly.py)
+data/sentinel2/**/*.tif
+data/sentinel2/**/*.tiff
+
+# WebP generados (regenerar con build_sentinel2_local.py)
+data_static/sentinel2/rasters/
+
+# Estado local de sincronización Drive
+scripts/gee/drive_sync_keys_state.json
