@@ -1,0 +1,186 @@
+{
+  "generated_at": "2026-05-26T13:30:55+00:00",
+  "default_band": "NDVI",
+  "periods": [
+    {
+      "key": "2026_03_27",
+      "label": "27/03/2026",
+      "year": 2026,
+      "month": 3,
+      "day": 27
+    },
+    {
+      "key": "2026_04_24",
+      "label": "24/04/2026",
+      "year": 2026,
+      "month": 4,
+      "day": 24
+    }
+  ],
+  "series": {
+    "NDVI": {
+      "exotico": [
+        0.4508,
+        0.4404
+      ],
+      "cae1": [
+        0.2405,
+        0.3611
+      ],
+      "cae2": [
+        0.3126,
+        0.3644
+      ]
+    },
+    "NDWI": {
+      "exotico": [
+        -0.2397,
+        -0.1923
+      ],
+      "cae1": [
+        -0.0492,
+        -0.1174
+      ],
+      "cae2": [
+        -0.0919,
+        -0.1185
+      ]
+    },
+    "NDCI": {
+      "exotico": [
+        0.4666,
+        0.4641
+      ],
+      "cae1": [
+        0.3059,
+        0.4048
+      ],
+      "cae2": [
+        0.3651,
+        0.3957
+      ]
+    }
+  },
+  "las_series": {
+    "mean_canopy": {
+      "exotico": [
+        0.8468,
+        null
+      ],
+      "cae1": [
+        0.5143,
+        null
+      ],
+      "cae2": [
+        0.441,
+        null
+      ]
+    },
+    "max_canopy": {
+      "exotico": [
+        4.9633,
+        null
+      ],
+      "cae1": [
+        6.4838,
+        null
+      ],
+      "cae2": [
+        8.9422,
+        null
+      ]
+    }
+  },
+  "predios": {
+    "exotico": {
+      "name": "Predio exótico",
+      "color": "#c0392b",
+      "center": [
+        -33.35440615317631,
+        -70.69147851168442
+      ],
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "cae1": {
+      "name": "Predio CAE 1",
+      "color": "#1d6b4a",
+      "center": [
+        -33.35434551581102,
+        -70.69120608429367
+      ],
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae2": {
+      "name": "Predio CAE 2",
+      "color": "#2b6cb0",
+      "center": [
+        -33.35470416911154,
+        -70.69116870396212
+      ],
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    }
+  },
+  "indices": {
+    "NDVI": {
+      "label": "NDVI",
+      "colormap": "RdYlGn",
+      "symmetric": true,
+      "center": 0.0,
+      "fallback_vmin": -1.0,
+      "fallback_vmax": 1.0
+    },
+    "NDWI": {
+      "label": "NDWI",
+      "colormap": "RdYlBu",
+      "symmetric": true,
+      "center": 0.0,
+      "fallback_vmin": -1.0,
+      "fallback_vmax": 1.0
+    },
+    "NDCI": {
+      "label": "NDCI",
+      "colormap": "YlGn",
+      "symmetric": false,
+      "center": null,
+      "fallback_vmin": -1.0,
+      "fallback_vmax": 1.0
+    },
+    "RGB": {
+      "label": "RGB",
+      "colormap": null,
+      "symmetric": false,
+      "center": null,
+      "visual_only": true,
+      "fallback_vmin": 0,
+      "fallback_vmax": 1
+    }
+  },
+  "last_period_key": "2026_04_24"
+}

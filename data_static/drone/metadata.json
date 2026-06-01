@@ -1,0 +1,999 @@
+{
+  "generated_at": "2026-05-26T13:30:55+00:00",
+  "default_band": "NDVI",
+  "indices": {
+    "NDVI": {
+      "label": "NDVI",
+      "colormap": "RdYlGn",
+      "symmetric": true,
+      "center": 0.0,
+      "fallback_vmin": -1.0,
+      "fallback_vmax": 1.0
+    },
+    "NDWI": {
+      "label": "NDWI",
+      "colormap": "RdYlBu",
+      "symmetric": true,
+      "center": 0.0,
+      "fallback_vmin": -1.0,
+      "fallback_vmax": 1.0
+    },
+    "NDCI": {
+      "label": "NDCI",
+      "colormap": "YlGn",
+      "symmetric": false,
+      "center": null,
+      "fallback_vmin": -1.0,
+      "fallback_vmax": 1.0
+    },
+    "RGB": {
+      "label": "RGB",
+      "colormap": null,
+      "symmetric": false,
+      "center": null,
+      "visual_only": true,
+      "fallback_vmin": 0,
+      "fallback_vmax": 1
+    }
+  },
+  "predios": {
+    "exotico": {
+      "name": "Predio exótico",
+      "color": "#c0392b",
+      "center": [
+        -33.35440615317631,
+        -70.69147851168442
+      ],
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "cae1": {
+      "name": "Predio CAE 1",
+      "color": "#1d6b4a",
+      "center": [
+        -33.35434551581102,
+        -70.69120608429367
+      ],
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae2": {
+      "name": "Predio CAE 2",
+      "color": "#2b6cb0",
+      "center": [
+        -33.35470416911154,
+        -70.69116870396212
+      ],
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    }
+  },
+  "periods": [
+    {
+      "key": "2026_03_27",
+      "label": "27/03/2026",
+      "year": 2026,
+      "month": 3,
+      "day": 27
+    },
+    {
+      "key": "2026_04_24",
+      "label": "24/04/2026",
+      "year": 2026,
+      "month": 4,
+      "day": 24
+    }
+  ],
+  "last_period_key": "2026_04_24",
+  "rasters": {
+    "exotico_2026_03_27_ndci": {
+      "p": "drone/rasters/exotico_2026_03_27_ndci.webp",
+      "l": "Predio exótico · 27/03/2026 · NDCI",
+      "period_key": "2026_03_27",
+      "predio_id": "exotico",
+      "index": "ndci",
+      "vmin": 0.05755,
+      "vmax": 0.78355,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "exotico_2026_03_27_ndvi": {
+      "p": "drone/rasters/exotico_2026_03_27_ndvi.webp",
+      "l": "Predio exótico · 27/03/2026 · NDVI",
+      "period_key": "2026_03_27",
+      "predio_id": "exotico",
+      "index": "ndvi",
+      "vmin": -0.9947,
+      "vmax": 0.9947,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "exotico_2026_03_27_ndwi": {
+      "p": "drone/rasters/exotico_2026_03_27_ndwi.webp",
+      "l": "Predio exótico · 27/03/2026 · NDWI",
+      "period_key": "2026_03_27",
+      "predio_id": "exotico",
+      "index": "ndwi",
+      "vmin": -0.92776,
+      "vmax": 0.92776,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "exotico_2026_03_27_rgb": {
+      "p": "drone/rasters/exotico_2026_03_27_rgb.webp",
+      "l": "Predio exótico · 27/03/2026 · RGB",
+      "period_key": "2026_03_27",
+      "predio_id": "exotico",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "cae1_2026_03_27_ndci": {
+      "p": "drone/rasters/cae1_2026_03_27_ndci.webp",
+      "l": "Predio CAE 1 · 27/03/2026 · NDCI",
+      "period_key": "2026_03_27",
+      "predio_id": "cae1",
+      "index": "ndci",
+      "vmin": -0.00705,
+      "vmax": 0.74704,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae1_2026_03_27_ndvi": {
+      "p": "drone/rasters/cae1_2026_03_27_ndvi.webp",
+      "l": "Predio CAE 1 · 27/03/2026 · NDVI",
+      "period_key": "2026_03_27",
+      "predio_id": "cae1",
+      "index": "ndvi",
+      "vmin": -0.92551,
+      "vmax": 0.92551,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae1_2026_03_27_ndwi": {
+      "p": "drone/rasters/cae1_2026_03_27_ndwi.webp",
+      "l": "Predio CAE 1 · 27/03/2026 · NDWI",
+      "period_key": "2026_03_27",
+      "predio_id": "cae1",
+      "index": "ndwi",
+      "vmin": -0.74962,
+      "vmax": 0.74962,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae1_2026_03_27_rgb": {
+      "p": "drone/rasters/cae1_2026_03_27_rgb.webp",
+      "l": "Predio CAE 1 · 27/03/2026 · RGB",
+      "period_key": "2026_03_27",
+      "predio_id": "cae1",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae2_2026_03_27_ndci": {
+      "p": "drone/rasters/cae2_2026_03_27_ndci.webp",
+      "l": "Predio CAE 2 · 27/03/2026 · NDCI",
+      "period_key": "2026_03_27",
+      "predio_id": "cae2",
+      "index": "ndci",
+      "vmin": 0.03345,
+      "vmax": 0.73839,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    },
+    "cae2_2026_03_27_ndvi": {
+      "p": "drone/rasters/cae2_2026_03_27_ndvi.webp",
+      "l": "Predio CAE 2 · 27/03/2026 · NDVI",
+      "period_key": "2026_03_27",
+      "predio_id": "cae2",
+      "index": "ndvi",
+      "vmin": -0.95928,
+      "vmax": 0.95928,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    },
+    "cae2_2026_03_27_ndwi": {
+      "p": "drone/rasters/cae2_2026_03_27_ndwi.webp",
+      "l": "Predio CAE 2 · 27/03/2026 · NDWI",
+      "period_key": "2026_03_27",
+      "predio_id": "cae2",
+      "index": "ndwi",
+      "vmin": -0.74277,
+      "vmax": 0.74277,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    },
+    "cae2_2026_03_27_rgb": {
+      "p": "drone/rasters/cae2_2026_03_27_rgb.webp",
+      "l": "Predio CAE 2 · 27/03/2026 · RGB",
+      "period_key": "2026_03_27",
+      "predio_id": "cae2",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    },
+    "exotico_2026_04_24_ndci": {
+      "p": "drone/rasters/exotico_2026_04_24_ndci.webp",
+      "l": "Predio exótico · 24/04/2026 · NDCI",
+      "period_key": "2026_04_24",
+      "predio_id": "exotico",
+      "index": "ndci",
+      "vmin": 0.05755,
+      "vmax": 0.78355,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "exotico_2026_04_24_ndvi": {
+      "p": "drone/rasters/exotico_2026_04_24_ndvi.webp",
+      "l": "Predio exótico · 24/04/2026 · NDVI",
+      "period_key": "2026_04_24",
+      "predio_id": "exotico",
+      "index": "ndvi",
+      "vmin": -0.9947,
+      "vmax": 0.9947,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "exotico_2026_04_24_ndwi": {
+      "p": "drone/rasters/exotico_2026_04_24_ndwi.webp",
+      "l": "Predio exótico · 24/04/2026 · NDWI",
+      "period_key": "2026_04_24",
+      "predio_id": "exotico",
+      "index": "ndwi",
+      "vmin": -0.92776,
+      "vmax": 0.92776,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "exotico_2026_04_24_rgb": {
+      "p": "drone/rasters/exotico_2026_04_24_rgb.webp",
+      "l": "Predio exótico · 24/04/2026 · RGB",
+      "period_key": "2026_04_24",
+      "predio_id": "exotico",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "cae1_2026_04_24_ndci": {
+      "p": "drone/rasters/cae1_2026_04_24_ndci.webp",
+      "l": "Predio CAE 1 · 24/04/2026 · NDCI",
+      "period_key": "2026_04_24",
+      "predio_id": "cae1",
+      "index": "ndci",
+      "vmin": -0.00705,
+      "vmax": 0.74704,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae1_2026_04_24_ndvi": {
+      "p": "drone/rasters/cae1_2026_04_24_ndvi.webp",
+      "l": "Predio CAE 1 · 24/04/2026 · NDVI",
+      "period_key": "2026_04_24",
+      "predio_id": "cae1",
+      "index": "ndvi",
+      "vmin": -0.92551,
+      "vmax": 0.92551,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae1_2026_04_24_ndwi": {
+      "p": "drone/rasters/cae1_2026_04_24_ndwi.webp",
+      "l": "Predio CAE 1 · 24/04/2026 · NDWI",
+      "period_key": "2026_04_24",
+      "predio_id": "cae1",
+      "index": "ndwi",
+      "vmin": -0.74962,
+      "vmax": 0.74962,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae1_2026_04_24_rgb": {
+      "p": "drone/rasters/cae1_2026_04_24_rgb.webp",
+      "l": "Predio CAE 1 · 24/04/2026 · RGB",
+      "period_key": "2026_04_24",
+      "predio_id": "cae1",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae2_2026_04_24_ndci": {
+      "p": "drone/rasters/cae2_2026_04_24_ndci.webp",
+      "l": "Predio CAE 2 · 24/04/2026 · NDCI",
+      "period_key": "2026_04_24",
+      "predio_id": "cae2",
+      "index": "ndci",
+      "vmin": 0.03345,
+      "vmax": 0.73839,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    },
+    "cae2_2026_04_24_ndvi": {
+      "p": "drone/rasters/cae2_2026_04_24_ndvi.webp",
+      "l": "Predio CAE 2 · 24/04/2026 · NDVI",
+      "period_key": "2026_04_24",
+      "predio_id": "cae2",
+      "index": "ndvi",
+      "vmin": -0.95928,
+      "vmax": 0.95928,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    },
+    "cae2_2026_04_24_ndwi": {
+      "p": "drone/rasters/cae2_2026_04_24_ndwi.webp",
+      "l": "Predio CAE 2 · 24/04/2026 · NDWI",
+      "period_key": "2026_04_24",
+      "predio_id": "cae2",
+      "index": "ndwi",
+      "vmin": -0.74277,
+      "vmax": 0.74277,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    },
+    "cae2_2026_04_24_rgb": {
+      "p": "drone/rasters/cae2_2026_04_24_rgb.webp",
+      "l": "Predio CAE 2 · 24/04/2026 · RGB",
+      "period_key": "2026_04_24",
+      "predio_id": "cae2",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    }
+  },
+  "pointclouds": {
+    "exotico_2026_03_27": {
+      "p": "drone/pointclouds/exotico_2026_03_27.json",
+      "l": "Predio exótico · 27/03/2026 · LiDAR",
+      "period_key": "2026_03_27",
+      "predio_id": "exotico",
+      "z_unit": "canopy_m",
+      "ground_z": 519.736572265625,
+      "zmin": 0.0,
+      "zmax": 4.8979,
+      "attribute_ids": [
+        "canopy",
+        "elevation",
+        "intensity",
+        "classification",
+        "return_number",
+        "scan_angle_rank",
+        "rgb"
+      ]
+    },
+    "cae1_2026_03_27": {
+      "p": "drone/pointclouds/cae1_2026_03_27.json",
+      "l": "Predio CAE 1 · 27/03/2026 · LiDAR",
+      "period_key": "2026_03_27",
+      "predio_id": "cae1",
+      "z_unit": "canopy_m",
+      "ground_z": 519.64697265625,
+      "zmin": 0.0,
+      "zmax": 6.4838,
+      "attribute_ids": [
+        "canopy",
+        "elevation",
+        "intensity",
+        "classification",
+        "return_number",
+        "scan_angle_rank",
+        "rgb"
+      ]
+    },
+    "cae2_2026_03_27": {
+      "p": "drone/pointclouds/cae2_2026_03_27.json",
+      "l": "Predio CAE 2 · 27/03/2026 · LiDAR",
+      "period_key": "2026_03_27",
+      "predio_id": "cae2",
+      "z_unit": "canopy_m",
+      "ground_z": 519.7119750976562,
+      "zmin": 0.0,
+      "zmax": 8.9422,
+      "attribute_ids": [
+        "canopy",
+        "elevation",
+        "intensity",
+        "classification",
+        "return_number",
+        "scan_angle_rank",
+        "rgb"
+      ]
+    }
+  },
+  "lidar_attributes": {
+    "canopy": {
+      "label": "Altura dosel",
+      "symmetric": false,
+      "center": null,
+      "visual_only": false,
+      "colormap": "terrain",
+      "fallback_vmin": 0.0,
+      "fallback_vmax": 3.17,
+      "unit": "m"
+    },
+    "elevation": {
+      "label": "Elevación (msnm)",
+      "symmetric": false,
+      "center": null,
+      "visual_only": false,
+      "colormap": "terrain",
+      "fallback_vmin": 519.657,
+      "fallback_vmax": 522.881,
+      "unit": "m"
+    },
+    "intensity": {
+      "label": "Intensidad",
+      "symmetric": false,
+      "center": null,
+      "visual_only": false,
+      "colormap": "viridis",
+      "fallback_vmin": 2048.0,
+      "fallback_vmax": 26880.0
+    },
+    "classification": {
+      "label": "Clasificación",
+      "symmetric": false,
+      "center": null,
+      "visual_only": false,
+      "type": "categorical",
+      "colormap": null
+    },
+    "return_number": {
+      "label": "Número de retorno",
+      "symmetric": false,
+      "center": null,
+      "visual_only": false,
+      "colormap": "Blues",
+      "fallback_vmin": 1.0,
+      "fallback_vmax": 2.0
+    },
+    "scan_angle_rank": {
+      "label": "Ángulo de escaneo",
+      "symmetric": false,
+      "center": null,
+      "visual_only": false,
+      "colormap": "RdYlBu",
+      "fallback_vmin": -17.0,
+      "fallback_vmax": 25.0
+    },
+    "rgb": {
+      "label": "RGB",
+      "symmetric": false,
+      "center": null,
+      "visual_only": true,
+      "type": "rgb",
+      "colormap": null
+    }
+  },
+  "lidar_stretch": {
+    "canopy": {
+      "symmetric": false,
+      "vmin": 0.0,
+      "vmax": 3.17,
+      "p0": 0.0,
+      "p100": 3.17
+    },
+    "elevation": {
+      "symmetric": false,
+      "vmin": 519.657,
+      "vmax": 522.881,
+      "p0": 519.657,
+      "p100": 522.881
+    },
+    "intensity": {
+      "symmetric": false,
+      "vmin": 2048.0,
+      "vmax": 26880.0,
+      "p0": 2048.0,
+      "p100": 26880.0
+    },
+    "return_number": {
+      "symmetric": false,
+      "vmin": 1.0,
+      "vmax": 2.0,
+      "p0": 1.0,
+      "p100": 2.0
+    },
+    "scan_angle_rank": {
+      "symmetric": false,
+      "vmin": -17.0,
+      "vmax": 25.0,
+      "p0": -17.0,
+      "p100": 25.0
+    }
+  },
+  "lidar_default_attribute": "canopy",
+  "stretch_by_predio": {
+    "exotico": {
+      "NDCI": {
+        "symmetric": false,
+        "vmin": 0.05755,
+        "vmax": 0.78355,
+        "p0": 0.05755,
+        "p100": 0.78355
+      },
+      "NDVI": {
+        "p0": -0.41877,
+        "p100": 0.9947,
+        "center": 0.0,
+        "spread": 0.9947,
+        "symmetric": true,
+        "vmin": -0.9947,
+        "vmax": 0.9947
+      },
+      "NDWI": {
+        "p0": -0.92776,
+        "p100": 0.58797,
+        "center": 0.0,
+        "spread": 0.92776,
+        "symmetric": true,
+        "vmin": -0.92776,
+        "vmax": 0.92776
+      },
+      "canopy": {
+        "symmetric": false,
+        "vmin": 0.0,
+        "vmax": 3.17,
+        "p0": 0.0,
+        "p100": 3.17
+      },
+      "elevation": {
+        "symmetric": false,
+        "vmin": 519.657,
+        "vmax": 522.881,
+        "p0": 519.657,
+        "p100": 522.881
+      },
+      "intensity": {
+        "symmetric": false,
+        "vmin": 2048.0,
+        "vmax": 26880.0,
+        "p0": 2048.0,
+        "p100": 26880.0
+      },
+      "return_number": {
+        "symmetric": false,
+        "vmin": 1.0,
+        "vmax": 2.0,
+        "p0": 1.0,
+        "p100": 2.0
+      },
+      "scan_angle_rank": {
+        "symmetric": false,
+        "vmin": -17.0,
+        "vmax": 25.0,
+        "p0": -17.0,
+        "p100": 25.0
+      }
+    },
+    "cae1": {
+      "NDCI": {
+        "symmetric": false,
+        "vmin": -0.00705,
+        "vmax": 0.74704,
+        "p0": -0.00705,
+        "p100": 0.74704
+      },
+      "NDVI": {
+        "p0": -0.39437,
+        "p100": 0.92551,
+        "center": 0.0,
+        "spread": 0.92551,
+        "symmetric": true,
+        "vmin": -0.92551,
+        "vmax": 0.92551
+      },
+      "NDWI": {
+        "p0": -0.74962,
+        "p100": 0.54152,
+        "center": 0.0,
+        "spread": 0.74962,
+        "symmetric": true,
+        "vmin": -0.74962,
+        "vmax": 0.74962
+      },
+      "canopy": {
+        "symmetric": false,
+        "vmin": 0.0,
+        "vmax": 3.17,
+        "p0": 0.0,
+        "p100": 3.17
+      },
+      "elevation": {
+        "symmetric": false,
+        "vmin": 519.657,
+        "vmax": 522.881,
+        "p0": 519.657,
+        "p100": 522.881
+      },
+      "intensity": {
+        "symmetric": false,
+        "vmin": 2048.0,
+        "vmax": 26880.0,
+        "p0": 2048.0,
+        "p100": 26880.0
+      },
+      "return_number": {
+        "symmetric": false,
+        "vmin": 1.0,
+        "vmax": 2.0,
+        "p0": 1.0,
+        "p100": 2.0
+      },
+      "scan_angle_rank": {
+        "symmetric": false,
+        "vmin": -17.0,
+        "vmax": 25.0,
+        "p0": -17.0,
+        "p100": 25.0
+      }
+    },
+    "cae2": {
+      "NDCI": {
+        "symmetric": false,
+        "vmin": 0.03345,
+        "vmax": 0.73839,
+        "p0": 0.03345,
+        "p100": 0.73839
+      },
+      "NDVI": {
+        "p0": -0.29678,
+        "p100": 0.95928,
+        "center": 0.0,
+        "spread": 0.95928,
+        "symmetric": true,
+        "vmin": -0.95928,
+        "vmax": 0.95928
+      },
+      "NDWI": {
+        "p0": -0.74277,
+        "p100": 0.45192,
+        "center": 0.0,
+        "spread": 0.74277,
+        "symmetric": true,
+        "vmin": -0.74277,
+        "vmax": 0.74277
+      },
+      "canopy": {
+        "symmetric": false,
+        "vmin": 0.0,
+        "vmax": 3.17,
+        "p0": 0.0,
+        "p100": 3.17
+      },
+      "elevation": {
+        "symmetric": false,
+        "vmin": 519.657,
+        "vmax": 522.881,
+        "p0": 519.657,
+        "p100": 522.881
+      },
+      "intensity": {
+        "symmetric": false,
+        "vmin": 2048.0,
+        "vmax": 26880.0,
+        "p0": 2048.0,
+        "p100": 26880.0
+      },
+      "return_number": {
+        "symmetric": false,
+        "vmin": 1.0,
+        "vmax": 2.0,
+        "p0": 1.0,
+        "p100": 2.0
+      },
+      "scan_angle_rank": {
+        "symmetric": false,
+        "vmin": -17.0,
+        "vmax": 25.0,
+        "p0": -17.0,
+        "p100": 25.0
+      }
+    },
+    "__all__": {
+      "NDVI": {
+        "p0": -0.41877,
+        "p100": 0.9947,
+        "center": 0.0,
+        "spread": 0.9947,
+        "symmetric": true,
+        "vmin": -0.9947,
+        "vmax": 0.9947
+      },
+      "NDWI": {
+        "p0": -0.92776,
+        "p100": 0.58797,
+        "center": 0.0,
+        "spread": 0.92776,
+        "symmetric": true,
+        "vmin": -0.92776,
+        "vmax": 0.92776
+      },
+      "NDCI": {
+        "symmetric": false,
+        "vmin": 0.01492,
+        "vmax": 0.76804,
+        "p0": 0.01492,
+        "p100": 0.76804
+      },
+      "canopy": {
+        "symmetric": false,
+        "vmin": 0.0,
+        "vmax": 3.17,
+        "p0": 0.0,
+        "p100": 3.17
+      },
+      "elevation": {
+        "symmetric": false,
+        "vmin": 519.657,
+        "vmax": 522.881,
+        "p0": 519.657,
+        "p100": 522.881
+      },
+      "intensity": {
+        "symmetric": false,
+        "vmin": 2048.0,
+        "vmax": 26880.0,
+        "p0": 2048.0,
+        "p100": 26880.0
+      },
+      "return_number": {
+        "symmetric": false,
+        "vmin": 1.0,
+        "vmax": 2.0,
+        "p0": 1.0,
+        "p100": 2.0
+      },
+      "scan_angle_rank": {
+        "symmetric": false,
+        "vmin": -17.0,
+        "vmax": 25.0,
+        "p0": -17.0,
+        "p100": 25.0
+      }
+    }
+  },
+  "las_available_periods": [
+    "2026_03_27"
+  ],
+  "reference_crs": "EPSG:4326",
+  "predio_crs": "EPSG:32719"
+}

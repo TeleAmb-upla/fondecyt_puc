@@ -21,11 +21,14 @@ from pathlib import Path
 
 import geopandas as gpd
 import numpy as np
+from shapely.geometry import mapping
 
 warnings_imported = False
 try:
     import rasterio
+    from rasterio.features import geometry_mask
     from rasterio.mask import mask as rio_mask
+    from rasterio.transform import array_bounds
     from rasterio.warp import transform_bounds
 except ImportError as exc:
     print(f"Falta rasterio: {exc}", file=sys.stderr)
@@ -52,8 +55,8 @@ from scripts.static_site.pipeline_utils import (
     REPO_ROOT,
     build_master_aoi_geojson,
     load_config,
-    wetland_bounds_center,
-    wetland_shapefiles,
+    predio_bounds_center,
+    predio_shapefiles,
 )
 
 _STEM_RE = re.compile(r"^Y(?P<year>\d{4})_W(?P<week>\d{2})$", re.I)
@@ -121,29 +124,32 @@ def discover_weekly_tifs(tif_dir: Path) -> list[dict]:
     return rows
 
 
-def load_parcel_geoms(config: dict) -> dict[str, dict]:
-    """``{wetland_id: {geometry, bounds, center, name, color}}``."""
+def load_predio_geoms(config: dict) -> dict[str, dict]:
+    """``{predio_id: {geometry, bounds, center, name, color}}``."""
     parcels: dict[str, dict] = {}
-    for wid, shp_path in wetland_shapefiles(config).items():
+    for wid, shp_path in predio_shapefiles(config).items():
         if not shp_path.is_file():
             raise FileNotFoundError(f"Falta shapefile: {shp_path}")
-        gdf = gpd.read_file(shp_path)
-        if gdf.crs is None:
-            gdf = gdf.set_crs("EPSG:4326")
-        else:
-            gdf = gdf.to_crs("EPSG:4326")
-        geom = gdf.unary_union
-        bounds, center = wetland_bounds_center(geom)
-        wcfg = config["wetlands"][wid]
+        gdf_native = gpd.read_file(shp_path)
+        if gdf_native.crs is None:
+            gdf_native = gdf_native.set_crs("EPSG:4326")
+        geom_proj = gdf_native.union_all()
+        crs_proj = str(gdf_native.crs)
+        gdf_wgs = gdf_native.to_crs("EPSG:4326")
+        geom = gdf_wgs.union_all()
+        bounds, center = predio_bounds_center(geom)
+        pcfg = config["predios"][wid]
         parcels[wid] = {
             "geometry": geom,
+            "geometry_proj": geom_proj,
+            "crs_proj": crs_proj,
             "geojson": json.loads(gpd.GeoSeries([geom], crs="EPSG:4326").to_json())["features"][0][
                 "geometry"
             ],
             "leaflet_bounds": bounds,
             "center": center,
-            "name": wcfg.get("name") or wid,
-            "color": wcfg.get("color") or "#1d6b4a",
+            "name": pcfg.get("name") or wid,
+            "color": pcfg.get("color") or "#1d6b4a",
         }
     return parcels
 
@@ -174,19 +180,47 @@ def _read_bands_normalized(ds) -> tuple[np.ndarray, list[str]]:
     return arr, band_names
 
 
+def _masked_raster_to_nan(arr: np.ndarray) -> np.ndarray:
+    """Convierte salida de ``rio_mask`` (enmascarada) a float32 con NaN fuera del polígono."""
+    if isinstance(arr, np.ma.MaskedArray):
+        out = arr.astype(np.float32, copy=False).filled(np.nan)
+        if np.ma.is_masked(arr):
+            out[np.ma.getmaskarray(arr)] = np.nan
+        return out
+    return arr.astype(np.float32, copy=False)
+
+
+def _leaflet_bounds_from_raster_clip(
+    width: int, height: int, transform, crs
+) -> list[list[float]]:
+    """Bounds Leaflet [[south, west], [north, east]] del array recortado."""
+    minx, miny, maxx, maxy = array_bounds(width, height, transform)
+    if crs is not None and str(crs).upper() not in ("EPSG:4326", "OGC:CRS84"):
+        minx, miny, maxx, maxy = transform_bounds(crs, "EPSG:4326", minx, miny, maxx, maxy)
+    return [[miny, minx], [maxy, maxx]]
+
+
 def extract_parcel_means_from_tif(
     tif_path: Path, parcel_geom, band_names_ref: list[str] | None
-) -> tuple[dict[str, float | None], list[str], np.ndarray | None]:
+) -> tuple[
+    dict[str, float | None],
+    list[str],
+    np.ndarray | None,
+    list[list[float]] | None,
+    object | None,
+]:
     with rasterio.open(tif_path) as ds:
         arr, band_names = _read_bands_normalized(ds)
         if band_names_ref and band_names != band_names_ref:
             pass
         geoms = [parcel_geom.__geo_interface__ if hasattr(parcel_geom, "__geo_interface__") else parcel_geom]
         try:
-            clipped, _ = rio_mask(ds, geoms, crop=True, filled=False)
+            clipped, out_transform = rio_mask(
+                ds, geoms, crop=True, filled=False, all_touched=True
+            )
         except ValueError:
-            return {b: None for b in band_names if b not in SKIP_BANDS}, band_names, None
-        clipped = clipped.astype(np.float32)
+            return {b: None for b in band_names if b not in SKIP_BANDS}, band_names, None, None, None
+        clipped = _masked_raster_to_nan(clipped)
         if ds.nodata is not None:
             clipped = np.where(clipped == ds.nodata, np.nan, clipped)
         for sentinel in SENTINEL_VALUES:
@@ -203,7 +237,12 @@ def extract_parcel_means_from_tif(
             with np.errstate(invalid="ignore"):
                 m = float(np.nanmean(clipped[i]))
             means[band] = _sanitize(m) if math.isfinite(m) else None
-        return means, band_names, clipped
+        if clipped.ndim == 2:
+            height, width = clipped.shape
+        else:
+            height, width = clipped.shape[1], clipped.shape[2]
+        leaflet_bounds = _leaflet_bounds_from_raster_clip(width, height, out_transform, ds.crs)
+        return means, band_names, clipped, leaflet_bounds, out_transform
 
 
 class ColormapCache:
@@ -222,7 +261,7 @@ class ColormapCache:
 
 CMAP_CACHE = ColormapCache()
 
-PARCEL_ALL_KEY = "__all__"
+PREDIO_ALL_KEY = "__all__"
 
 
 def is_normalized_band(band: str) -> bool:
@@ -276,7 +315,7 @@ def _compute_stretch_limits(
     parcel_ids: list[str],
 ) -> dict[str, dict[str, dict[str, float]]]:
     """p0 / p100 por parcela × banda (píxeles válidos en todas las semanas)."""
-    by_wetland: dict[str, dict[str, dict[str, float]]] = {wid: {} for wid in parcel_ids}
+    by_predio: dict[str, dict[str, dict[str, float]]] = {wid: {} for wid in parcel_ids}
     pooled: dict[str, list[np.ndarray]] = {b: [] for b in band_names if b not in SKIP_BANDS}
 
     for (wid, band), chunks in acc.items():
@@ -289,7 +328,7 @@ def _compute_stretch_limits(
         p0f, p100f = float(p0), float(p100)
         if not (math.isfinite(p0f) and math.isfinite(p100f)):
             continue
-        by_wetland.setdefault(wid, {})[band] = _stretch_entry_from_percentiles(p0f, p100f, band)
+        by_predio.setdefault(wid, {})[band] = _stretch_entry_from_percentiles(p0f, p100f, band)
         pooled.setdefault(band, []).append(vals)
 
     all_limits: dict[str, dict[str, float]] = {}
@@ -303,36 +342,56 @@ def _compute_stretch_limits(
             continue
         all_limits[band] = _stretch_entry_from_percentiles(p0f, p100f, band)
     if all_limits:
-        by_wetland[PARCEL_ALL_KEY] = all_limits
+        by_predio[PREDIO_ALL_KEY] = all_limits
 
     for wid in parcel_ids:
         for band in band_names:
             if band in SKIP_BANDS:
                 continue
-            if band in by_wetland.get(wid, {}):
+            if band in by_predio.get(wid, {}):
                 continue
             viz = BAND_VIZ.get(band, DEFAULT_VIZ)
-            by_wetland.setdefault(wid, {})[band] = _stretch_entry_from_percentiles(
+            by_predio.setdefault(wid, {})[band] = _stretch_entry_from_percentiles(
                 float(viz["vmin"]), float(viz["vmax"]), band
             )
-    return by_wetland
+    return by_predio
 
 
 def stretch_for_render(
-    stretch_by_wetland: dict[str, dict[str, dict[str, float]]],
+    stretch_by_predio: dict[str, dict[str, dict[str, float]]],
     wid: str,
     band: str,
 ) -> tuple[float, float]:
-    lim = (stretch_by_wetland.get(wid) or {}).get(band)
+    lim = (stretch_by_predio.get(wid) or {}).get(band)
     if lim:
         return float(lim["vmin"]), float(lim["vmax"])
     viz = BAND_VIZ.get(band, DEFAULT_VIZ)
     return float(viz["vmin"]), float(viz["vmax"])
 
 
-def render_band_webp(data: np.ndarray, out_path: Path, *, vmin: float, vmax: float, colormap: str) -> None:
+def render_band_webp(
+    data: np.ndarray,
+    out_path: Path,
+    *,
+    vmin: float,
+    vmax: float,
+    colormap: str,
+    parcel_geom=None,
+    out_transform=None,
+    raster_crs=None,
+) -> None:
     arr = data.astype(np.float32, copy=False)
     mask = ~np.isfinite(arr)
+    if parcel_geom is not None and out_transform is not None:
+        h, w = arr.shape
+        inside = geometry_mask(
+            [mapping(parcel_geom)],
+            out_shape=(h, w),
+            transform=out_transform,
+            invert=True,
+            all_touched=True,
+        )
+        mask = mask | ~inside
     span = max(float(vmax) - float(vmin), 1e-9)
     norm = np.clip((arr - vmin) / span, 0.0, 1.0)
     norm = np.where(mask, 0.0, norm)
@@ -371,9 +430,9 @@ def main() -> None:
         print(f"No hay TIF en {tif_dir}", file=sys.stderr)
         sys.exit(1)
 
-    parcels = load_parcel_geoms(config)
+    parcels = load_predio_geoms(config)
     build_master_aoi_geojson(config)
-    static_aoi = REPO_ROOT / "data_static" / "wetlands_aoi.geojson"
+    static_aoi = REPO_ROOT / "data_static" / "predios_aoi.geojson"
     static_aoi.parent.mkdir(parents=True, exist_ok=True)
     master = REPO_ROOT / config.get("master_aoi_path", "data/shapefiles/pumahuida_aoi.geojson")
     static_aoi.write_text(master.read_text(encoding="utf-8"), encoding="utf-8")
@@ -385,11 +444,11 @@ def main() -> None:
     series: dict[str, dict[str, list]] = {}
     band_names: list[str] = []
     rasters_meta: dict[str, dict] = {}
-    wetlands_meta: dict[str, dict] = {}
+    predios_meta: dict[str, dict] = {}
     pixel_acc: dict[tuple[str, str], list[np.ndarray]] = {}
 
     for wid, pinfo in parcels.items():
-        wetlands_meta[wid] = {
+        predios_meta[wid] = {
             "name": pinfo["name"],
             "color": pinfo["color"],
             "center": pinfo["center"],
@@ -403,7 +462,7 @@ def main() -> None:
         tif_path = rec["path"]
         print(f"    [{ti+1}/{len(records)}] {tif_path.name}")
         for wid in parcel_ids:
-            means, bnames, clipped = extract_parcel_means_from_tif(
+            means, bnames, clipped, _bounds, _tf = extract_parcel_means_from_tif(
                 tif_path, parcels[wid]["geometry"], band_names or None
             )
             if not band_names:
@@ -417,46 +476,55 @@ def main() -> None:
             for bi, band in enumerate(bnames):
                 if band in SKIP_BANDS:
                     continue
-                _accumulate_pixels(pixel_acc, wid, band, clipped[bi])
+                band_arr = clipped[bi] if clipped.ndim == 3 else clipped
+                _accumulate_pixels(pixel_acc, wid, band, band_arr)
 
-    stretch_by_wetland = _compute_stretch_limits(pixel_acc, band_names, parcel_ids)
+    stretch_by_predio = _compute_stretch_limits(pixel_acc, band_names, parcel_ids)
     print("  Paso 2/2: WebP con paletas estiradas a p0–p100…")
 
     for ti, rec in enumerate(records):
         tif_path = rec["path"]
         print(f"    [{ti+1}/{len(records)}] {tif_path.name}")
+        with rasterio.open(tif_path) as _ds_ref:
+            tif_crs = _ds_ref.crs
         for wid in parcel_ids:
-            _, bnames, clipped = extract_parcel_means_from_tif(
-                tif_path, parcels[wid]["geometry"], band_names or None
+            pinfo = parcels[wid]
+            _, bnames, clipped, leaflet_bounds, out_transform = extract_parcel_means_from_tif(
+                tif_path, pinfo["geometry"], band_names or None
             )
-            if clipped is None:
+            if clipped is None or leaflet_bounds is None or out_transform is None:
                 continue
             for bi, band in enumerate(bnames):
                 if band in SKIP_BANDS:
                     continue
                 viz = BAND_VIZ.get(band, DEFAULT_VIZ)
-                vmin, vmax = stretch_for_render(stretch_by_wetland, wid, band)
+                vmin, vmax = stretch_for_render(stretch_by_predio, wid, band)
                 stem = f"{wid}_{rec['key']}_{band.lower()}"
                 rel = f"sentinel2/rasters/{stem}.webp"
                 out_webp = static_dir / "rasters" / f"{stem}.webp"
+                band_arr = clipped[bi] if clipped.ndim == 3 else clipped
                 if args.force or not out_webp.is_file():
                     render_band_webp(
-                        clipped[bi],
+                        band_arr,
                         out_webp,
                         vmin=vmin,
                         vmax=vmax,
                         colormap=viz["colormap"],
+                        parcel_geom=pinfo["geometry"],
+                        out_transform=out_transform,
+                        raster_crs=tif_crs,
                     )
                 rasters_meta[f"{wid}_{rec['key']}_{band.lower()}"] = {
                     "p": rel,
-                    "l": f"{pinfo['name'] if (pinfo := parcels[wid]) else wid} · {rec['label']} · {viz.get('label', band)}",
+                    "l": f"{pinfo['name']} · {rec['label']} · {viz.get('label', band)}",
                     "year": rec["year"],
                     "week": rec["week"],
-                    "wetland_id": wid,
+                    "predio_id": wid,
                     "band": band,
                     "vmin": vmin,
                     "vmax": vmax,
                     "colormap": viz["colormap"],
+                    "leaflet_bounds": leaflet_bounds,
                 }
 
     indices_meta = {}
@@ -480,7 +548,7 @@ def main() -> None:
         "default_band": "NDVI" if "NDVI" in series else next(iter(series), "NDVI"),
         "timeline": timeline,
         "series": series,
-        "wetlands": wetlands_meta,
+        "predios": predios_meta,
         "indices": indices_meta,
         "last_timeline_key": last_key,
     }
@@ -488,15 +556,15 @@ def main() -> None:
         "generated_at": ts_payload["generated_at"],
         "default_band": ts_payload["default_band"],
         "indices": indices_meta,
-        "wetlands": wetlands_meta,
+        "predios": predios_meta,
         "timeline": timeline,
         "last_timeline_key": last_key,
         "rasters": rasters_meta,
-        "stretch_by_wetland": stretch_by_wetland,
+        "stretch_by_predio": stretch_by_predio,
         "view_modes": {
             "weekly": {
                 "label": "Semanal",
-                "template": "{wetland_id}_{year}_w{week:02d}_{band}",
+                "template": "{predio_id}_{year}_w{week:02d}_{band}",
             }
         },
     }
@@ -515,7 +583,7 @@ def main() -> None:
 
     manifest = {
         "generated_at": ts_payload["generated_at"],
-        "aoi_path": "wetlands_aoi.geojson",
+        "aoi_path": "predios_aoi.geojson",
         "project_title": "Pumahuida · Fondecyt PUC",
         "sources": {
             "sentinel2": {
@@ -537,7 +605,7 @@ def main() -> None:
         },
     }
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Listo → {static_dir}  ({len(rasters_meta)} capas WebP)")
+    print(f"Listo -> {static_dir}  ({len(rasters_meta)} capas WebP)")
 
 
 if __name__ == "__main__":

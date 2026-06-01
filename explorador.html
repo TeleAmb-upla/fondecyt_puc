@@ -1,0 +1,2287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitoreo vegetacional en Pumahuida</title>
+  <link rel="icon" href="assets/img/puc_escudo.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <style>
+    :root {
+      --puc-blue: #003366;
+      --puc-gold: #ffc72c;
+      --accent: #1d6b4a;
+      --ink: #122018;
+      --muted: #4a5c4e;
+      --panel-w: clamp(300px, 32vw, 400px);
+      --map-chrome-inset-left: calc(var(--panel-w) + 28px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; font-family: 'Source Sans 3', system-ui, sans-serif; color: var(--ink); }
+    .app { position: relative; width: 100%; height: 100dvh; background: #0d120f; }
+    #map { position: absolute; inset: 0; z-index: 0; }
+    .panel {
+      position: absolute; z-index: 500;
+      left: max(12px, env(safe-area-inset-left));
+      top: max(12px, env(safe-area-inset-top));
+      bottom: max(12px, env(safe-area-inset-bottom));
+      width: var(--panel-w);
+      min-height: 0;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      background: linear-gradient(175deg, #fbfdf9 0%, #f3f8f3 38%, #ebf3ec 100%);
+      border: 1px solid rgba(0, 51, 102, 0.12);
+      border-radius: 22px;
+      box-shadow: 0 12px 48px rgba(18, 42, 28, 0.18);
+      padding: 12px 16px 14px;
+    }
+    .panel__scroll {
+      flex: 0 0 auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    .panel__spacer {
+      flex: 1 1 auto;
+      min-height: 0;
+      width: 100%;
+    }
+    .brand {
+      margin-bottom: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(0, 51, 102, 0.1);
+    }
+    .brand__logo-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 12px 10px;
+      margin-bottom: 12px;
+      background: linear-gradient(180deg, #fff 0%, #f8faf9 100%);
+      border-radius: 14px;
+      border: 1px solid rgba(0, 51, 102, 0.1);
+      box-shadow: 0 4px 16px rgba(0, 51, 102, 0.07);
+    }
+    .brand__logo-cell {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 5px;
+    }
+    .brand__logo-cell + .brand__logo-cell {
+      border-left: 1px solid rgba(0, 51, 102, 0.1);
+    }
+    .brand__logo {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 44px;
+      object-fit: contain;
+      object-position: center;
+    }
+    .brand__logo--puc {
+      max-height: 40px;
+    }
+    .brand__logo--teleamb {
+      max-height: 44px;
+    }
+    .brand__logo--upla {
+      max-height: 38px;
+    }
+    .brand__logo--fallback {
+      max-height: 44px;
+      width: 44px;
+    }
+    .brand__eyebrow {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+    .brand__title {
+      font-family: Outfit, sans-serif;
+      font-size: clamp(1.22rem, 2.8vw, 1.42rem);
+      font-weight: 700;
+      line-height: 1.28;
+      color: var(--puc-blue);
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    .brand__place-wrap {
+      display: inline-block;
+      margin-top: 0.05em;
+    }
+    .brand__place {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .brand__rule {
+      display: block;
+      width: 100%;
+      height: 3px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--puc-gold), var(--accent));
+    }
+    label, .lbl { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 10px 0 4px; }
+    select { width: 100%; padding: 8px 10px; border-radius: 10px; border: 1px solid rgba(0,51,102,.15); font: inherit; background: #fff; }
+    .source-box { margin-top: 8px; padding: 10px; border-radius: 14px; background: rgba(0,51,102,.04); border: 1px solid rgba(0,51,102,.08); }
+    .source-box__title { font-size: 0.72rem; font-weight: 700; color: var(--puc-blue); margin-bottom: 8px; }
+    .source-pills { display: flex; gap: 8px; }
+    .source-pill {
+      flex: 1;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 10px 8px 8px;
+      border-radius: 14px;
+      border: 2px solid rgba(0,51,102,.12);
+      background: #fff;
+      cursor: pointer;
+      transition: border-color .12s, box-shadow .12s, opacity .12s;
+      font: inherit;
+      color: var(--puc-blue);
+    }
+    .source-pill__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+    }
+    .source-pill__icon {
+      width: 48px;
+      height: 48px;
+      display: block;
+      color: #111;
+      opacity: 0.92;
+    }
+    .source-pill__label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+    .source-pill--active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(29,107,74,.2);
+      color: var(--accent);
+    }
+    .source-pill--active .source-pill__icon { color: #111; opacity: 1; }
+    .source-pill--active .source-pill__label { color: var(--accent); }
+    .source-pill:disabled { opacity: .45; cursor: not-allowed; }
+    .hint { font-size: 0.78rem; color: var(--muted); margin-top: 6px; line-height: 1.35; }
+    .hint--warn { color: #9a6700; background: #fff8e6; padding: 8px 10px; border-radius: 10px; margin-top: 8px; }
+    #droneFields[hidden] { display: none !important; }
+    #lidarAttrFields[hidden] { display: none !important; }
+    .map-zoom-pills {
+      position: absolute; z-index: 600; top: 12px; right: 12px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .map-zoom-pills button {
+      width: 40px; height: 40px; border: none; border-radius: 999px;
+      background: rgba(255,255,255,.96); color: var(--puc-blue); font-size: 1.25rem; font-weight: 700;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.18);
+    }
+    .map-zoom-pills button:hover { background: #fff; }
+    .map-zoom-pills button.fit { font-size: 0.95rem; }
+    .bottom-stack {
+      position: absolute; z-index: 500;
+      left: calc(var(--panel-w) + 24px); right: 12px; bottom: 12px;
+      display: flex; flex-direction: column; gap: 0; pointer-events: none;
+      background: transparent;
+    }
+    .bottom-stack > * { pointer-events: auto; }
+    .sat-period-float {
+      width: 100%;
+      padding: 8px 12px 10px;
+      background: linear-gradient(165deg, rgba(255,255,255,.98) 0%, rgba(251,253,250,.95) 100%);
+      border: 1px solid rgba(0, 51, 102, 0.14);
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 8px 28px rgba(18, 42, 28, 0.12), inset 0 1px 0 rgba(255,255,255,.92);
+      transition: border-radius 0.25s ease, box-shadow 0.25s ease;
+    }
+    .bottom-stack.chart-collapsed .sat-period-float {
+      border-radius: 18px;
+      box-shadow: 0 8px 28px rgba(18, 42, 28, 0.14), inset 0 1px 0 rgba(255,255,255,.92);
+    }
+    .sat-period-float__head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+    .sat-period-float__head .sat-period-toolbar { flex: 1; min-width: 0; }
+    .chart-collapse-btn {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(0, 51, 102, 0.28);
+      background: rgba(255,255,255,.96);
+      color: var(--puc-blue);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.12s, border-color 0.12s, transform 0.2s;
+    }
+    .chart-collapse-btn:hover {
+      background: #eef5f0;
+      border-color: var(--accent);
+    }
+    .chart-collapse-btn svg { display: block; transition: transform 0.25s ease; }
+    .bottom-stack.chart-collapsed .chart-collapse-btn svg { transform: rotate(180deg); }
+    .sat-period-toolbar { width: 100%; }
+    .sat-period-toolbar__row { display: flex; align-items: center; gap: 8px; width: 100%; }
+    .sat-period-custom-slider {
+      flex: 1; min-width: 0; position: relative; height: 36px;
+      display: flex; align-items: center; touch-action: none;
+    }
+    .sat-period-custom-slider__track {
+      position: relative; width: 100%; height: 7px; border-radius: 999px;
+      background: rgba(0, 51, 102, 0.14); cursor: pointer;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,.06);
+    }
+    .sat-period-custom-slider__fill {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(45, 157, 110, 0.35), rgba(0, 51, 102, 0.5));
+      pointer-events: none;
+    }
+    .sat-period-custom-slider__thumb {
+      position: absolute; left: 0%; top: 50%; transform: translate(-50%, -50%);
+      min-width: 4.75rem; max-width: min(40vw, 10rem);
+      padding: 6px 11px 7px; border-radius: 12px;
+      background: var(--puc-blue); color: #fff;
+      font-size: 0.72rem; font-weight: 800; text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 51, 102, 0.35);
+      pointer-events: none; z-index: 2;
+      border: 1.5px solid rgba(255,255,255,.35);
+    }
+    .sat-period-custom-slider__thumb-label {
+      display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .sat-period-step {
+      flex: 0 0 auto; width: 38px; height: 38px; border-radius: 12px;
+      border: 1.5px solid rgba(0, 51, 102, 0.28);
+      background: rgba(255,255,255,.96); color: var(--puc-blue);
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0; cursor: pointer; font-family: inherit;
+    }
+    .sat-period-step:hover:not(:disabled) { background: #eef5f0; border-color: var(--accent); }
+    .sat-period-step:disabled { opacity: 0.45; cursor: default; }
+    .sat-period-step svg { display: block; }
+    .chart-wrap {
+      background: rgba(255,255,255,0.97); border-radius: 0 0 16px 16px;
+      border: 1px solid rgba(0, 51, 102, 0.14); border-top: none;
+      padding: 12px 14px 10px; box-shadow: 0 8px 32px rgba(0,0,0,.2);
+      max-height: 36vh;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.22s ease, padding 0.3s ease, border-width 0.2s ease;
+    }
+    .bottom-stack.chart-collapsed .chart-wrap {
+      max-height: 0 !important;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-width: 0;
+      box-shadow: none;
+      pointer-events: none;
+    }
+    .chart-wrap h2 { font-family: Outfit, sans-serif; font-size: 0.95rem; color: var(--puc-blue); }
+    .chart-wrap .sub { font-size: 0.75rem; color: var(--muted); margin: 2px 0 8px; }
+    .chart-canvas { height: min(26vh, 200px); }
+    .drone-opacity {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      width: 6rem;
+      min-width: 6rem;
+      max-width: 6rem;
+      overflow: hidden;
+    }
+    .drone-opacity[hidden] { display: none !important; }
+    .app.mode-sat #droneOpacityWrap { display: none !important; }
+    .drone-opacity-title {
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.15;
+      width: 100%;
+      word-break: break-word;
+      hyphens: auto;
+    }
+    .drone-opacity-sub {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--muted);
+      opacity: 0.85;
+      margin-top: 1px;
+      line-height: 1.15;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .drone-opacity-scale {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+    }
+    .drone-opacity-value {
+      font-size: 0.74rem;
+      color: var(--ink);
+      font-weight: 700;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+      width: 100%;
+    }
+    .drone-opacity-slider-wrap {
+      position: relative;
+      height: 148px;
+      width: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .drone-opacity input[type="range"] {
+      width: 148px;
+      height: 18px;
+      margin: 0;
+      padding: 0;
+      transform: rotate(-90deg);
+      transform-origin: center center;
+      cursor: pointer;
+      accent-color: var(--puc-blue);
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+    }
+    .drone-opacity input[type="range"]::-webkit-slider-runnable-track {
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(0, 51, 102, 0.14);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,.06);
+    }
+    .drone-opacity input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--puc-blue);
+      border: 1.5px solid rgba(255,255,255,.5);
+      box-shadow: 0 2px 8px rgba(0, 51, 102, 0.35);
+      margin-top: -5px;
+    }
+    .drone-opacity input[type="range"]::-moz-range-track {
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(0, 51, 102, 0.14);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,.06);
+    }
+    .drone-opacity input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--puc-blue);
+      border: 1.5px solid rgba(255,255,255,.5);
+      box-shadow: 0 2px 8px rgba(0, 51, 102, 0.35);
+    }
+    .legend-rail {
+      position: absolute;
+      z-index: 550;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      max-height: calc(100dvh - 32px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      pointer-events: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .legend-rail--left {
+      left: calc(var(--map-chrome-inset-left) + max(10px, env(safe-area-inset-left)));
+    }
+    .legend-rail--right {
+      right: max(12px, env(safe-area-inset-right));
+      left: auto;
+    }
+    .legend-rail > .map-legend-dock { pointer-events: auto; }
+    .map-legend-dock {
+      position: relative;
+      flex-shrink: 0;
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(0, 51, 102, 0.12);
+      border-radius: 18px;
+      padding: 10px 12px 11px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.1);
+    }
+    .colorbar-box {
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      width: 5.25rem;
+    }
+    .colorbar-title {
+      font-size: 0.72rem; font-weight: 700; color: var(--muted);
+      text-align: center; line-height: 1.25;
+      width: 100%;
+    }
+    .colorbar-scale {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+    }
+    .colorbar-value {
+      font-size: 0.74rem;
+      color: var(--ink);
+      font-weight: 700;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+      width: 100%;
+    }
+    .colorbar-gradient-wrap {
+      position: relative;
+      width: 16px;
+      flex-shrink: 0;
+    }
+    .colorbar-gradient {
+      display: block;
+      height: 148px;
+      width: 16px;
+      border-radius: 999px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+    }
+    .colorbar-value--center {
+      position: absolute;
+      left: calc(100% + 5px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: auto;
+      min-width: 2rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-align: left;
+    }
+    .colorbar-value--center[hidden] { display: none; }
+    .lidar-class-legend {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      width: 5.25rem;
+      min-width: 5.25rem;
+    }
+    .lidar-class-legend-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.25;
+      width: 100%;
+    }
+    .lidar-class-legend-items {
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .lidar-class-legend-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.74rem; font-weight: 600; color: var(--ink);
+      line-height: 1.2;
+    }
+    .lidar-class-legend-swatch {
+      width: 14px; height: 14px; border-radius: 4px;
+      flex-shrink: 0;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+    }
+    .app.mode-drone #satBottom { display: none !important; }
+    .app.mode-sat #droneBottom { display: none !important; }
+    #las3dView {
+      position: absolute; z-index: 480;
+      left: calc(var(--panel-w) + 24px); right: 12px; top: 12px;
+      bottom: 12px;
+      background: #0c1210;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 51, 102, 0.2);
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      overflow: hidden;
+    }
+    #las3dView[hidden] { display: none !important; }
+    #las3dCanvas { width: 100%; height: 100%; display: block; cursor: grab; }
+    #las3dCanvas:active { cursor: grabbing; }
+    .las3d-hint {
+      position: absolute; left: 12px; bottom: 10px; z-index: 2;
+      font-size: 0.72rem; color: rgba(255,255,255,.75);
+      background: rgba(0,0,0,.35); padding: 6px 10px; border-radius: 8px;
+      pointer-events: none;
+    }
+    .app.mode-las-3d #map {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+    @media (max-width: 720px) {
+      :root {
+        --panel-w: min(100% - 24px, 400px);
+      }
+      .bottom-stack { left: 12px; margin-left: 0; }
+      .map-zoom-pills { top: 12px; bottom: auto; right: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div id="map"></div>
+    <div id="las3dView" hidden>
+      <canvas id="las3dCanvas"></canvas>
+      <p class="las3d-hint">Arrastra para rotar · rueda para zoom · clic derecho para desplazar</p>
+    </div>
+    <div class="legend-rail legend-rail--left" id="legendRailLeft" aria-label="Leyendas del mapa">
+      <div class="map-legend-dock lidar-class-legend" id="lidarClassLegend" hidden aria-hidden="true">
+        <div class="lidar-class-legend-title">Clasificación</div>
+        <div class="lidar-class-legend-items" id="lidarClassLegendItems"></div>
+      </div>
+      <div class="map-legend-dock colorbar-box" id="colorbarBox" aria-hidden="true">
+        <div class="colorbar-title" id="cbTitle">NDVI</div>
+        <div class="colorbar-scale">
+          <span class="colorbar-value" id="cbMax"></span>
+          <div class="colorbar-gradient-wrap">
+            <div class="colorbar-gradient" id="cbGradient" role="img" aria-hidden="true"></div>
+            <span class="colorbar-value colorbar-value--center" id="cbCenter" hidden></span>
+          </div>
+          <span class="colorbar-value" id="cbMin"></span>
+        </div>
+      </div>
+    </div>
+    <div class="legend-rail legend-rail--right" id="legendRailRight" aria-label="Transparencia del índice">
+      <div class="map-legend-dock drone-opacity" id="droneOpacityWrap" hidden>
+        <div class="drone-opacity-title">Transparencia índice</div>
+        <div class="drone-opacity-sub">sobre RGB</div>
+        <div class="drone-opacity-scale">
+          <span class="drone-opacity-value">100%</span>
+          <div class="drone-opacity-slider-wrap">
+            <input type="range" id="droneOpacity" min="0" max="100" value="85" orient="vertical"
+              aria-label="Transparencia del índice sobre RGB">
+          </div>
+          <span class="drone-opacity-value">0%</span>
+        </div>
+      </div>
+    </div>
+    <div class="map-zoom-pills" aria-label="Zoom del mapa">
+      <button type="button" id="zoomIn" title="Acercar">+</button>
+      <button type="button" id="zoomOut" title="Alejar">−</button>
+      <button type="button" id="zoomFit" class="fit" title="Encuadrar vista">⌂</button>
+    </div>
+    <aside class="panel">
+      <header class="brand">
+        <div class="brand__logo-wrap">
+          <div class="brand__logo-cell">
+            <img
+              class="brand__logo brand__logo--puc"
+              src="assets/img/puc_logo.png"
+              srcset="assets/img/puc_logo.png 1x, assets/img/puc_logo@2x.png 2x"
+              alt="Pontificia Universidad Católica de Chile"
+              width="1280"
+              height="738"
+              decoding="async"
+              onerror="this.onerror=null;this.src='assets/img/Pontificia-Universidad-Catolica-de-Chile-Logo.webp'">
+          </div>
+          <div class="brand__logo-cell">
+            <img
+              class="brand__logo brand__logo--teleamb"
+              src="assets/img/teleamb_logo.png"
+              srcset="assets/img/teleamb_logo.png 1x, assets/img/teleamb_logo@2x.png 2x"
+              alt="Laboratorio TeleAmb — UPLA"
+              width="729"
+              height="380"
+              decoding="async">
+          </div>
+          <div class="brand__logo-cell">
+            <img
+              class="brand__logo brand__logo--upla"
+              src="assets/img/upla_logo.png"
+              srcset="assets/img/upla_logo.png 1x, assets/img/upla_logo@2x.png 2x"
+              alt="Universidad de Playa Ancha"
+              width="953"
+              height="305"
+              decoding="async">
+          </div>
+        </div>
+        <p class="brand__eyebrow">Fondecyt · PUC · TeleAmb · UPLA</p>
+        <h1 class="brand__title">Monitoreo vegetacional<br><span class="brand__place-wrap"><span class="brand__place">en Pumahuida</span><span class="brand__rule" aria-hidden="true"></span></span></h1>
+      </header>
+      <div class="panel__scroll">
+      <div class="source-box">
+        <div class="source-box__title">Origen</div>
+        <div class="source-pills" role="group" aria-label="Origen del mapa">
+          <button type="button" class="source-pill source-pill--active" id="pillSat" aria-pressed="true" title="Satélite semanal">
+            <span class="source-pill__content">
+              <svg class="source-pill__icon" viewBox="0 0 64 64" aria-hidden="true">
+                <ellipse cx="32" cy="53" rx="19" ry="3" fill="currentColor" opacity="0.12"/>
+                <rect x="4" y="27" width="16" height="16" rx="2" fill="currentColor"/>
+                <rect x="44" y="27" width="16" height="16" rx="2" fill="currentColor"/>
+                <path stroke="#fff" stroke-width="1.1" opacity="0.22" fill="none" d="M7.5 32h9M7.5 37.5h9M47.5 32h9M47.5 37.5h9"/>
+                <rect x="21" y="29" width="22" height="12" rx="2" fill="currentColor"/>
+                <rect x="30" y="22" width="4" height="7" rx="1" fill="currentColor"/>
+                <path fill="currentColor" d="M32 12.5c-5.2 0-9.5 3.2-9.5 7.2h19c0-4-4.3-7.2-9.5-7.2z"/>
+                <circle cx="32" cy="12.5" r="1.6" fill="currentColor"/>
+              </svg>
+              <span class="source-pill__label">Satélite</span>
+            </span>
+          </button>
+          <button type="button" class="source-pill" id="pillDrone" aria-pressed="false" title="Ortofoto dron" disabled>
+            <span class="source-pill__content">
+              <svg class="source-pill__icon" viewBox="0 0 64 64" aria-hidden="true">
+                <ellipse cx="32" cy="53" rx="18" ry="3" fill="currentColor" opacity="0.12"/>
+                <path fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" d="M32 32 15.5 15.5M32 32 48.5 15.5M32 32 15.5 48.5M32 32 48.5 48.5"/>
+                <circle cx="15.5" cy="15.5" r="7.2" fill="currentColor"/>
+                <circle cx="48.5" cy="15.5" r="7.2" fill="currentColor"/>
+                <circle cx="15.5" cy="48.5" r="7.2" fill="currentColor"/>
+                <circle cx="48.5" cy="48.5" r="7.2" fill="currentColor"/>
+                <circle cx="32" cy="32" r="6.8" fill="currentColor"/>
+                <circle cx="15.5" cy="15.5" r="2" fill="#fff"/>
+                <circle cx="48.5" cy="15.5" r="2" fill="#fff"/>
+                <circle cx="15.5" cy="48.5" r="2" fill="#fff"/>
+                <circle cx="48.5" cy="48.5" r="2" fill="#fff"/>
+                <circle cx="32" cy="32" r="2.3" fill="#fff"/>
+              </svg>
+              <span class="source-pill__label">Dron</span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <p class="hint" id="sourceHint">Satélite: semanas ISO y todos los índices del compuesto S2.</p>
+      <p class="hint hint--warn" id="dronePendingHint" hidden>Aún no hay ortofotos de dron en <code>data/drone/</code>. Cuando las cargues, habilitaremos este origen.</p>
+      <label for="selPredio">Predio</label>
+      <select id="selPredio"></select>
+      <div id="satFields">
+        <label for="selBand">Índice / banda</label>
+        <select id="selBand"></select>
+      </div>
+      <div id="droneFields" hidden>
+        <label for="selDroneDate">Fecha de vuelo</label>
+        <select id="selDroneDate"><option value="">— Sin vuelos —</option></select>
+        <label for="selDroneLayer">Capa</label>
+        <select id="selDroneLayer">
+          <option value="rgb">RGB</option>
+          <option value="ndvi">NDVI</option>
+          <option value="ndwi">NDWI</option>
+          <option value="ndci">NDCI</option>
+          <option value="lidar">LiDAR</option>
+        </select>
+        <div id="lidarAttrFields" hidden>
+          <label for="selLidarAttr">Atributo LiDAR</label>
+          <select id="selLidarAttr"></select>
+        </div>
+      </div>
+      </div>
+      <div class="panel__spacer" aria-hidden="true"></div>
+    </aside>
+    <div class="bottom-stack" id="satBottom" aria-hidden="false">
+      <div class="sat-period-float" id="periodFloat">
+        <div class="sat-period-float__head">
+          <div class="sat-period-toolbar" id="periodToolbar"></div>
+          <button type="button" class="chart-collapse-btn" data-chart-collapse aria-expanded="true" title="Ocultar gráfico" aria-label="Ocultar gráfico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <section class="chart-wrap">
+        <h2>Seguimiento semanal (media por predio)</h2>
+        <p class="sub">Tres predios · eje Y ajustado a los datos del índice seleccionado</p>
+        <div class="chart-canvas"><canvas id="weeklyChart"></canvas></div>
+      </section>
+    </div>
+    <div class="bottom-stack" id="droneBottom" hidden aria-hidden="true">
+      <div class="sat-period-float" id="dronePeriodFloat">
+        <div class="sat-period-float__head">
+          <div class="sat-period-toolbar" id="dronePeriodToolbar"></div>
+          <button type="button" class="chart-collapse-btn" data-chart-collapse aria-expanded="true" title="Ocultar gráfico" aria-label="Ocultar gráfico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <section class="chart-wrap">
+        <h2>Seguimiento por vuelo (media por predio)</h2>
+        <p class="sub" id="droneChartSub">Tres predios · altura media de dosel por vuelo</p>
+        <div class="chart-canvas"><canvas id="droneChart"></canvas></div>
+      </section>
+    </div>
+  </div>
+  <script>
+(function () {
+  const BASE = 'data_static/';
+  const MAP_MAX_ZOOM = 22;
+  /** Vista por defecto: predios ~centro-derecha, autopista al oeste, gráfico abajo (≈ zoom 17). */
+  const DEFAULT_MAP_FIT = {
+    paddingTopLeft: [220, 48],
+    paddingBottomRight: [48, 230],
+    maxZoom: 18
+  };
+  const state = {
+    manifest: null, meta: null, ts: null, aoi: null,
+    droneMeta: null, droneTs: null,
+    source: 'sentinel2',
+    predio: null, band: 'NDVI', tIndex: 0,
+    droneDate: '', dronePeriodIndex: 0, droneLayer: 'rgb', lidarAttribute: 'canopy', droneOpacity: 0.85,
+    lidarClassColors: null,
+    map: null, rasterLayers: [],
+    aoiLayer: null, chart: null, droneChart: null,
+    las3d: {
+      inited: false, renderer: null, scene: null, camera: null, controls: null,
+      points: [], animId: null, lastViewKey: null, cameraReady: false, pcdCache: null
+    },
+    las3dLoadGen: 0
+  };
+
+  async function fetchJson(path) {
+    const r = await fetch(BASE + path);
+    if (!r.ok) throw new Error(path + ' → ' + r.status);
+    return r.json();
+  }
+
+  const PREDIO_ALL = '__all__';
+
+  const PUC_CMAP = {
+    RdYlGn: 'linear-gradient(to top,#a50026,#d73027,#f46d43,#fdae61,#fee08b,#ffffbf,#d9ef8b,#a6d96a,#66bd63,#1a9850,#006837)',
+    RdYlBu: 'linear-gradient(to top,#a50026,#d73027,#f46d43,#fdae61,#fee090,#ffffbf,#e0f3f8,#abd9e9,#74add1,#4575b4,#313695)',
+    YlGn: 'linear-gradient(to top,#ffffcc,#d9f0a3,#addd8e,#78c679,#41ab5d,#238443,#005a32)',
+    Blues: 'linear-gradient(to top,#f7fbff,#deebf7,#c6dbef,#9ecae1,#6baed6,#3182bd,#08519c,#08306b)',
+    RdPu: 'linear-gradient(to top,#fff7f3,#fde0dd,#fcc5c0,#fa9fb5,#f768a1,#dd3497,#ae017e,#7a0177,#49006a)',
+    viridis: 'linear-gradient(to top,#440154,#482575,#414487,#355f8d,#2a788e,#21908d,#22a884,#44bf70,#7ad151,#bdd26c,#fde725)',
+    RdYlGn_r: 'linear-gradient(to top,#006837,#1a9850,#66bd63,#a6d96a,#d9ef8b,#ffffbf,#fee08b,#fdae61,#f46d43,#d73027,#a50026)',
+    RdYlBu_r: 'linear-gradient(to top,#313695,#4575b4,#74add1,#abd9e9,#e0f3f8,#ffffbf,#fee090,#fdae61,#f46d43,#d73027,#a50026)',
+    terrain: 'linear-gradient(to top,#333399,#2a7ab0,#4eb0d3,#8fd594,#c8e98e,#f2f0a0,#e8c66d,#d29b52,#b87333,#8f5631,#6b3f2a)'
+  };
+  const PUC_CMAP_DEFAULT = PUC_CMAP.RdYlGn;
+
+  function predioIds() {
+    const w = state.meta && state.meta.predios;
+    return w ? Object.keys(w) : [];
+  }
+
+  function isAllPredios() {
+    return state.predio === PREDIO_ALL;
+  }
+
+  function stretchPredioKey() {
+    return isAllPredios() ? PREDIO_ALL : state.predio;
+  }
+
+  function activeMetaBundle() {
+    return state.source === 'drone' ? state.droneMeta : state.meta;
+  }
+
+  function isLidarLayer() {
+    const layer = String(state.droneLayer || '').toLowerCase();
+    return layer === 'lidar' || layer === 'las';
+  }
+
+  function lidarAttrMeta(attrId) {
+    const ix = (state.droneMeta && state.droneMeta.lidar_attributes) || {};
+    return ix[attrId] || null;
+  }
+
+  function indexMeta(band) {
+    if (state.source === 'drone' && isLidarLayer()) {
+      return lidarAttrMeta(state.lidarAttribute || 'canopy');
+    }
+    const ix = (activeMetaBundle() && activeMetaBundle().indices) || {};
+    if (ix[band]) return ix[band];
+    const u = String(band || '').toUpperCase();
+    if (ix[u]) return ix[u];
+    return null;
+  }
+
+  function stretchForLidarAttr(attrId) {
+    const aid = attrId || state.lidarAttribute || 'canopy';
+    const gs = (state.droneMeta && state.droneMeta.lidar_stretch) || {};
+    const lim = gs[aid];
+    if (lim && lim.vmin != null && lim.vmax != null) {
+      return {
+        symmetric: false,
+        vmin: Number(lim.vmin),
+        vmax: Number(lim.vmax),
+        p0: Number(lim.p0 != null ? lim.p0 : lim.vmin),
+        p100: Number(lim.p100 != null ? lim.p100 : lim.vmax)
+      };
+    }
+    const stretch = (state.droneMeta && state.droneMeta.stretch_by_predio) || {};
+    const fallback = (stretch[PREDIO_ALL] || {})[aid] || {};
+    if (fallback.vmin != null && fallback.vmax != null) {
+      return {
+        symmetric: false,
+        vmin: Number(fallback.vmin),
+        vmax: Number(fallback.vmax),
+        p0: Number(fallback.p0 != null ? fallback.p0 : fallback.vmin),
+        p100: Number(fallback.p100 != null ? fallback.p100 : fallback.vmax)
+      };
+    }
+    return null;
+  }
+
+  function stretchForDroneRasterLayer(layer) {
+    const band = String(layer || '').toUpperCase();
+    const wid = state.predio;
+    if (!state.droneMeta || !wid || wid === PREDIO_ALL) return null;
+    const idxKey = findDroneRasterKey(wid, layer);
+    const r = idxKey && state.droneMeta.rasters && state.droneMeta.rasters[idxKey];
+    if (!r || r.vmin == null || r.vmax == null) return null;
+    const vmin = Number(r.vmin);
+    const vmax = Number(r.vmax);
+    if (!Number.isFinite(vmin) || !Number.isFinite(vmax)) return null;
+    const symmetric = band !== 'NDCI' && Math.abs(vmin + vmax) < 0.05 && vmin < 0 && vmax > 0;
+    const out = { symmetric, vmin, vmax, p0: vmin, p100: vmax };
+    if (symmetric) {
+      out.center = 0;
+      out.spread = Math.max(Math.abs(vmin), Math.abs(vmax), 1e-4);
+    }
+    return out;
+  }
+
+  function stretchForBand(band) {
+    if (state.source === 'drone' && isLidarLayer()) {
+      const lim = stretchForLidarAttr(state.lidarAttribute || 'canopy');
+      if (lim) return lim;
+    }
+    if (state.source === 'drone' && !isLidarLayer()) {
+      const fromRaster = stretchForDroneRasterLayer(String(state.droneLayer || '').toLowerCase());
+      if (fromRaster) return fromRaster;
+    }
+    const stretch = (activeMetaBundle() && activeMetaBundle().stretch_by_predio) || {};
+    const key = stretchPredioKey();
+    const lookup = band;
+    const lim = (stretch[key] || {})[lookup];
+    const im = indexMeta(band);
+    const symmetric = !!(lim && lim.symmetric) || !!(im && im.symmetric);
+    if (lim && lim.vmin != null && lim.vmax != null) {
+      const out = {
+        symmetric,
+        vmin: Number(lim.vmin),
+        vmax: Number(lim.vmax),
+        p0: Number(lim.p0),
+        p100: Number(lim.p100)
+      };
+      if (symmetric) {
+        out.center = Number(lim.center != null ? lim.center : (im && im.center) || 0);
+        out.spread = Number(lim.spread != null ? lim.spread : Math.max(
+          Math.abs(out.p0 - out.center), Math.abs(out.p100 - out.center)
+        ));
+      }
+      return out;
+    }
+    if (im && im.fallback_vmin != null) {
+      const vmin = Number(im.fallback_vmin);
+      const vmax = Number(im.fallback_vmax);
+      if (symmetric) {
+        const center = Number(im.center != null ? im.center : 0);
+        const spread = Math.max(Math.abs(vmin - center), Math.abs(vmax - center), 1e-4);
+        return { symmetric: true, center, spread, vmin: center - spread, vmax: center + spread, p0: vmin, p100: vmax };
+      }
+      return { symmetric: false, vmin, vmax, p0: vmin, p100: vmax };
+    }
+    return { symmetric: true, center: 0, spread: 1, vmin: -1, vmax: 1, p0: -1, p100: 1 };
+  }
+
+  function colormapToGradient(name) {
+    const n = name != null ? String(name).trim() : '';
+    if (!n) return PUC_CMAP_DEFAULT;
+    if (PUC_CMAP[n]) return PUC_CMAP[n];
+    const nl = n.toLowerCase();
+    for (const k of Object.keys(PUC_CMAP)) {
+      if (k.toLowerCase() === nl) return PUC_CMAP[k];
+    }
+    if (n.length > 2 && n.slice(-2).toLowerCase() === '_r') {
+      const base = n.slice(0, -2);
+      const g = PUC_CMAP[base];
+      if (g) {
+        const stops = g.replace(/^linear-gradient\(\s*to\s+top\s*,\s*/i, '').replace(/\)\s*$/, '')
+          .split(',').map(s => s.trim()).filter(Boolean).reverse();
+        return 'linear-gradient(to top,' + stops.join(',') + ')';
+      }
+    }
+    return PUC_CMAP_DEFAULT;
+  }
+
+  const LIDAR_CLASS_LEGEND_DEFAULT = {
+    '2': { label: 'Suelo', color: '#8B4513' },
+    '1': { label: 'No suelo', color: '#808080' }
+  };
+
+  function classificationLegendItems() {
+    const colors = state.lidarClassColors || {};
+    return ['2', '1'].map(key => {
+      const def = LIDAR_CLASS_LEGEND_DEFAULT[key];
+      return {
+        label: def.label,
+        color: (colors[key] || def.color)
+      };
+    });
+  }
+
+  function applyLidarClassLegend() {
+    const box = document.getElementById('lidarClassLegend');
+    const list = document.getElementById('lidarClassLegendItems');
+    if (!box || !list) return;
+    const show = state.source === 'drone' && isLidarLayer() &&
+      String(state.lidarAttribute || '') === 'classification';
+    if (!show) {
+      box.hidden = true;
+      box.style.display = 'none';
+      box.setAttribute('aria-hidden', 'true');
+      return;
+    }
+    list.innerHTML = classificationLegendItems().map(it =>
+      '<div class="lidar-class-legend-item">' +
+      '<span class="lidar-class-legend-swatch" style="background:' + it.color + '"></span>' +
+      '<span>' + it.label + '</span></div>'
+    ).join('');
+    box.hidden = false;
+    box.style.display = 'flex';
+    box.setAttribute('aria-hidden', 'false');
+  }
+
+  function formatLegendScalar(v) {
+    if (v == null || v === '') return '';
+    const n = Number(v);
+    if (!Number.isFinite(n)) return String(v);
+    if (n === 0) return '0';
+    const a = Math.abs(n);
+    if (a >= 10000 || (a < 0.001 && a > 0)) return n.toExponential(2).replace('+', '');
+    return (Math.round(n * 10000) / 10000).toString();
+  }
+
+  function applyColorbar() {
+    const box = document.getElementById('colorbarBox');
+    const gEl = document.getElementById('cbGradient');
+    const tEl = document.getElementById('cbTitle');
+    const minEl = document.getElementById('cbMin');
+    const maxEl = document.getElementById('cbMax');
+    const centerEl = document.getElementById('cbCenter');
+    try {
+    if (!box || !gEl) return;
+    let band, im;
+    if (state.source === 'drone') {
+      const layer = String(state.droneLayer || '').toLowerCase();
+      if (layer === 'rgb') {
+        box.style.display = 'none';
+        box.setAttribute('aria-hidden', 'true');
+        return;
+      }
+      if (isLidarLayer()) {
+        band = state.lidarAttribute || 'canopy';
+        im = lidarAttrMeta(band);
+        if (!im) {
+          box.style.display = 'none';
+          box.setAttribute('aria-hidden', 'true');
+          return;
+        }
+        if (im.type === 'categorical' || im.type === 'rgb') {
+          box.style.display = 'none';
+          box.setAttribute('aria-hidden', 'true');
+          return;
+        }
+      } else {
+        band = layer.toUpperCase();
+        im = indexMeta(band);
+        if (!im) {
+          box.style.display = 'none';
+          box.setAttribute('aria-hidden', 'true');
+          return;
+        }
+      }
+    } else if (state.source !== 'sentinel2') {
+      box.style.display = 'none';
+      box.setAttribute('aria-hidden', 'true');
+      return;
+    } else {
+      band = state.band;
+    }
+    if (state.source === 'sentinel2') {
+      im = indexMeta(band);
+    }
+    if (!im || im.visual_only) {
+      box.style.display = 'none';
+      box.setAttribute('aria-hidden', 'true');
+      return;
+    }
+    const lim = stretchForBand(band);
+    if (!Number.isFinite(lim.vmin) || !Number.isFinite(lim.vmax)) {
+      box.style.display = 'none';
+      box.setAttribute('aria-hidden', 'true');
+      return;
+    }
+    gEl.style.background = colormapToGradient(im.colormap);
+    const unit = im.unit ? ' (' + im.unit + ')' : '';
+    tEl.textContent = (im.label || band) + unit;
+    maxEl.textContent = formatLegendScalar(lim.vmax);
+    minEl.textContent = formatLegendScalar(lim.vmin);
+    if (centerEl) {
+      if (lim.symmetric && lim.center != null && Number.isFinite(lim.center)) {
+        centerEl.textContent = formatLegendScalar(lim.center);
+        centerEl.hidden = false;
+      } else {
+        centerEl.hidden = true;
+      }
+    }
+    box.style.display = 'flex';
+    box.setAttribute('aria-hidden', 'false');
+    } finally {
+      applyLidarClassLegend();
+    }
+  }
+
+  function rasterKey(wid, tKey, band) {
+    return wid + '_' + tKey + '_' + band.toLowerCase();
+  }
+
+  function currentTimeline() {
+    return state.meta.timeline[state.tIndex] || null;
+  }
+
+  function yLimitsForBand(band) {
+    const vals = [];
+    predioIds().forEach(wid => {
+      const arr = (state.ts.series[band] && state.ts.series[band][wid]) || [];
+      arr.forEach(v => {
+        if (v != null && Number.isFinite(v)) vals.push(v);
+      });
+    });
+    if (!vals.length) return {};
+    let lo = Math.min(...vals), hi = Math.max(...vals);
+    if (lo === hi) {
+      const eps = Math.max(Math.abs(lo) * 0.05, 0.02);
+      lo -= eps; hi += eps;
+    } else {
+      const pad = (hi - lo) * 0.06;
+      lo -= pad; hi += pad;
+    }
+    return { min: lo, max: hi };
+  }
+
+  function fillPredioSelector() {
+    const pSel = document.getElementById('selPredio');
+    if (!pSel) return;
+    const prev = state.predio;
+    const lidarMode = state.source === 'drone' && isLidarLayer();
+    pSel.innerHTML = '';
+    if (!lidarMode) {
+      const oAll = document.createElement('option');
+      oAll.value = PREDIO_ALL;
+      oAll.textContent = 'Todos los predios';
+      pSel.appendChild(oAll);
+    }
+    predioIds().forEach(id => {
+      const o = document.createElement('option');
+      o.value = id;
+      o.textContent = state.meta.predios[id].name || id;
+      pSel.appendChild(o);
+    });
+    if (lidarMode && (prev === PREDIO_ALL || !predioIds().includes(prev))) {
+      state.predio = predioIds()[0];
+    } else if (prev && (prev === PREDIO_ALL || predioIds().includes(prev))) {
+      state.predio = prev;
+    } else {
+      state.predio = lidarMode ? predioIds()[0] : (pSel.options[0] && pSel.options[0].value);
+    }
+    pSel.value = state.predio;
+  }
+
+  function fillSelectors() {
+    fillPredioSelector();
+    const bSel = document.getElementById('selBand');
+    bSel.innerHTML = '';
+    Object.keys(state.meta.indices || {}).sort().forEach(b => {
+      const o = document.createElement('option');
+      o.value = b;
+      o.textContent = state.meta.indices[b].label || b;
+      bSel.appendChild(o);
+    });
+    state.band = state.ts.default_band || 'NDVI';
+    bSel.value = state.band;
+    const last = state.meta.last_timeline_key;
+    const idx = state.meta.timeline.findIndex(t => t.key === last);
+    state.tIndex = idx >= 0 ? idx : state.meta.timeline.length - 1;
+    buildPeriodToolbar();
+  }
+
+  function periodStepArrowSvg(pointLeft) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('width', '20');
+    svg.setAttribute('height', '20');
+    svg.setAttribute('aria-hidden', 'true');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', 'currentColor');
+    path.setAttribute('stroke-width', '2.2');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute('d', pointLeft ? 'M14 7l-5 5 5 5' : 'M10 7l5 5-5 5');
+    svg.appendChild(path);
+    return svg;
+  }
+
+  function formatWeekThumb(t) {
+    if (!t) return '—';
+    return 'Sem. ' + String(t.week).padStart(2, '0');
+  }
+
+  function buildPeriodToolbar() {
+    const toolbar = document.getElementById('periodToolbar');
+    if (!toolbar || !state.meta || !state.meta.timeline.length) return;
+    toolbar.innerHTML = '';
+    const items = state.meta.timeline;
+    const n = items.length;
+    const row = document.createElement('div');
+    row.className = 'sat-period-toolbar__row';
+    const btnMinus = document.createElement('button');
+    btnMinus.type = 'button';
+    btnMinus.className = 'sat-period-step';
+    btnMinus.setAttribute('aria-label', 'Semana anterior');
+    btnMinus.appendChild(periodStepArrowSvg(true));
+    const wrap = document.createElement('div');
+    wrap.className = 'sat-period-custom-slider';
+    const track = document.createElement('div');
+    track.className = 'sat-period-custom-slider__track';
+    track.tabIndex = 0;
+    track.setAttribute('role', 'slider');
+    track.setAttribute('aria-label', 'Semana ISO');
+    const fill = document.createElement('div');
+    fill.className = 'sat-period-custom-slider__fill';
+    const thumb = document.createElement('div');
+    thumb.className = 'sat-period-custom-slider__thumb';
+    const thumbLabel = document.createElement('span');
+    thumbLabel.className = 'sat-period-custom-slider__thumb-label';
+    thumb.appendChild(thumbLabel);
+    track.appendChild(fill);
+    track.appendChild(thumb);
+    const btnPlus = document.createElement('button');
+    btnPlus.type = 'button';
+    btnPlus.className = 'sat-period-step';
+    btnPlus.setAttribute('aria-label', 'Semana siguiente');
+    btnPlus.appendChild(periodStepArrowSvg(false));
+    function pctForIdx(i) {
+      if (n <= 1) return 50;
+      return (i / (n - 1)) * 100;
+    }
+    function syncUi() {
+      const i = Math.max(0, Math.min(n - 1, state.tIndex));
+      const pct = pctForIdx(i);
+      thumb.style.left = pct + '%';
+      fill.style.width = pct + '%';
+      const t = items[i];
+      thumbLabel.textContent = formatWeekThumb(t);
+      track.setAttribute('aria-valuenow', String(t.week));
+      track.setAttribute('aria-valuemin', String(items[0].week));
+      track.setAttribute('aria-valuemax', String(items[n - 1].week));
+      track.setAttribute('aria-valuetext', thumbLabel.textContent);
+      btnMinus.disabled = i <= 0;
+      btnPlus.disabled = i >= n - 1;
+    }
+    function applyIndex(i, doMap) {
+      state.tIndex = Math.max(0, Math.min(n - 1, i));
+      syncUi();
+      if (doMap) updateWeekUi();
+    }
+    function idxFromClientX(cx) {
+      const r = track.getBoundingClientRect();
+      const t = Math.max(0, Math.min(1, (cx - r.left) / Math.max(1, r.width)));
+      return n <= 1 ? 0 : Math.round(t * (n - 1));
+    }
+    let dragActive = false;
+    track.addEventListener('pointerdown', ev => {
+      dragActive = true;
+      try { track.setPointerCapture(ev.pointerId); } catch (_) {}
+      applyIndex(idxFromClientX(ev.clientX), true);
+    });
+    track.addEventListener('pointermove', ev => {
+      if (!dragActive || !track.hasPointerCapture(ev.pointerId)) return;
+      applyIndex(idxFromClientX(ev.clientX), true);
+    });
+    function endDrag(ev) {
+      if (!dragActive) return;
+      dragActive = false;
+      try { track.releasePointerCapture(ev.pointerId); } catch (_) {}
+      updateWeekUi();
+    }
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    track.addEventListener('lostpointercapture', () => {
+      if (dragActive) {
+        dragActive = false;
+        updateWeekUi();
+      }
+    });
+    track.addEventListener('keydown', ev => {
+      if (ev.key === 'ArrowLeft' || ev.key === 'ArrowDown') { ev.preventDefault(); applyIndex(state.tIndex - 1, true); }
+      else if (ev.key === 'ArrowRight' || ev.key === 'ArrowUp') { ev.preventDefault(); applyIndex(state.tIndex + 1, true); }
+      else if (ev.key === 'Home') { ev.preventDefault(); applyIndex(0, true); }
+      else if (ev.key === 'End') { ev.preventDefault(); applyIndex(n - 1, true); }
+    });
+    btnMinus.addEventListener('click', () => applyIndex(state.tIndex - 1, true));
+    btnPlus.addEventListener('click', () => applyIndex(state.tIndex + 1, true));
+    row.appendChild(btnMinus);
+    row.appendChild(wrap);
+    row.appendChild(btnPlus);
+    wrap.appendChild(track);
+    toolbar.appendChild(row);
+    syncUi();
+  }
+
+  function formatDroneThumb(p) {
+    if (!p) return '—';
+    return p.label || p.key || '—';
+  }
+
+  function syncDroneDateFromIndex() {
+    const periods = (state.droneMeta && state.droneMeta.periods) || [];
+    const i = Math.max(0, Math.min(periods.length - 1, state.dronePeriodIndex));
+    const p = periods[i];
+    if (!p) return;
+    state.droneDate = p.key;
+    state.dronePeriodIndex = i;
+    const sel = document.getElementById('selDroneDate');
+    if (sel) sel.value = p.key;
+  }
+
+  function lasAvailablePeriodKeys() {
+    const meta = state.droneMeta;
+    if (!meta) return [];
+    const keys = meta.las_available_periods;
+    if (keys && keys.length) return keys;
+    const found = new Set();
+    Object.keys(meta.pointclouds || {}).forEach(k => {
+      const m = k.match(/_(\d{4}_\d{2}_\d{2})$/);
+      if (m) found.add(m[1]);
+    });
+    return [...found];
+  }
+
+  function droneToolbarPeriods() {
+    const all = (state.droneMeta && state.droneMeta.periods) || [];
+    if (state.source !== 'drone' || !isLidarLayer()) return all;
+    const allowed = new Set(lasAvailablePeriodKeys());
+    const filtered = all.filter(p => allowed.has(p.key));
+    return filtered.length ? filtered : all;
+  }
+
+  function ensureLasFlightDate() {
+    if (!state.droneMeta || !isLidarLayer()) return;
+    const items = droneToolbarPeriods();
+    if (!items.length) return;
+    if (state.droneDate && items.some(p => p.key === state.droneDate)) {
+      const idx = state.droneMeta.periods.findIndex(p => p.key === state.droneDate);
+      if (idx >= 0) state.dronePeriodIndex = idx;
+      return;
+    }
+    const p = items[0];
+    const idx = state.droneMeta.periods.findIndex(x => x.key === p.key);
+    if (idx >= 0) {
+      state.dronePeriodIndex = idx;
+      syncDroneDateFromIndex();
+    }
+  }
+
+  function refreshDroneDateSelect() {
+    const sel = document.getElementById('selDroneDate');
+    if (!sel || !state.droneMeta || !state.droneMeta.periods) return;
+    const lasMode = state.source === 'drone' && isLidarLayer();
+    const allowed = new Set(lasAvailablePeriodKeys());
+    state.droneMeta.periods.forEach(p => {
+      let o = [...sel.options].find(opt => opt.value === p.key);
+      if (!o) return;
+      if (!lasMode) {
+        o.disabled = false;
+        o.textContent = p.label || p.key;
+      } else {
+        const ok = allowed.has(p.key);
+        o.disabled = !ok;
+        o.textContent = (p.label || p.key) + (ok ? '' : ' · sin LiDAR');
+      }
+    });
+    ensureLasFlightDate();
+    sel.value = state.droneDate;
+  }
+
+  function buildDronePeriodToolbar() {
+    const toolbar = document.getElementById('dronePeriodToolbar');
+    if (!toolbar || !state.droneMeta || !state.droneMeta.periods || !state.droneMeta.periods.length) {
+      if (toolbar) toolbar.innerHTML = '';
+      return;
+    }
+    ensureLasFlightDate();
+    const items = droneToolbarPeriods();
+    const n = items.length;
+    toolbar.innerHTML = '';
+    const row = document.createElement('div');
+    row.className = 'sat-period-toolbar__row';
+    const btnMinus = document.createElement('button');
+    btnMinus.type = 'button';
+    btnMinus.className = 'sat-period-step';
+    btnMinus.setAttribute('aria-label', 'Vuelo anterior');
+    btnMinus.appendChild(periodStepArrowSvg(true));
+    const wrap = document.createElement('div');
+    wrap.className = 'sat-period-custom-slider';
+    const track = document.createElement('div');
+    track.className = 'sat-period-custom-slider__track';
+    track.tabIndex = 0;
+    track.setAttribute('role', 'slider');
+    track.setAttribute('aria-label', 'Fecha de vuelo dron');
+    const fill = document.createElement('div');
+    fill.className = 'sat-period-custom-slider__fill';
+    const thumb = document.createElement('div');
+    thumb.className = 'sat-period-custom-slider__thumb';
+    const thumbLabel = document.createElement('span');
+    thumbLabel.className = 'sat-period-custom-slider__thumb-label';
+    thumb.appendChild(thumbLabel);
+    track.appendChild(fill);
+    track.appendChild(thumb);
+    const btnPlus = document.createElement('button');
+    btnPlus.type = 'button';
+    btnPlus.className = 'sat-period-step';
+    btnPlus.setAttribute('aria-label', 'Vuelo siguiente');
+    btnPlus.appendChild(periodStepArrowSvg(false));
+    function pctForIdx(i) {
+      if (n <= 1) return 50;
+      return (i / (n - 1)) * 100;
+    }
+    function toolbarIdx() {
+      let i = items.findIndex(p => p.key === state.droneDate);
+      if (i < 0) i = 0;
+      return Math.max(0, Math.min(n - 1, i));
+    }
+    function syncUi() {
+      const i = toolbarIdx();
+      const pct = pctForIdx(i);
+      thumb.style.left = pct + '%';
+      fill.style.width = pct + '%';
+      const p = items[i];
+      thumbLabel.textContent = formatDroneThumb(p);
+      track.setAttribute('aria-valuenow', String(i));
+      track.setAttribute('aria-valuemin', '0');
+      track.setAttribute('aria-valuemax', String(n - 1));
+      track.setAttribute('aria-valuetext', thumbLabel.textContent);
+      btnMinus.disabled = i <= 0;
+      btnPlus.disabled = i >= n - 1;
+    }
+    function applyIndex(i, refresh) {
+      const ti = Math.max(0, Math.min(n - 1, i));
+      const p = items[ti];
+      const globalIdx = state.droneMeta.periods.findIndex(x => x.key === p.key);
+      if (globalIdx >= 0) state.dronePeriodIndex = globalIdx;
+      syncDroneDateFromIndex();
+      syncUi();
+      if (refresh) updateDroneUi();
+    }
+    function idxFromClientX(cx) {
+      const r = track.getBoundingClientRect();
+      const t = Math.max(0, Math.min(1, (cx - r.left) / Math.max(1, r.width)));
+      return n <= 1 ? 0 : Math.round(t * (n - 1));
+    }
+    let dragActive = false;
+    track.addEventListener('pointerdown', ev => {
+      dragActive = true;
+      try { track.setPointerCapture(ev.pointerId); } catch (_) {}
+      applyIndex(idxFromClientX(ev.clientX), true);
+    });
+    track.addEventListener('pointermove', ev => {
+      if (!dragActive || !track.hasPointerCapture(ev.pointerId)) return;
+      applyIndex(idxFromClientX(ev.clientX), true);
+    });
+    function endDrag(ev) {
+      if (!dragActive) return;
+      dragActive = false;
+      try { track.releasePointerCapture(ev.pointerId); } catch (_) {}
+      updateDroneUi();
+    }
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    track.addEventListener('keydown', ev => {
+      if (ev.key === 'ArrowLeft' || ev.key === 'ArrowDown') { ev.preventDefault(); applyIndex(state.dronePeriodIndex - 1, true); }
+      else if (ev.key === 'ArrowRight' || ev.key === 'ArrowUp') { ev.preventDefault(); applyIndex(state.dronePeriodIndex + 1, true); }
+      else if (ev.key === 'Home') { ev.preventDefault(); applyIndex(0, true); }
+      else if (ev.key === 'End') { ev.preventDefault(); applyIndex(n - 1, true); }
+    });
+    btnMinus.addEventListener('click', () => applyIndex(state.dronePeriodIndex - 1, true));
+    btnPlus.addEventListener('click', () => applyIndex(state.dronePeriodIndex + 1, true));
+    row.appendChild(btnMinus);
+    row.appendChild(wrap);
+    row.appendChild(btnPlus);
+    wrap.appendChild(track);
+    toolbar.appendChild(row);
+    syncUi();
+  }
+
+  function elevationToRgb(t) {
+    const x = Math.max(0, Math.min(1, t));
+    const stops = [
+      [0, [51, 51, 153]], [0.25, [42, 122, 176]], [0.5, [143, 216, 211]],
+      [0.75, [200, 232, 142]], [1, [220, 140, 51]]
+    ];
+    for (let i = 0; i < stops.length - 1; i++) {
+      const [p0, c0] = stops[i];
+      const [p1, c1] = stops[i + 1];
+      if (x >= p0 && x <= p1) {
+        const f = (x - p0) / (p1 - p0);
+        return [
+          (c0[0] + (c1[0] - c0[0]) * f) / 255,
+          (c0[1] + (c1[1] - c0[1]) * f) / 255,
+          (c0[2] + (c1[2] - c0[2]) * f) / 255
+        ];
+      }
+    }
+    return [0.86, 0.55, 0.2];
+  }
+
+  function clearLas3dPoints() {
+    const L3 = state.las3d;
+    L3.points.forEach(p => {
+      if (p && L3.scene) L3.scene.remove(p);
+      if (p && p.geometry) p.geometry.dispose();
+      if (p && p.material) p.material.dispose();
+    });
+    L3.points = [];
+    if (L3.boundary && L3.scene) {
+      L3.scene.remove(L3.boundary);
+      if (L3.boundary.geometry) L3.boundary.geometry.dispose();
+      if (L3.boundary.material) L3.boundary.material.dispose();
+      L3.boundary = null;
+    }
+  }
+
+  function addLas3dBoundary(data, colorHex) {
+    if (!data || !data.boundary || data.boundary.length < 2 || !state.las3d.scene) return;
+    const flat = [];
+    data.boundary.forEach(p => flat.push(p[0], p[1], p[2] != null ? p[2] : 0));
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute('position', new THREE.Float32BufferAttribute(flat, 3));
+    const mat = new THREE.LineBasicMaterial({
+      color: new THREE.Color(colorHex || '#ffffff'),
+      transparent: true,
+      opacity: 0.95
+    });
+    const line = new THREE.LineLoop(geom, mat);
+    state.las3d.scene.add(line);
+    state.las3d.boundary = line;
+  }
+
+  function initLas3d() {
+    if (state.las3d.inited || typeof THREE === 'undefined') return;
+    const canvas = document.getElementById('las3dCanvas');
+    if (!canvas) return;
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+    renderer.setClearColor(0x0c1210, 1);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0c1210);
+    const camera = new THREE.PerspectiveCamera(52, 1, 0.05, 8000);
+    const controls = new THREE.OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.screenSpacePanning = true;
+    const prev = state.las3d || {};
+    state.las3d = {
+      inited: true, renderer, scene, camera, controls, points: [], boundary: null, animId: null,
+      lastViewKey: prev.lastViewKey || null,
+      cameraReady: prev.cameraReady || false,
+      pcdCache: prev.pcdCache || null
+    };
+    function resize() {
+      const box = document.getElementById('las3dView');
+      if (!box || box.hidden) return;
+      const w = box.clientWidth;
+      const h = box.clientHeight;
+      if (w < 1 || h < 1) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    function tick() {
+      state.las3d.animId = requestAnimationFrame(tick);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    tick();
+    state.las3d._resize = resize;
+  }
+
+  function findPointcloudEntry(wid) {
+    const pcs = (state.droneMeta && state.droneMeta.pointclouds) || {};
+    const stem = wid + '_' + state.droneDate;
+    return pcs[stem] || null;
+  }
+
+  function las3dViewKey(wid) {
+    return String(wid || state.predio || '') + '|' + String(state.droneDate || '');
+  }
+
+  function hexColorTo01(hex) {
+    const h = String(hex || '#888').replace('#', '');
+    if (h.length < 6) return [0.5, 0.5, 0.5];
+    return [
+      parseInt(h.slice(0, 2), 16) / 255,
+      parseInt(h.slice(2, 4), 16) / 255,
+      parseInt(h.slice(4, 6), 16) / 255
+    ];
+  }
+
+  async function loadLas3dPointcloud(wid, colorHex, cachedData) {
+    let data = cachedData;
+    if (!data) {
+      const entry = findPointcloudEntry(wid);
+      if (!entry || !entry.p) return null;
+      data = await fetchJson(entry.p);
+    }
+    if (!data || !data.count || !data.positions || !data.positions.length) return null;
+    const attrId = state.lidarAttribute || 'canopy';
+    const attr = (data.attributes && data.attributes[attrId]) || null;
+    const lim = stretchForLidarAttr(attrId) || stretchForBand(attrId);
+    const pos = data.positions;
+    let n = pos.length / 3;
+    const maxRender = 120000;
+    const step = n > maxRender ? Math.ceil(n / maxRender) : 1;
+    const nOut = Math.ceil(n / step);
+    const verts = new Float32Array(nOut * 3);
+    const cols = new Float32Array(nOut * 3);
+    let oi = 0;
+    for (let i = 0; i < n; i += step) {
+      const x = pos[i * 3];
+      const y = pos[i * 3 + 1];
+      const z = pos[i * 3 + 2];
+      verts[oi * 3] = x;
+      verts[oi * 3 + 1] = y;
+      verts[oi * 3 + 2] = z;
+      let r, g, b;
+      if (attr && attr.type === 'rgb') {
+        const hi = i;
+        const scale = 1 / 65535;
+        r = (attr.red[hi] || 0) * scale;
+        g = (attr.green[hi] || 0) * scale;
+        b = (attr.blue[hi] || 0) * scale;
+      } else if (attr && attr.type === 'categorical') {
+        const cls = String(attr.values[i]);
+        if (attrId === 'classification' && attr.colors) {
+          state.lidarClassColors = attr.colors;
+        }
+        const rgb = hexColorTo01((attr.colors && attr.colors[cls]) || '#888888');
+        r = rgb[0]; g = rgb[1]; b = rgb[2];
+      } else {
+        let val;
+        if (attr && attr.type === 'scalar' && attr.values && attr.values.length) {
+          val = Number(attr.values[i]);
+        } else {
+          val = z;
+        }
+        const vmin = Number.isFinite(lim && lim.vmin) ? lim.vmin : Number(attr && attr.vmin);
+        const vmax = Number.isFinite(lim && lim.vmax) ? lim.vmax : Number(attr && attr.vmax);
+        const span = Math.max((vmax - vmin) || 1, 1e-6);
+        const t = Math.max(0, Math.min(1, (val - vmin) / span));
+        const rgb = elevationToRgb(t);
+        r = rgb[0]; g = rgb[1]; b = rgb[2];
+      }
+      cols[oi * 3] = r;
+      cols[oi * 3 + 1] = g;
+      cols[oi * 3 + 2] = b;
+      oi++;
+    }
+    n = oi;
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute('position', new THREE.BufferAttribute(verts, 3));
+    geom.setAttribute('color', new THREE.BufferAttribute(cols, 3));
+    const pointSize = Math.max(0.03, Math.min(0.08, 380 / Math.sqrt(n)));
+    const mat = new THREE.PointsMaterial({
+      size: pointSize,
+      vertexColors: true,
+      sizeAttenuation: true,
+      transparent: true,
+      opacity: 0.88
+    });
+    return new THREE.Points(geom, mat);
+  }
+
+  async function updateLas3dView(opts) {
+    const view = document.getElementById('las3dView');
+    if (!view || state.source !== 'drone' || !isLidarLayer()) return;
+    ensureLasFlightDate();
+    initLas3d();
+    if (!state.las3d.inited) return;
+    if (state.las3d._resize) state.las3d._resize();
+    const loadGen = ++state.las3dLoadGen;
+    clearLas3dPoints();
+    const wid = state.predio;
+    if (!wid || wid === PREDIO_ALL || !predioIds().includes(wid)) {
+      state.las3d.lastViewKey = null;
+      state.las3d.cameraReady = false;
+      state.las3d.pcdCache = null;
+      applyLidarClassLegend();
+      return;
+    }
+    const viewKey = las3dViewKey(wid);
+    const preserveCamera = !!(opts && opts.preserveCamera) ||
+      (state.las3d.cameraReady && state.las3d.lastViewKey === viewKey);
+    let loaded = 0;
+    const box3 = new THREE.Box3();
+    const hasLas = findPointcloudEntry(wid);
+    if (hasLas) {
+      const col = (state.meta.predios[wid] || {}).color || '#1d6b4a';
+      try {
+        let pcdData = null;
+        if (state.las3d.pcdCache && state.las3d.pcdCache.key === viewKey) {
+          pcdData = state.las3d.pcdCache.data;
+        } else {
+          const entry = findPointcloudEntry(wid);
+          if (entry && entry.p) {
+            pcdData = await fetchJson(entry.p);
+            if (loadGen !== state.las3dLoadGen) return;
+            state.las3d.pcdCache = { key: viewKey, data: pcdData };
+          }
+        }
+        const pts = await loadLas3dPointcloud(wid, col, pcdData);
+        if (loadGen !== state.las3dLoadGen) return;
+        if (pts) {
+          state.las3d.scene.add(pts);
+          state.las3d.points.push(pts);
+          box3.expandByObject(pts);
+          loaded = 1;
+        }
+        if (pcdData) addLas3dBoundary(pcdData, col);
+      } catch (_) {}
+    }
+    if (loadGen !== state.las3dLoadGen) return;
+    if (loaded > 0 && !box3.isEmpty() && !preserveCamera) {
+      const center = box3.getCenter(new THREE.Vector3());
+      const size = box3.getSize(new THREE.Vector3());
+      const spanXY = Math.max(size.x, size.y, 1);
+      const spanZ = Math.max(size.z, 0.5);
+      const dist = spanXY * 1.05;
+      state.las3d.camera.position.set(
+        center.x,
+        center.y - dist,
+        center.z + spanZ * 0.45 + spanXY * 0.12
+      );
+      state.las3d.controls.target.copy(center);
+      state.las3d.controls.minDistance = spanXY * 0.25;
+      state.las3d.controls.maxDistance = spanXY * 6;
+      state.las3d.controls.update();
+      state.las3d.lastViewKey = viewKey;
+      state.las3d.cameraReady = true;
+    } else if (loaded > 0) {
+      state.las3d.lastViewKey = viewKey;
+      state.las3d.cameraReady = true;
+    }
+    applyLidarClassLegend();
+  }
+
+  function showLas3d(show) {
+    const view = document.getElementById('las3dView');
+    const app = document.querySelector('.app');
+    if (view) view.hidden = !show;
+    if (app) app.classList.toggle('mode-las-3d', !!show);
+    if (!show) {
+      ++state.las3dLoadGen;
+      clearLas3dPoints();
+      applyLidarClassLegend();
+    } else {
+      requestAnimationFrame(() => {
+        if (state.las3d._resize) state.las3d._resize();
+      });
+      applyLidarClassLegend();
+    }
+  }
+
+  function updateDroneUi() {
+    if (state.source !== 'drone') return;
+    ensureLasFlightDate();
+    refreshDroneDateSelect();
+    buildDronePeriodToolbar();
+    updateLidarAttrFieldsVisibility();
+    updateDroneOpacityVisibility();
+    updateMapLayers();
+    buildDroneChart();
+    applyColorbar();
+  }
+
+  function setDefaultMapView() {
+    if (!state.map || !state.aoiLayer) return;
+    const b = state.aoiLayer.getBounds();
+    const ptl = DEFAULT_MAP_FIT.paddingTopLeft;
+    const pbr = DEFAULT_MAP_FIT.paddingBottomRight;
+    state.map.fitBounds(b, {
+      paddingTopLeft: L.point(ptl[0], ptl[1]),
+      paddingBottomRight: L.point(pbr[0], pbr[1]),
+      maxZoom: DEFAULT_MAP_FIT.maxZoom,
+      animate: false
+    });
+    if (state.map.getZoom() < state.map.getMaxZoom()) {
+      state.map.zoomIn(1);
+    }
+  }
+
+  function initMap() {
+    state.map = L.map('map', {
+      zoomControl: false,
+      scrollWheelZoom: true,
+      doubleClickZoom: true,
+      maxZoom: MAP_MAX_ZOOM
+    });
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Esri',
+      maxZoom: MAP_MAX_ZOOM,
+      maxNativeZoom: 19
+    }).addTo(state.map);
+    if (state.aoi && state.aoi.features) {
+      state.aoiLayer = L.geoJSON(state.aoi, {
+        style: f => ({
+          color: (state.meta.predios[f.properties.predio_id] || {}).color || '#1d6b4a',
+          weight: 2,
+          fill: false,
+          fillOpacity: 0
+        })
+      }).addTo(state.map);
+      setDefaultMapView();
+    }
+    document.getElementById('zoomIn').onclick = () => state.map.zoomIn();
+    document.getElementById('zoomOut').onclick = () => state.map.zoomOut();
+    document.getElementById('zoomFit').onclick = () => setDefaultMapView();
+  }
+
+  function applyPredioHighlight() {
+    if (!state.aoiLayer) return;
+    const all = isAllPredios();
+    state.aoiLayer.eachLayer(l => {
+      const id = l.feature.properties.predio_id;
+      const col = (state.meta.predios[id] || {}).color || '#888';
+      const active = all || id === state.predio;
+      l.setStyle({
+        color: col,
+        weight: active ? (all ? 3 : 4) : 2,
+        fill: false,
+        fillOpacity: 0
+      });
+    });
+  }
+
+  function clearRasterLayers() {
+    state.rasterLayers.forEach(ly => { if (ly && state.map) state.map.removeLayer(ly); });
+    state.rasterLayers = [];
+  }
+
+  function updateSatelliteRaster() {
+    clearRasterLayers();
+    const t = currentTimeline();
+    if (!t) return;
+    const targets = isAllPredios() ? predioIds() : [state.predio];
+    targets.forEach(wid => {
+      const key = rasterKey(wid, t.key, state.band);
+      const r = state.meta.rasters[key];
+      const w = state.meta.predios[wid];
+      if (!r || !r.p) return;
+      const bounds = r.leaflet_bounds || (w && w.leaflet_bounds);
+      if (!bounds) return;
+      const op = isAllPredios() ? 0.72 : 0.92;
+      const ly = L.imageOverlay(BASE + r.p, bounds, { opacity: op, interactive: false });
+      ly.addTo(state.map);
+      state.rasterLayers.push(ly);
+    });
+  }
+
+  function updateDroneOpacityVisibility() {
+    const wrap = document.getElementById('droneOpacityWrap');
+    if (!wrap) return;
+    const layer = String(state.droneLayer || '').toLowerCase();
+    const isIndex = layer === 'ndvi' || layer === 'ndwi' || layer === 'ndci';
+    wrap.hidden = state.source !== 'drone' || !isIndex;
+  }
+
+  function updateLidarAttrFieldsVisibility() {
+    const box = document.getElementById('lidarAttrFields');
+    if (!box) return;
+    box.hidden = state.source !== 'drone' || !isLidarLayer();
+  }
+
+  function fillLidarAttrSelector() {
+    const sel = document.getElementById('selLidarAttr');
+    if (!sel) return;
+    sel.innerHTML = '';
+    const attrs = (state.droneMeta && state.droneMeta.lidar_attributes) || {};
+    const ids = Object.keys(attrs);
+    if (!ids.length) {
+      const o = document.createElement('option');
+      o.value = 'canopy';
+      o.textContent = 'Altura dosel';
+      sel.appendChild(o);
+      return;
+    }
+    ids.forEach(id => {
+      const meta = attrs[id];
+      const o = document.createElement('option');
+      o.value = id;
+      o.textContent = meta.label || id;
+      sel.appendChild(o);
+    });
+    const def = (state.droneMeta && state.droneMeta.lidar_default_attribute) || 'canopy';
+    state.lidarAttribute = ids.includes(state.lidarAttribute) ? state.lidarAttribute : def;
+    sel.value = state.lidarAttribute;
+  }
+
+  function findDroneRasterKey(wid, layer) {
+    const rasters = (state.droneMeta && state.droneMeta.rasters) || {};
+    let found = null;
+    Object.keys(rasters).forEach(k => {
+      const r = rasters[k];
+      if (String(r.predio_id).toLowerCase() !== wid) return;
+      if (r.period_key !== state.droneDate) return;
+      if (String(r.index).toLowerCase() === String(layer).toLowerCase()) found = k;
+    });
+    return found;
+  }
+
+  function updateDroneRaster() {
+    clearRasterLayers();
+    showLas3d(false);
+    if (!state.droneMeta || !state.droneDate) return;
+    if (isLidarLayer()) return;
+    const targets = isAllPredios() ? predioIds() : [state.predio];
+    const layer = String(state.droneLayer || 'ndvi').toLowerCase();
+    const isIndex = layer === 'ndvi' || layer === 'ndwi' || layer === 'ndci';
+    const rasters = state.droneMeta.rasters || {};
+    let hasRgb = false;
+    targets.forEach(wid => {
+      const rgbKey = findDroneRasterKey(wid, 'rgb');
+      const idxKey = findDroneRasterKey(wid, layer);
+      const w = (state.droneMeta && state.droneMeta.predios && state.droneMeta.predios[wid])
+        || (state.meta && state.meta.predios && state.meta.predios[wid]);
+      const rEntry = idxKey ? rasters[idxKey] : null;
+      const rgbEntry = rgbKey ? rasters[rgbKey] : null;
+      const rgbBounds = (rgbEntry && rgbEntry.leaflet_bounds) || (w && w.leaflet_bounds);
+      const idxBounds = (rEntry && rEntry.leaflet_bounds) || (w && w.leaflet_bounds);
+      const opBase = isAllPredios() ? 0.85 : 1;
+      if (rgbKey && rasters[rgbKey].p && rgbBounds) {
+        hasRgb = true;
+        const ly = L.imageOverlay(BASE + rasters[rgbKey].p, rgbBounds, { opacity: opBase, interactive: false });
+        ly.addTo(state.map);
+        state.rasterLayers.push(ly);
+      }
+      if (idxKey && rasters[idxKey].p && isIndex && idxBounds) {
+        const op = state.droneOpacity * (isAllPredios() ? 0.9 : 1);
+        const ly = L.imageOverlay(BASE + rasters[idxKey].p, idxBounds, { opacity: op, interactive: false });
+        ly.addTo(state.map);
+        state.rasterLayers.push(ly);
+        anyIdx = true;
+      }
+    });
+    updateDroneOpacityVisibility();
+  }
+
+  function updateMapLayers() {
+    if (state.source === 'drone') {
+      const layer = String(state.droneLayer || '').toLowerCase();
+      if (isLidarLayer()) {
+        clearRasterLayers();
+        showLas3d(true);
+        updateLas3dView();
+        return;
+      }
+      showLas3d(false);
+      updateDroneRaster();
+      return;
+    }
+    showLas3d(false);
+    updateSatelliteRaster();
+  }
+
+  function updateWeekUi() {
+    if (state.source !== 'sentinel2') return;
+    const t = currentTimeline();
+    if (state.chart) {
+      state.chart.options.plugins.pucWeekLine.index = state.tIndex;
+      state.chart.update('none');
+    }
+    updateMapLayers();
+    applyColorbar();
+  }
+
+  function buildChart() {
+    const ctx = document.getElementById('weeklyChart');
+    const labels = state.meta.timeline.map(t => t.label);
+    const band = state.band;
+    const yLim = yLimitsForBand(band);
+    const datasets = predioIds().map(wid => {
+      const vals = (state.ts.series[band] && state.ts.series[band][wid]) || [];
+      const col = state.meta.predios[wid].color || '#333';
+      return {
+        label: state.meta.predios[wid].name || wid,
+        data: vals,
+        borderColor: col,
+        backgroundColor: col + '44',
+        borderWidth: 2,
+        pointRadius: 2,
+        pointHoverRadius: 5,
+        spanGaps: false,
+        tension: 0.12
+      };
+    });
+    if (state.chart) state.chart.destroy();
+    state.chart = new Chart(ctx, {
+      type: 'line',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } },
+          pucWeekLine: { index: state.tIndex }
+        },
+        scales: {
+          x: { ticks: { maxTicksLimit: 12, font: { size: 10 } } },
+          y: {
+            title: { display: true, text: (state.meta.indices[band] && state.meta.indices[band].label) || band },
+            min: yLim.min,
+            max: yLim.max
+          }
+        },
+        onClick: (_, elems) => {
+          if (elems.length && state.source === 'sentinel2') {
+            state.tIndex = elems[0].index;
+            buildPeriodToolbar();
+            updateWeekUi();
+          }
+        }
+      },
+      plugins: [{
+        id: 'pucWeekLine',
+        afterDraw(chart) {
+          const idx = chart.options.plugins.pucWeekLine.index;
+          if (idx == null || idx < 0) return;
+          const x = chart.scales.x.getPixelForValue(idx);
+          const { top, bottom } = chart.chartArea;
+          const c = chart.ctx;
+          c.save();
+          c.strokeStyle = '#003366';
+          c.lineWidth = 2;
+          c.setLineDash([4, 4]);
+          c.beginPath();
+          c.moveTo(x, top);
+          c.lineTo(x, bottom);
+          c.stroke();
+          c.restore();
+        }
+      }]
+    });
+  }
+
+  function buildDroneChart() {
+    const ctx = document.getElementById('droneChart');
+    if (!ctx || !state.droneTs || !state.droneTs.periods) return;
+    const labels = state.droneTs.periods.map(p => p.label || p.key);
+    const actualBand = 'mean_canopy';
+    const actualBlock = state.droneTs.las_series || {};
+    const yLim = (function () {
+      const vals = [];
+      predioIds().forEach(wid => {
+        const arr = (actualBlock[actualBand] && actualBlock[actualBand][wid]) || [];
+        arr.forEach(v => { if (v != null && Number.isFinite(v)) vals.push(v); });
+      });
+      if (!vals.length) return {};
+      let lo = Math.min(...vals), hi = Math.max(...vals);
+      if (lo === hi) {
+        const eps = Math.max(Math.abs(lo) * 0.05, 0.5);
+        lo -= eps; hi += eps;
+      } else {
+        const pad = (hi - lo) * 0.06;
+        lo -= pad; hi += pad;
+      }
+      return { min: lo, max: hi };
+    })();
+    const yTitle = 'Altura media dosel (m)';
+    const datasets = predioIds().map(wid => {
+      let vals = (actualBlock[actualBand] && actualBlock[actualBand][wid]) || [];
+      if (!vals.length && actualBand === 'mean_canopy' && actualBlock.mean_z) {
+        vals = actualBlock.mean_z[wid] || [];
+      }
+      const col = state.meta.predios[wid].color || '#333';
+      return {
+        label: state.meta.predios[wid].name || wid,
+        data: vals,
+        borderColor: col,
+        backgroundColor: col + '44',
+        borderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        spanGaps: false,
+        tension: 0.12
+      };
+    });
+    if (state.droneChart) state.droneChart.destroy();
+    state.droneChart = new Chart(ctx, {
+      type: 'line',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }
+        },
+        scales: {
+          x: { ticks: { maxTicksLimit: 8, font: { size: 10 } } },
+          y: {
+            title: { display: true, text: yTitle },
+            min: yLim.min,
+            max: yLim.max
+          }
+        },
+        onClick: (_, elems) => {
+          if (elems.length && state.source === 'drone' && state.droneTs.periods[elems[0].index]) {
+            state.dronePeriodIndex = elems[0].index;
+            syncDroneDateFromIndex();
+            buildDronePeriodToolbar();
+            updateDroneUi();
+          }
+        }
+      }
+    });
+    const sub = document.getElementById('droneChartSub');
+    if (sub) {
+      sub.textContent = 'Tres predios · altura media de dosel por vuelo (vuelos con LiDAR)';
+    }
+  }
+
+  function fillDroneDates() {
+    const sel = document.getElementById('selDroneDate');
+    sel.innerHTML = '';
+    if (!state.droneMeta || !state.droneMeta.periods) {
+      const o = document.createElement('option');
+      o.value = '';
+      o.textContent = '— Sin vuelos —';
+      sel.appendChild(o);
+      return;
+    }
+    state.droneMeta.periods.forEach(p => {
+      const o = document.createElement('option');
+      o.value = p.key;
+      o.textContent = p.label || p.key;
+      sel.appendChild(o);
+    });
+    const idx = Math.max(0, state.droneMeta.periods.length - 1);
+    state.dronePeriodIndex = idx;
+    state.droneDate = state.droneMeta.periods[idx].key;
+    sel.value = state.droneDate;
+    buildDronePeriodToolbar();
+  }
+
+  function setSource(src) {
+    state.source = src;
+    const sat = src === 'sentinel2';
+    document.getElementById('pillSat').classList.toggle('source-pill--active', sat);
+    document.getElementById('pillDrone').classList.toggle('source-pill--active', !sat);
+    document.getElementById('pillSat').setAttribute('aria-pressed', sat ? 'true' : 'false');
+    document.getElementById('pillDrone').setAttribute('aria-pressed', sat ? 'false' : 'true');
+    document.getElementById('satFields').hidden = !sat;
+    document.getElementById('droneFields').hidden = sat;
+    const app = document.querySelector('.app');
+    if (app) {
+      app.classList.toggle('mode-drone', !sat);
+      app.classList.toggle('mode-sat', sat);
+      if (sat) app.classList.remove('mode-las-3d');
+    }
+    document.getElementById('satBottom').hidden = !sat;
+    document.getElementById('satBottom').setAttribute('aria-hidden', sat ? 'false' : 'true');
+    const droneBottom = document.getElementById('droneBottom');
+    if (droneBottom) {
+      droneBottom.hidden = sat;
+      droneBottom.setAttribute('aria-hidden', sat ? 'true' : 'false');
+    }
+    document.getElementById('sourceHint').textContent = sat
+      ? 'Satélite: semanas ISO y todos los índices del compuesto S2.'
+      : 'Dron: fechas de vuelo · RGB e índices · LAS en 3D por predio.';
+    fillPredioSelector();
+    if (!sat) {
+      fillLidarAttrSelector();
+      updateLidarAttrFieldsVisibility();
+      buildDronePeriodToolbar();
+      buildDroneChart();
+    } else {
+      showLas3d(false);
+      updateLidarAttrFieldsVisibility();
+    }
+    updateDroneOpacityVisibility();
+    updateMapLayers();
+    applyColorbar();
+  }
+
+  function onBandChange() {
+    state.band = document.getElementById('selBand').value;
+    buildChart();
+    updateMapLayers();
+    applyColorbar();
+  }
+
+  function onParcelChange() {
+    state.predio = document.getElementById('selPredio').value;
+    if (state.source === 'drone' && isLidarLayer() && state.predio === PREDIO_ALL) {
+      state.predio = predioIds()[0];
+      document.getElementById('selPredio').value = state.predio;
+    }
+    applyPredioHighlight();
+    if (state.source === 'drone') updateDroneUi();
+    else {
+      updateMapLayers();
+      applyColorbar();
+    }
+  }
+
+  function afterChartLayoutChange() {
+    requestAnimationFrame(() => {
+      if (state.chart) state.chart.resize();
+      if (state.droneChart) state.droneChart.resize();
+      if (state.las3d._resize) state.las3d._resize();
+    });
+  }
+
+  function initChartCollapse() {
+    document.querySelectorAll('[data-chart-collapse]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const stack = btn.closest('.bottom-stack');
+        if (!stack) return;
+        const collapsed = stack.classList.toggle('chart-collapsed');
+        btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        const label = collapsed ? 'Mostrar gráfico' : 'Ocultar gráfico';
+        btn.title = label;
+        btn.setAttribute('aria-label', label);
+        afterChartLayoutChange();
+      });
+    });
+  }
+
+  async function boot() {
+    try {
+      const app = document.querySelector('.app');
+      if (app) app.classList.add('mode-sat');
+      state.manifest = await fetchJson('sources_manifest.json');
+      const s2 = state.manifest.sources.sentinel2;
+      const [meta, ts, aoi] = await Promise.all([
+        fetchJson(s2.metadata_path),
+        fetchJson(s2.timeseries_path),
+        fetchJson(state.manifest.aoi_path)
+      ]);
+      state.meta = meta;
+      state.ts = ts;
+      state.aoi = aoi;
+
+      const droneSrc = state.manifest.sources.drone;
+      const droneReady = droneSrc && droneSrc.has_data && droneSrc.metadata_path;
+      document.getElementById('dronePendingHint').hidden = droneReady;
+      const pillDrone = document.getElementById('pillDrone');
+      if (droneReady) {
+        pillDrone.disabled = false;
+        state.droneMeta = await fetchJson(droneSrc.metadata_path);
+        if (droneSrc.timeseries_path) {
+          try { state.droneTs = await fetchJson(droneSrc.timeseries_path); } catch (_) {}
+        }
+        fillDroneDates();
+        fillLidarAttrSelector();
+        buildDronePeriodToolbar();
+        buildDroneChart();
+      } else {
+        pillDrone.disabled = true;
+      }
+
+      fillSelectors();
+      initMap();
+      applyPredioHighlight();
+      buildChart();
+      updateWeekUi();
+      applyColorbar();
+
+      document.getElementById('selPredio').addEventListener('change', onParcelChange);
+      document.getElementById('selBand').addEventListener('change', onBandChange);
+      document.getElementById('pillSat').addEventListener('click', () => setSource('sentinel2'));
+      document.getElementById('pillDrone').addEventListener('click', () => {
+        if (!pillDrone.disabled) setSource('drone');
+      });
+      document.getElementById('selDroneDate').addEventListener('change', e => {
+        const key = e.target.value;
+        if (isLidarLayer()) {
+          const allowed = new Set(lasAvailablePeriodKeys());
+          if (!allowed.has(key)) {
+            ensureLasFlightDate();
+            e.target.value = state.droneDate;
+            return;
+          }
+        }
+        state.droneDate = key;
+        const idx = (state.droneMeta.periods || []).findIndex(p => p.key === state.droneDate);
+        state.dronePeriodIndex = idx >= 0 ? idx : 0;
+        buildDronePeriodToolbar();
+        updateDroneUi();
+      });
+      document.getElementById('selDroneLayer').addEventListener('change', e => {
+        state.droneLayer = e.target.value;
+        fillPredioSelector();
+        updateLidarAttrFieldsVisibility();
+        if (state.source === 'drone') {
+          ensureLasFlightDate();
+          refreshDroneDateSelect();
+          buildDronePeriodToolbar();
+          updateDroneUi();
+        } else updateMapLayers();
+      });
+      document.getElementById('selLidarAttr').addEventListener('change', e => {
+        state.lidarAttribute = e.target.value;
+        if (state.source === 'drone' && isLidarLayer()) {
+          updateLas3dView({ preserveCamera: true });
+          applyColorbar();
+        }
+      });
+      document.getElementById('droneOpacity').addEventListener('input', e => {
+        state.droneOpacity = Number(e.target.value) / 100;
+        if (state.source === 'drone') updateDroneRaster();
+      });
+      updateDroneOpacityVisibility();
+      initChartCollapse();
+    } catch (e) {
+      document.body.innerHTML = '<p style="padding:2rem;color:#fff">Error: ' + e.message +
+        '. Ejecuta <code>python scripts/static_site/build_sentinel2_local.py</code> y sirve con HTTP.</p>';
+    }
+  }
+
+  boot();
+})();
+  </script>
+</body>
+</html>
