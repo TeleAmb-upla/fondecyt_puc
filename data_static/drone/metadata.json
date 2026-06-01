@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-26T13:30:55+00:00",
+  "generated_at": "2026-06-01T15:40:19+00:00",
   "default_band": "NDVI",
   "indices": {
     "NDVI": {
@@ -116,8 +116,8 @@
       "period_key": "2026_03_27",
       "predio_id": "exotico",
       "index": "ndci",
-      "vmin": 0.05755,
-      "vmax": 0.78355,
+      "vmin": 0.06064,
+      "vmax": 0.78389,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -136,8 +136,8 @@
       "period_key": "2026_03_27",
       "predio_id": "exotico",
       "index": "ndvi",
-      "vmin": -0.9947,
-      "vmax": 0.9947,
+      "vmin": -0.9991,
+      "vmax": 0.9991,
       "colormap": "RdYlGn",
       "leaflet_bounds": [
         [
@@ -194,8 +194,8 @@
       "period_key": "2026_03_27",
       "predio_id": "cae1",
       "index": "ndci",
-      "vmin": -0.00705,
-      "vmax": 0.74704,
+      "vmin": 0.00607,
+      "vmax": 0.7471,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -272,8 +272,8 @@
       "period_key": "2026_03_27",
       "predio_id": "cae2",
       "index": "ndci",
-      "vmin": 0.03345,
-      "vmax": 0.73839,
+      "vmin": 0.03756,
+      "vmax": 0.73895,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -350,8 +350,8 @@
       "period_key": "2026_04_24",
       "predio_id": "exotico",
       "index": "ndci",
-      "vmin": 0.05755,
-      "vmax": 0.78355,
+      "vmin": 0.06064,
+      "vmax": 0.78389,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -370,8 +370,8 @@
       "period_key": "2026_04_24",
       "predio_id": "exotico",
       "index": "ndvi",
-      "vmin": -0.9947,
-      "vmax": 0.9947,
+      "vmin": -0.9991,
+      "vmax": 0.9991,
       "colormap": "RdYlGn",
       "leaflet_bounds": [
         [
@@ -428,8 +428,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae1",
       "index": "ndci",
-      "vmin": -0.00705,
-      "vmax": 0.74704,
+      "vmin": 0.00607,
+      "vmax": 0.7471,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -506,8 +506,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae2",
       "index": "ndci",
-      "vmin": 0.03345,
-      "vmax": 0.73839,
+      "vmin": 0.03756,
+      "vmax": 0.73895,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -745,19 +745,19 @@
     "exotico": {
       "NDCI": {
         "symmetric": false,
-        "vmin": 0.05755,
-        "vmax": 0.78355,
-        "p0": 0.05755,
-        "p100": 0.78355
+        "vmin": 0.06064,
+        "vmax": 0.78389,
+        "p0": 0.06064,
+        "p100": 0.78389
       },
       "NDVI": {
-        "p0": -0.41877,
-        "p100": 0.9947,
+        "p0": -0.37176,
+        "p100": 0.9991,
         "center": 0.0,
-        "spread": 0.9947,
+        "spread": 0.9991,
         "symmetric": true,
-        "vmin": -0.9947,
-        "vmax": 0.9947
+        "vmin": -0.9991,
+        "vmax": 0.9991
       },
       "NDWI": {
         "p0": -0.92776,
@@ -807,13 +807,13 @@
     "cae1": {
       "NDCI": {
         "symmetric": false,
-        "vmin": -0.00705,
-        "vmax": 0.74704,
-        "p0": -0.00705,
-        "p100": 0.74704
+        "vmin": 0.00607,
+        "vmax": 0.7471,
+        "p0": 0.00607,
+        "p100": 0.7471
       },
       "NDVI": {
-        "p0": -0.39437,
+        "p0": -0.39634,
         "p100": 0.92551,
         "center": 0.0,
         "spread": 0.92551,
@@ -869,10 +869,10 @@
     "cae2": {
       "NDCI": {
         "symmetric": false,
-        "vmin": 0.03345,
-        "vmax": 0.73839,
-        "p0": 0.03345,
-        "p100": 0.73839
+        "vmin": 0.03756,
+        "vmax": 0.73895,
+        "p0": 0.03756,
+        "p100": 0.73895
       },
       "NDVI": {
         "p0": -0.29678,
@@ -930,13 +930,13 @@
     },
     "__all__": {
       "NDVI": {
-        "p0": -0.41877,
-        "p100": 0.9947,
+        "p0": -0.39634,
+        "p100": 0.9991,
         "center": 0.0,
-        "spread": 0.9947,
+        "spread": 0.9991,
         "symmetric": true,
-        "vmin": -0.9947,
-        "vmax": 0.9947
+        "vmin": -0.9991,
+        "vmax": 0.9991
       },
       "NDWI": {
         "p0": -0.92776,
@@ -949,10 +949,10 @@
       },
       "NDCI": {
         "symmetric": false,
-        "vmin": 0.01492,
-        "vmax": 0.76804,
-        "p0": 0.01492,
-        "p100": 0.76804
+        "vmin": 0.02791,
+        "vmax": 0.76847,
+        "p0": 0.02791,
+        "p100": 0.76847
       },
       "canopy": {
         "symmetric": false,
