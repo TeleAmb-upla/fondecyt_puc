@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-08T14:15:38+00:00",
+  "generated_at": "2026-06-08T14:40:42+00:00",
   "default_band": "NDVI",
   "indices": {
     "NDVI": {
@@ -444,8 +444,8 @@
       "period_key": "2026_04_24",
       "predio_id": "exotico",
       "index": "thermal",
-      "vmin": 6.11473,
-      "vmax": 29.18464,
+      "vmin": 9.16084,
+      "vmax": 30.11535,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -542,8 +542,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae1",
       "index": "thermal",
-      "vmin": 8.01782,
-      "vmax": 32.07386,
+      "vmin": 9.73349,
+      "vmax": 31.74657,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -640,8 +640,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae2",
       "index": "thermal",
-      "vmin": 9.40128,
-      "vmax": 31.45045,
+      "vmin": 8.19484,
+      "vmax": 31.17793,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -660,8 +660,8 @@
       "period_key": "2026_05_22",
       "predio_id": "exotico",
       "index": "thermal",
-      "vmin": 6.11473,
-      "vmax": 29.18464,
+      "vmin": 9.16084,
+      "vmax": 30.11535,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -680,8 +680,8 @@
       "period_key": "2026_05_22",
       "predio_id": "cae1",
       "index": "thermal",
-      "vmin": 8.01782,
-      "vmax": 32.07386,
+      "vmin": 9.73349,
+      "vmax": 31.74657,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -700,8 +700,8 @@
       "period_key": "2026_05_22",
       "predio_id": "cae2",
       "index": "thermal",
-      "vmin": 9.40128,
-      "vmax": 31.45045,
+      "vmin": 8.19484,
+      "vmax": 31.17793,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -906,10 +906,10 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 6.11473,
-        "vmax": 29.18464,
-        "p0": 6.11473,
-        "p100": 29.18464
+        "vmin": 9.16084,
+        "vmax": 30.11535,
+        "p0": 9.16084,
+        "p100": 30.11535
       },
       "canopy": {
         "symmetric": false,
@@ -975,10 +975,10 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 8.01782,
-        "vmax": 32.07386,
-        "p0": 8.01782,
-        "p100": 32.07386
+        "vmin": 9.73349,
+        "vmax": 31.74657,
+        "p0": 9.73349,
+        "p100": 31.74657
       },
       "canopy": {
         "symmetric": false,
@@ -1044,10 +1044,10 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 9.40128,
-        "vmax": 31.45045,
-        "p0": 9.40128,
-        "p100": 31.45045
+        "vmin": 8.19484,
+        "vmax": 31.17793,
+        "p0": 8.19484,
+        "p100": 31.17793
       },
       "canopy": {
         "symmetric": false,
@@ -1113,10 +1113,10 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 6.82252,
-        "vmax": 31.24621,
-        "p0": 6.82252,
-        "p100": 31.24621
+        "vmin": 8.79375,
+        "vmax": 31.0968,
+        "p0": 8.79375,
+        "p100": 31.0968
       },
       "canopy": {
         "symmetric": false,
