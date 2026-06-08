@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-08T14:40:42+00:00",
+  "generated_at": "2026-06-08T14:45:36+00:00",
   "default_band": "NDVI",
   "indices": {
     "NDVI": {
@@ -172,8 +172,8 @@
       "period_key": "2026_03_27",
       "predio_id": "exotico",
       "index": "ndwi",
-      "vmin": -0.93168,
-      "vmax": 0.93168,
+      "vmin": -0.9443,
+      "vmax": 0.9443,
       "colormap": "RdYlBu",
       "leaflet_bounds": [
         [
@@ -406,8 +406,8 @@
       "period_key": "2026_04_24",
       "predio_id": "exotico",
       "index": "ndwi",
-      "vmin": -0.93168,
-      "vmax": 0.93168,
+      "vmin": -0.9443,
+      "vmax": 0.9443,
       "colormap": "RdYlBu",
       "leaflet_bounds": [
         [
@@ -444,8 +444,8 @@
       "period_key": "2026_04_24",
       "predio_id": "exotico",
       "index": "thermal",
-      "vmin": 9.16084,
-      "vmax": 30.11535,
+      "vmin": 9.15887,
+      "vmax": 30.11458,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -542,8 +542,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae1",
       "index": "thermal",
-      "vmin": 9.73349,
-      "vmax": 31.74657,
+      "vmin": 9.73528,
+      "vmax": 31.7466,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -640,8 +640,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae2",
       "index": "thermal",
-      "vmin": 8.19484,
-      "vmax": 31.17793,
+      "vmin": 8.19605,
+      "vmax": 31.17773,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -654,14 +654,72 @@
         ]
       ]
     },
+    "exotico_2026_05_22_ndvi": {
+      "p": "drone/rasters/exotico_2026_05_22_ndvi.webp",
+      "l": "Predio exótico · 22/05/2026 · NDVI",
+      "period_key": "2026_05_22",
+      "predio_id": "exotico",
+      "index": "ndvi",
+      "vmin": -0.99793,
+      "vmax": 0.99793,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "exotico_2026_05_22_ndwi": {
+      "p": "drone/rasters/exotico_2026_05_22_ndwi.webp",
+      "l": "Predio exótico · 22/05/2026 · NDWI",
+      "period_key": "2026_05_22",
+      "predio_id": "exotico",
+      "index": "ndwi",
+      "vmin": -0.9443,
+      "vmax": 0.9443,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
+    "exotico_2026_05_22_rgb": {
+      "p": "drone/rasters/exotico_2026_05_22_rgb.webp",
+      "l": "Predio exótico · 22/05/2026 · RGB",
+      "period_key": "2026_05_22",
+      "predio_id": "exotico",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.35451704470788,
+          -70.69157437183301
+        ],
+        [
+          -33.35429526164474,
+          -70.69138265153583
+        ]
+      ]
+    },
     "exotico_2026_05_22_thermal": {
       "p": "drone/rasters/exotico_2026_05_22_thermal.webp",
       "l": "Predio exótico · 22/05/2026 · Temperatura",
       "period_key": "2026_05_22",
       "predio_id": "exotico",
       "index": "thermal",
-      "vmin": 9.16084,
-      "vmax": 30.11535,
+      "vmin": 9.15887,
+      "vmax": 30.11458,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -674,14 +732,72 @@
         ]
       ]
     },
+    "cae1_2026_05_22_ndvi": {
+      "p": "drone/rasters/cae1_2026_05_22_ndvi.webp",
+      "l": "Predio CAE 1 · 22/05/2026 · NDVI",
+      "period_key": "2026_05_22",
+      "predio_id": "cae1",
+      "index": "ndvi",
+      "vmin": -0.92339,
+      "vmax": 0.92339,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae1_2026_05_22_ndwi": {
+      "p": "drone/rasters/cae1_2026_05_22_ndwi.webp",
+      "l": "Predio CAE 1 · 22/05/2026 · NDWI",
+      "period_key": "2026_05_22",
+      "predio_id": "cae1",
+      "index": "ndwi",
+      "vmin": -0.75013,
+      "vmax": 0.75013,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
+    "cae1_2026_05_22_rgb": {
+      "p": "drone/rasters/cae1_2026_05_22_rgb.webp",
+      "l": "Predio CAE 1 · 22/05/2026 · RGB",
+      "period_key": "2026_05_22",
+      "predio_id": "cae1",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.35445661317698,
+          -70.69130118647473
+        ],
+        [
+          -33.35423441844506,
+          -70.69111098211259
+        ]
+      ]
+    },
     "cae1_2026_05_22_thermal": {
       "p": "drone/rasters/cae1_2026_05_22_thermal.webp",
       "l": "Predio CAE 1 · 22/05/2026 · Temperatura",
       "period_key": "2026_05_22",
       "predio_id": "cae1",
       "index": "thermal",
-      "vmin": 9.73349,
-      "vmax": 31.74657,
+      "vmin": 9.73528,
+      "vmax": 31.7466,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -694,14 +810,72 @@
         ]
       ]
     },
+    "cae2_2026_05_22_ndvi": {
+      "p": "drone/rasters/cae2_2026_05_22_ndvi.webp",
+      "l": "Predio CAE 2 · 22/05/2026 · NDVI",
+      "period_key": "2026_05_22",
+      "predio_id": "cae2",
+      "index": "ndvi",
+      "vmin": -0.95702,
+      "vmax": 0.95702,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    },
+    "cae2_2026_05_22_ndwi": {
+      "p": "drone/rasters/cae2_2026_05_22_ndwi.webp",
+      "l": "Predio CAE 2 · 22/05/2026 · NDWI",
+      "period_key": "2026_05_22",
+      "predio_id": "cae2",
+      "index": "ndwi",
+      "vmin": -0.71178,
+      "vmax": 0.71178,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    },
+    "cae2_2026_05_22_rgb": {
+      "p": "drone/rasters/cae2_2026_05_22_rgb.webp",
+      "l": "Predio CAE 2 · 22/05/2026 · RGB",
+      "period_key": "2026_05_22",
+      "predio_id": "cae2",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.35495564473527,
+          -70.69133049143045
+        ],
+        [
+          -33.35445269348781,
+          -70.69100691649378
+        ]
+      ]
+    },
     "cae2_2026_05_22_thermal": {
       "p": "drone/rasters/cae2_2026_05_22_thermal.webp",
       "l": "Predio CAE 2 · 22/05/2026 · Temperatura",
       "period_key": "2026_05_22",
       "predio_id": "cae2",
       "index": "thermal",
-      "vmin": 8.19484,
-      "vmax": 31.17793,
+      "vmin": 8.19605,
+      "vmax": 31.17773,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -896,20 +1070,20 @@
         "vmax": 0.99793
       },
       "NDWI": {
-        "p0": -0.93168,
+        "p0": -0.9443,
         "p100": 0.61115,
         "center": 0.0,
-        "spread": 0.93168,
+        "spread": 0.9443,
         "symmetric": true,
-        "vmin": -0.93168,
-        "vmax": 0.93168
+        "vmin": -0.9443,
+        "vmax": 0.9443
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 9.16084,
-        "vmax": 30.11535,
-        "p0": 9.16084,
-        "p100": 30.11535
+        "vmin": 9.15887,
+        "vmax": 30.11458,
+        "p0": 9.15887,
+        "p100": 30.11458
       },
       "canopy": {
         "symmetric": false,
@@ -956,7 +1130,7 @@
         "p100": 0.74711
       },
       "NDVI": {
-        "p0": -0.38731,
+        "p0": -0.59188,
         "p100": 0.92339,
         "center": 0.0,
         "spread": 0.92339,
@@ -966,7 +1140,7 @@
       },
       "NDWI": {
         "p0": -0.75013,
-        "p100": 0.55056,
+        "p100": 0.70531,
         "center": 0.0,
         "spread": 0.75013,
         "symmetric": true,
@@ -975,10 +1149,10 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 9.73349,
-        "vmax": 31.74657,
-        "p0": 9.73349,
-        "p100": 31.74657
+        "vmin": 9.73528,
+        "vmax": 31.7466,
+        "p0": 9.73528,
+        "p100": 31.7466
       },
       "canopy": {
         "symmetric": false,
@@ -1044,10 +1218,10 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 8.19484,
-        "vmax": 31.17793,
-        "p0": 8.19484,
-        "p100": 31.17793
+        "vmin": 8.19605,
+        "vmax": 31.17773,
+        "p0": 8.19605,
+        "p100": 31.17773
       },
       "canopy": {
         "symmetric": false,
@@ -1087,7 +1261,7 @@
     },
     "__all__": {
       "NDVI": {
-        "p0": -0.41828,
+        "p0": -0.59188,
         "p100": 0.99793,
         "center": 0.0,
         "spread": 0.99793,
@@ -1096,13 +1270,13 @@
         "vmax": 0.99793
       },
       "NDWI": {
-        "p0": -0.93168,
-        "p100": 0.61115,
+        "p0": -0.9443,
+        "p100": 0.70531,
         "center": 0.0,
-        "spread": 0.93168,
+        "spread": 0.9443,
         "symmetric": true,
-        "vmin": -0.93168,
-        "vmax": 0.93168
+        "vmin": -0.9443,
+        "vmax": 0.9443
       },
       "NDCI": {
         "symmetric": false,
@@ -1113,10 +1287,10 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 8.79375,
-        "vmax": 31.0968,
-        "p0": 8.79375,
-        "p100": 31.0968
+        "vmin": 8.79441,
+        "vmax": 31.09648,
+        "p0": 8.79441,
+        "p100": 31.09648
       },
       "canopy": {
         "symmetric": false,
