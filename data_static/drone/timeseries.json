@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-01T15:40:19+00:00",
+  "generated_at": "2026-06-08T14:15:38+00:00",
   "default_band": "NDVI",
   "periods": [
     {
@@ -15,49 +15,82 @@
       "year": 2026,
       "month": 4,
       "day": 24
+    },
+    {
+      "key": "2026_05_22",
+      "label": "22/05/2026",
+      "year": 2026,
+      "month": 5,
+      "day": 22
     }
   ],
   "series": {
     "NDVI": {
       "exotico": [
-        0.4755,
-        0.4404
+        0.4507,
+        0.4169,
+        null
       ],
       "cae1": [
-        0.2681,
-        0.3611
+        0.2404,
+        0.3515,
+        null
       ],
       "cae2": [
-        0.3277,
-        0.3644
+        0.3126,
+        0.364,
+        null
       ]
     },
     "NDWI": {
       "exotico": [
-        -0.2397,
-        -0.1923
+        -0.2192,
+        -0.171,
+        null
       ],
       "cae1": [
-        -0.0492,
-        -0.1174
+        -0.0282,
+        -0.1121,
+        null
       ],
       "cae2": [
-        -0.0919,
-        -0.1185
+        -0.0782,
+        -0.1167,
+        null
       ]
     },
     "NDCI": {
       "exotico": [
-        0.4847,
-        0.4641
+        0.4666,
+        0.4437,
+        null
       ],
       "cae1": [
-        0.323,
-        0.4048
+        0.3059,
+        0.3987,
+        null
       ],
       "cae2": [
-        0.3746,
-        0.3957
+        0.3651,
+        0.3956,
+        null
+      ]
+    },
+    "THERMAL": {
+      "exotico": [
+        null,
+        22.1589,
+        14.4241
+      ],
+      "cae1": [
+        null,
+        24.167,
+        10.9717
+      ],
+      "cae2": [
+        null,
+        23.0185,
+        13.7606
       ]
     }
   },
@@ -65,28 +98,34 @@
     "mean_canopy": {
       "exotico": [
         0.8468,
+        null,
         null
       ],
       "cae1": [
         0.5143,
+        null,
         null
       ],
       "cae2": [
         0.441,
+        null,
         null
       ]
     },
     "max_canopy": {
       "exotico": [
         4.9633,
+        null,
         null
       ],
       "cae1": [
         6.4838,
+        null,
         null
       ],
       "cae2": [
         8.9422,
+        null,
         null
       ]
     }
@@ -172,6 +211,15 @@
       "fallback_vmin": -1.0,
       "fallback_vmax": 1.0
     },
+    "THERMAL": {
+      "label": "Temperatura",
+      "colormap": "inferno",
+      "symmetric": false,
+      "center": null,
+      "fallback_vmin": 0.0,
+      "fallback_vmax": 50.0,
+      "unit": "°C"
+    },
     "RGB": {
       "label": "RGB",
       "colormap": null,
@@ -182,5 +230,5 @@
       "fallback_vmax": 1
     }
   },
-  "last_period_key": "2026_04_24"
+  "last_period_key": "2026_05_22"
 }

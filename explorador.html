@@ -697,6 +697,7 @@
           <option value="ndvi">NDVI</option>
           <option value="ndwi">NDWI</option>
           <option value="ndci">NDCI</option>
+          <option value="thermal">Térmico</option>
           <option value="lidar">LiDAR</option>
         </select>
         <div id="lidarAttrFields" hidden>
@@ -781,7 +782,8 @@
     viridis: 'linear-gradient(to top,#440154,#482575,#414487,#355f8d,#2a788e,#21908d,#22a884,#44bf70,#7ad151,#bdd26c,#fde725)',
     RdYlGn_r: 'linear-gradient(to top,#006837,#1a9850,#66bd63,#a6d96a,#d9ef8b,#ffffbf,#fee08b,#fdae61,#f46d43,#d73027,#a50026)',
     RdYlBu_r: 'linear-gradient(to top,#313695,#4575b4,#74add1,#abd9e9,#e0f3f8,#ffffbf,#fee090,#fdae61,#f46d43,#d73027,#a50026)',
-    terrain: 'linear-gradient(to top,#333399,#2a7ab0,#4eb0d3,#8fd594,#c8e98e,#f2f0a0,#e8c66d,#d29b52,#b87333,#8f5631,#6b3f2a)'
+    terrain: 'linear-gradient(to top,#333399,#2a7ab0,#4eb0d3,#8fd594,#c8e98e,#f2f0a0,#e8c66d,#d29b52,#b87333,#8f5631,#6b3f2a)',
+    inferno: 'linear-gradient(to top,#000004,#1b0c41,#4a0c6b,#781c6d,#a52c60,#cf4446,#ed6925,#fb9b06,#f7d13d,#fcffa4)'
   };
   const PUC_CMAP_DEFAULT = PUC_CMAP.RdYlGn;
 
@@ -805,6 +807,11 @@
   function isLidarLayer() {
     const layer = String(state.droneLayer || '').toLowerCase();
     return layer === 'lidar' || layer === 'las';
+  }
+
+  function isDroneSpectralLayer(layer) {
+    const l = String(layer || state.droneLayer || '').toLowerCase();
+    return l === 'ndvi' || l === 'ndwi' || l === 'ndci' || l === 'thermal';
   }
 
   function lidarAttrMeta(attrId) {
@@ -860,7 +867,7 @@
     const vmin = Number(r.vmin);
     const vmax = Number(r.vmax);
     if (!Number.isFinite(vmin) || !Number.isFinite(vmax)) return null;
-    const symmetric = band !== 'NDCI' && Math.abs(vmin + vmax) < 0.05 && vmin < 0 && vmax > 0;
+    const symmetric = band !== 'NDCI' && band !== 'THERMAL' && Math.abs(vmin + vmax) < 0.05 && vmin < 0 && vmax > 0;
     const out = { symmetric, vmin, vmax, p0: vmin, p100: vmax };
     if (symmetric) {
       out.center = 0;
@@ -1822,8 +1829,7 @@
     const wrap = document.getElementById('droneOpacityWrap');
     if (!wrap) return;
     const layer = String(state.droneLayer || '').toLowerCase();
-    const isIndex = layer === 'ndvi' || layer === 'ndwi' || layer === 'ndci';
-    wrap.hidden = state.source !== 'drone' || !isIndex;
+    wrap.hidden = state.source !== 'drone' || !isDroneSpectralLayer(layer);
   }
 
   function updateLidarAttrFieldsVisibility() {
@@ -1876,9 +1882,8 @@
     if (isLidarLayer()) return;
     const targets = isAllPredios() ? predioIds() : [state.predio];
     const layer = String(state.droneLayer || 'ndvi').toLowerCase();
-    const isIndex = layer === 'ndvi' || layer === 'ndwi' || layer === 'ndci';
+    const isSpectral = isDroneSpectralLayer(layer);
     const rasters = state.droneMeta.rasters || {};
-    let hasRgb = false;
     targets.forEach(wid => {
       const rgbKey = findDroneRasterKey(wid, 'rgb');
       const idxKey = findDroneRasterKey(wid, layer);
@@ -1889,18 +1894,19 @@
       const rgbBounds = (rgbEntry && rgbEntry.leaflet_bounds) || (w && w.leaflet_bounds);
       const idxBounds = (rEntry && rEntry.leaflet_bounds) || (w && w.leaflet_bounds);
       const opBase = isAllPredios() ? 0.85 : 1;
-      if (rgbKey && rasters[rgbKey].p && rgbBounds) {
-        hasRgb = true;
+      const hasRgbUnder = !!(rgbKey && rasters[rgbKey].p && rgbBounds);
+      if (hasRgbUnder && (layer === 'rgb' || isSpectral)) {
         const ly = L.imageOverlay(BASE + rasters[rgbKey].p, rgbBounds, { opacity: opBase, interactive: false });
         ly.addTo(state.map);
         state.rasterLayers.push(ly);
       }
-      if (idxKey && rasters[idxKey].p && isIndex && idxBounds) {
-        const op = state.droneOpacity * (isAllPredios() ? 0.9 : 1);
+      if (idxKey && rasters[idxKey].p && isSpectral && layer !== 'rgb' && idxBounds) {
+        const op = hasRgbUnder
+          ? state.droneOpacity * (isAllPredios() ? 0.9 : 1)
+          : opBase;
         const ly = L.imageOverlay(BASE + rasters[idxKey].p, idxBounds, { opacity: op, interactive: false });
         ly.addTo(state.map);
         state.rasterLayers.push(ly);
-        anyIdx = true;
       }
     });
     updateDroneOpacityVisibility();
@@ -2128,7 +2134,7 @@
     }
     document.getElementById('sourceHint').textContent = sat
       ? 'Satélite: semanas ISO y todos los índices del compuesto S2.'
-      : 'Dron: fechas de vuelo · RGB e índices · LAS en 3D por predio.';
+      : 'Dron: fechas de vuelo · RGB, índices y térmico · LAS en 3D por predio.';
     fillPredioSelector();
     if (!sat) {
       fillLidarAttrSelector();
