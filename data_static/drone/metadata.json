@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T13:00:48+00:00",
+  "generated_at": "2026-07-14T15:44:28+00:00",
   "default_band": "NDVI",
   "indices": {
     "NDVI": {
@@ -122,9 +122,16 @@
       "year": 2026,
       "month": 5,
       "day": 22
+    },
+    {
+      "key": "2026_06_19",
+      "label": "19/06/2026",
+      "year": 2026,
+      "month": 6,
+      "day": 19
     }
   ],
-  "last_period_key": "2026_05_22",
+  "last_period_key": "2026_06_19",
   "rasters": {
     "exotico_2026_03_27_ndci": {
       "p": "drone/rasters/exotico_2026_03_27_ndci.webp",
@@ -132,8 +139,8 @@
       "period_key": "2026_03_27",
       "predio_id": "exotico",
       "index": "ndci",
-      "vmin": 0.06813,
-      "vmax": 0.77603,
+      "vmin": 0.07511,
+      "vmax": 0.76965,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -210,8 +217,8 @@
       "period_key": "2026_03_27",
       "predio_id": "cae1",
       "index": "ndci",
-      "vmin": 0.01305,
-      "vmax": 0.73676,
+      "vmin": 0.02001,
+      "vmax": 0.73428,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -288,8 +295,8 @@
       "period_key": "2026_03_27",
       "predio_id": "cae2",
       "index": "ndci",
-      "vmin": 0.03923,
-      "vmax": 0.72881,
+      "vmin": 0.04212,
+      "vmax": 0.72341,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -366,8 +373,8 @@
       "period_key": "2026_04_24",
       "predio_id": "exotico",
       "index": "ndci",
-      "vmin": 0.06813,
-      "vmax": 0.77603,
+      "vmin": 0.07511,
+      "vmax": 0.76965,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -444,8 +451,8 @@
       "period_key": "2026_04_24",
       "predio_id": "exotico",
       "index": "thermal",
-      "vmin": 9.62717,
-      "vmax": 29.04368,
+      "vmin": 10.10541,
+      "vmax": 29.82678,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -464,8 +471,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae1",
       "index": "ndci",
-      "vmin": 0.01305,
-      "vmax": 0.73676,
+      "vmin": 0.02001,
+      "vmax": 0.73428,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -542,8 +549,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae1",
       "index": "thermal",
-      "vmin": 10.45249,
-      "vmax": 30.21103,
+      "vmin": 10.73029,
+      "vmax": 29.69597,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -562,8 +569,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae2",
       "index": "ndci",
-      "vmin": 0.03923,
-      "vmax": 0.72881,
+      "vmin": 0.04212,
+      "vmax": 0.72341,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -640,8 +647,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae2",
       "index": "thermal",
-      "vmin": 9.62405,
-      "vmax": 31.56219,
+      "vmin": 9.95337,
+      "vmax": 31.32255,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -660,8 +667,8 @@
       "period_key": "2026_05_22",
       "predio_id": "exotico",
       "index": "ndci",
-      "vmin": 0.06813,
-      "vmax": 0.77603,
+      "vmin": 0.07511,
+      "vmax": 0.76965,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -738,8 +745,8 @@
       "period_key": "2026_05_22",
       "predio_id": "exotico",
       "index": "thermal",
-      "vmin": 9.62717,
-      "vmax": 29.04368,
+      "vmin": 10.10541,
+      "vmax": 29.82678,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -758,8 +765,8 @@
       "period_key": "2026_05_22",
       "predio_id": "cae1",
       "index": "ndci",
-      "vmin": 0.01305,
-      "vmax": 0.73676,
+      "vmin": 0.02001,
+      "vmax": 0.73428,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -836,8 +843,8 @@
       "period_key": "2026_05_22",
       "predio_id": "cae1",
       "index": "thermal",
-      "vmin": 10.45249,
-      "vmax": 30.21103,
+      "vmin": 10.73029,
+      "vmax": 29.69597,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -856,8 +863,8 @@
       "period_key": "2026_05_22",
       "predio_id": "cae2",
       "index": "ndci",
-      "vmin": 0.03923,
-      "vmax": 0.72881,
+      "vmin": 0.04212,
+      "vmax": 0.72341,
       "colormap": "YlGn",
       "leaflet_bounds": [
         [
@@ -934,8 +941,302 @@
       "period_key": "2026_05_22",
       "predio_id": "cae2",
       "index": "thermal",
-      "vmin": 9.62405,
-      "vmax": 31.56219,
+      "vmin": 9.95337,
+      "vmax": 31.32255,
+      "colormap": "inferno",
+      "leaflet_bounds": [
+        [
+          -33.354969597564754,
+          -70.69132559268132
+        ],
+        [
+          -33.35446603706764,
+          -70.69100293422201
+        ]
+      ]
+    },
+    "exotico_2026_06_19_ndci": {
+      "p": "drone/rasters/exotico_2026_06_19_ndci.webp",
+      "l": "Predio exótico · 19/06/2026 · NDCI",
+      "period_key": "2026_06_19",
+      "predio_id": "exotico",
+      "index": "ndci",
+      "vmin": 0.07511,
+      "vmax": 0.76965,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35452814644737,
+          -70.69156868390827
+        ],
+        [
+          -33.354305780693885,
+          -70.69137786531645
+        ]
+      ]
+    },
+    "exotico_2026_06_19_ndvi": {
+      "p": "drone/rasters/exotico_2026_06_19_ndvi.webp",
+      "l": "Predio exótico · 19/06/2026 · NDVI",
+      "period_key": "2026_06_19",
+      "predio_id": "exotico",
+      "index": "ndvi",
+      "vmin": -1.0,
+      "vmax": 1.0,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35452814644737,
+          -70.69156868390827
+        ],
+        [
+          -33.354305780693885,
+          -70.69137786531645
+        ]
+      ]
+    },
+    "exotico_2026_06_19_ndwi": {
+      "p": "drone/rasters/exotico_2026_06_19_ndwi.webp",
+      "l": "Predio exótico · 19/06/2026 · NDWI",
+      "period_key": "2026_06_19",
+      "predio_id": "exotico",
+      "index": "ndwi",
+      "vmin": -0.94624,
+      "vmax": 0.94624,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35452814644737,
+          -70.69156868390827
+        ],
+        [
+          -33.354305780693885,
+          -70.69137786531645
+        ]
+      ]
+    },
+    "exotico_2026_06_19_rgb": {
+      "p": "drone/rasters/exotico_2026_06_19_rgb.webp",
+      "l": "Predio exótico · 19/06/2026 · RGB",
+      "period_key": "2026_06_19",
+      "predio_id": "exotico",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.35452814644737,
+          -70.69156868390827
+        ],
+        [
+          -33.354305780693885,
+          -70.69137786531645
+        ]
+      ]
+    },
+    "exotico_2026_06_19_thermal": {
+      "p": "drone/rasters/exotico_2026_06_19_thermal.webp",
+      "l": "Predio exótico · 19/06/2026 · Temperatura",
+      "period_key": "2026_06_19",
+      "predio_id": "exotico",
+      "index": "thermal",
+      "vmin": 10.10541,
+      "vmax": 29.82678,
+      "colormap": "inferno",
+      "leaflet_bounds": [
+        [
+          -33.35452814644737,
+          -70.69156868390827
+        ],
+        [
+          -33.354305780693885,
+          -70.69137786531645
+        ]
+      ]
+    },
+    "cae1_2026_06_19_ndci": {
+      "p": "drone/rasters/cae1_2026_06_19_ndci.webp",
+      "l": "Predio CAE 1 · 19/06/2026 · NDCI",
+      "period_key": "2026_06_19",
+      "predio_id": "cae1",
+      "index": "ndci",
+      "vmin": 0.02001,
+      "vmax": 0.73428,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35446930731599,
+          -70.69129469357567
+        ],
+        [
+          -33.354246599658296,
+          -70.6911055369926
+        ]
+      ]
+    },
+    "cae1_2026_06_19_ndvi": {
+      "p": "drone/rasters/cae1_2026_06_19_ndvi.webp",
+      "l": "Predio CAE 1 · 19/06/2026 · NDVI",
+      "period_key": "2026_06_19",
+      "predio_id": "cae1",
+      "index": "ndvi",
+      "vmin": -0.92464,
+      "vmax": 0.92464,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35446930731599,
+          -70.69129469357567
+        ],
+        [
+          -33.354246599658296,
+          -70.6911055369926
+        ]
+      ]
+    },
+    "cae1_2026_06_19_ndwi": {
+      "p": "drone/rasters/cae1_2026_06_19_ndwi.webp",
+      "l": "Predio CAE 1 · 19/06/2026 · NDWI",
+      "period_key": "2026_06_19",
+      "predio_id": "cae1",
+      "index": "ndwi",
+      "vmin": -0.75531,
+      "vmax": 0.75531,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35446930731599,
+          -70.69129469357567
+        ],
+        [
+          -33.354246599658296,
+          -70.6911055369926
+        ]
+      ]
+    },
+    "cae1_2026_06_19_rgb": {
+      "p": "drone/rasters/cae1_2026_06_19_rgb.webp",
+      "l": "Predio CAE 1 · 19/06/2026 · RGB",
+      "period_key": "2026_06_19",
+      "predio_id": "cae1",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.35446930731599,
+          -70.69129469357567
+        ],
+        [
+          -33.354246599658296,
+          -70.6911055369926
+        ]
+      ]
+    },
+    "cae1_2026_06_19_thermal": {
+      "p": "drone/rasters/cae1_2026_06_19_thermal.webp",
+      "l": "Predio CAE 1 · 19/06/2026 · Temperatura",
+      "period_key": "2026_06_19",
+      "predio_id": "cae1",
+      "index": "thermal",
+      "vmin": 10.73029,
+      "vmax": 29.69597,
+      "colormap": "inferno",
+      "leaflet_bounds": [
+        [
+          -33.35446930731599,
+          -70.69129469357567
+        ],
+        [
+          -33.354246599658296,
+          -70.6911055369926
+        ]
+      ]
+    },
+    "cae2_2026_06_19_ndci": {
+      "p": "drone/rasters/cae2_2026_06_19_ndci.webp",
+      "l": "Predio CAE 2 · 19/06/2026 · NDCI",
+      "period_key": "2026_06_19",
+      "predio_id": "cae2",
+      "index": "ndci",
+      "vmin": 0.04212,
+      "vmax": 0.72341,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354969597564754,
+          -70.69132559268132
+        ],
+        [
+          -33.35446603706764,
+          -70.69100293422201
+        ]
+      ]
+    },
+    "cae2_2026_06_19_ndvi": {
+      "p": "drone/rasters/cae2_2026_06_19_ndvi.webp",
+      "l": "Predio CAE 2 · 19/06/2026 · NDVI",
+      "period_key": "2026_06_19",
+      "predio_id": "cae2",
+      "index": "ndvi",
+      "vmin": -0.94526,
+      "vmax": 0.94526,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.354969597564754,
+          -70.69132559268132
+        ],
+        [
+          -33.35446603706764,
+          -70.69100293422201
+        ]
+      ]
+    },
+    "cae2_2026_06_19_ndwi": {
+      "p": "drone/rasters/cae2_2026_06_19_ndwi.webp",
+      "l": "Predio CAE 2 · 19/06/2026 · NDWI",
+      "period_key": "2026_06_19",
+      "predio_id": "cae2",
+      "index": "ndwi",
+      "vmin": -0.70021,
+      "vmax": 0.70021,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.354969597564754,
+          -70.69132559268132
+        ],
+        [
+          -33.35446603706764,
+          -70.69100293422201
+        ]
+      ]
+    },
+    "cae2_2026_06_19_rgb": {
+      "p": "drone/rasters/cae2_2026_06_19_rgb.webp",
+      "l": "Predio CAE 2 · 19/06/2026 · RGB",
+      "period_key": "2026_06_19",
+      "predio_id": "cae2",
+      "index": "rgb",
+      "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.354969597564754,
+          -70.69132559268132
+        ],
+        [
+          -33.35446603706764,
+          -70.69100293422201
+        ]
+      ]
+    },
+    "cae2_2026_06_19_thermal": {
+      "p": "drone/rasters/cae2_2026_06_19_thermal.webp",
+      "l": "Predio CAE 2 · 19/06/2026 · Temperatura",
+      "period_key": "2026_06_19",
+      "predio_id": "cae2",
+      "index": "thermal",
+      "vmin": 9.95337,
+      "vmax": 31.32255,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -1006,6 +1307,120 @@
         "scan_angle_rank",
         "rgb"
       ]
+    },
+    "exotico_2026_05_22": {
+      "p": "drone/pointclouds/exotico_2026_05_22.json",
+      "l": "Predio exótico · 22/05/2026 · LiDAR",
+      "period_key": "2026_05_22",
+      "predio_id": "exotico",
+      "z_unit": "canopy_m",
+      "ground_z": 510.8988037109375,
+      "zmin": 0.0,
+      "zmax": 4.9931,
+      "attribute_ids": [
+        "canopy",
+        "elevation",
+        "intensity",
+        "classification",
+        "return_number",
+        "scan_angle_rank",
+        "rgb"
+      ]
+    },
+    "cae1_2026_05_22": {
+      "p": "drone/pointclouds/cae1_2026_05_22.json",
+      "l": "Predio CAE 1 · 22/05/2026 · LiDAR",
+      "period_key": "2026_05_22",
+      "predio_id": "cae1",
+      "z_unit": "canopy_m",
+      "ground_z": 510.8764953613281,
+      "zmin": 0.0,
+      "zmax": 10.2715,
+      "attribute_ids": [
+        "canopy",
+        "elevation",
+        "intensity",
+        "classification",
+        "return_number",
+        "scan_angle_rank",
+        "rgb"
+      ]
+    },
+    "cae2_2026_05_22": {
+      "p": "drone/pointclouds/cae2_2026_05_22.json",
+      "l": "Predio CAE 2 · 22/05/2026 · LiDAR",
+      "period_key": "2026_05_22",
+      "predio_id": "cae2",
+      "z_unit": "canopy_m",
+      "ground_z": 510.96551513671875,
+      "zmin": 0.0,
+      "zmax": 11.3653,
+      "attribute_ids": [
+        "canopy",
+        "elevation",
+        "intensity",
+        "classification",
+        "return_number",
+        "scan_angle_rank",
+        "rgb"
+      ]
+    },
+    "exotico_2026_06_19": {
+      "p": "drone/pointclouds/exotico_2026_06_19.json",
+      "l": "Predio exótico · 19/06/2026 · LiDAR",
+      "period_key": "2026_06_19",
+      "predio_id": "exotico",
+      "z_unit": "canopy_m",
+      "ground_z": 522.1840209960938,
+      "zmin": 0.0,
+      "zmax": 5.3504,
+      "attribute_ids": [
+        "canopy",
+        "elevation",
+        "intensity",
+        "classification",
+        "return_number",
+        "scan_angle_rank",
+        "rgb"
+      ]
+    },
+    "cae1_2026_06_19": {
+      "p": "drone/pointclouds/cae1_2026_06_19.json",
+      "l": "Predio CAE 1 · 19/06/2026 · LiDAR",
+      "period_key": "2026_06_19",
+      "predio_id": "cae1",
+      "z_unit": "canopy_m",
+      "ground_z": 522.2459106445312,
+      "zmin": 0.0,
+      "zmax": 3.8222,
+      "attribute_ids": [
+        "canopy",
+        "elevation",
+        "intensity",
+        "classification",
+        "return_number",
+        "scan_angle_rank",
+        "rgb"
+      ]
+    },
+    "cae2_2026_06_19": {
+      "p": "drone/pointclouds/cae2_2026_06_19.json",
+      "l": "Predio CAE 2 · 19/06/2026 · LiDAR",
+      "period_key": "2026_06_19",
+      "predio_id": "cae2",
+      "z_unit": "canopy_m",
+      "ground_z": 522.27197265625,
+      "zmin": 0.0,
+      "zmax": 4.8566,
+      "attribute_ids": [
+        "canopy",
+        "elevation",
+        "intensity",
+        "classification",
+        "return_number",
+        "scan_angle_rank",
+        "rgb"
+      ]
     }
   },
   "lidar_attributes": {
@@ -1016,7 +1431,7 @@
       "visual_only": false,
       "colormap": "terrain",
       "fallback_vmin": 0.0,
-      "fallback_vmax": 3.217,
+      "fallback_vmax": 7.623,
       "unit": "m"
     },
     "elevation": {
@@ -1025,8 +1440,8 @@
       "center": null,
       "visual_only": false,
       "colormap": "terrain",
-      "fallback_vmin": 519.667,
-      "fallback_vmax": 522.926,
+      "fallback_vmin": 510.92,
+      "fallback_vmax": 524.698,
       "unit": "m"
     },
     "intensity": {
@@ -1035,8 +1450,8 @@
       "center": null,
       "visual_only": false,
       "colormap": "viridis",
-      "fallback_vmin": 2048.0,
-      "fallback_vmax": 27392.0
+      "fallback_vmin": 1536.0,
+      "fallback_vmax": 25088.0
     },
     "classification": {
       "label": "Clasificación",
@@ -1061,8 +1476,8 @@
       "center": null,
       "visual_only": false,
       "colormap": "RdYlBu",
-      "fallback_vmin": -17.0,
-      "fallback_vmax": 25.0
+      "fallback_vmin": -16.0,
+      "fallback_vmax": 28.0
     },
     "rgb": {
       "label": "RGB",
@@ -1077,23 +1492,23 @@
     "canopy": {
       "symmetric": false,
       "vmin": 0.0,
-      "vmax": 3.217,
+      "vmax": 7.623,
       "p0": 0.0,
-      "p100": 3.217
+      "p100": 7.623
     },
     "elevation": {
       "symmetric": false,
-      "vmin": 519.667,
-      "vmax": 522.926,
-      "p0": 519.667,
-      "p100": 522.926
+      "vmin": 510.92,
+      "vmax": 524.698,
+      "p0": 510.92,
+      "p100": 524.698
     },
     "intensity": {
       "symmetric": false,
-      "vmin": 2048.0,
-      "vmax": 27392.0,
-      "p0": 2048.0,
-      "p100": 27392.0
+      "vmin": 1536.0,
+      "vmax": 25088.0,
+      "p0": 1536.0,
+      "p100": 25088.0
     },
     "return_number": {
       "symmetric": false,
@@ -1104,10 +1519,10 @@
     },
     "scan_angle_rank": {
       "symmetric": false,
-      "vmin": -17.0,
-      "vmax": 25.0,
-      "p0": -17.0,
-      "p100": 25.0
+      "vmin": -16.0,
+      "vmax": 28.0,
+      "p0": -16.0,
+      "p100": 28.0
     }
   },
   "lidar_default_attribute": "canopy",
@@ -1115,10 +1530,10 @@
     "exotico": {
       "NDCI": {
         "symmetric": false,
-        "vmin": 0.06813,
-        "vmax": 0.77603,
-        "p0": 0.06813,
-        "p100": 0.77603
+        "vmin": 0.07511,
+        "vmax": 0.76965,
+        "p0": 0.07511,
+        "p100": 0.76965
       },
       "NDVI": {
         "p0": -0.34172,
@@ -1140,31 +1555,31 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 9.62717,
-        "vmax": 29.04368,
-        "p0": 9.62717,
-        "p100": 29.04368
+        "vmin": 10.10541,
+        "vmax": 29.82678,
+        "p0": 10.10541,
+        "p100": 29.82678
       },
       "canopy": {
         "symmetric": false,
         "vmin": 0.0,
-        "vmax": 3.217,
+        "vmax": 7.623,
         "p0": 0.0,
-        "p100": 3.217
+        "p100": 7.623
       },
       "elevation": {
         "symmetric": false,
-        "vmin": 519.667,
-        "vmax": 522.926,
-        "p0": 519.667,
-        "p100": 522.926
+        "vmin": 510.92,
+        "vmax": 524.698,
+        "p0": 510.92,
+        "p100": 524.698
       },
       "intensity": {
         "symmetric": false,
-        "vmin": 2048.0,
-        "vmax": 27392.0,
-        "p0": 2048.0,
-        "p100": 27392.0
+        "vmin": 1536.0,
+        "vmax": 25088.0,
+        "p0": 1536.0,
+        "p100": 25088.0
       },
       "return_number": {
         "symmetric": false,
@@ -1175,19 +1590,19 @@
       },
       "scan_angle_rank": {
         "symmetric": false,
-        "vmin": -17.0,
-        "vmax": 25.0,
-        "p0": -17.0,
-        "p100": 25.0
+        "vmin": -16.0,
+        "vmax": 28.0,
+        "p0": -16.0,
+        "p100": 28.0
       }
     },
     "cae1": {
       "NDCI": {
         "symmetric": false,
-        "vmin": 0.01305,
-        "vmax": 0.73676,
-        "p0": 0.01305,
-        "p100": 0.73676
+        "vmin": 0.02001,
+        "vmax": 0.73428,
+        "p0": 0.02001,
+        "p100": 0.73428
       },
       "NDVI": {
         "p0": -0.39429,
@@ -1209,31 +1624,31 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 10.45249,
-        "vmax": 30.21103,
-        "p0": 10.45249,
-        "p100": 30.21103
+        "vmin": 10.73029,
+        "vmax": 29.69597,
+        "p0": 10.73029,
+        "p100": 29.69597
       },
       "canopy": {
         "symmetric": false,
         "vmin": 0.0,
-        "vmax": 3.217,
+        "vmax": 7.623,
         "p0": 0.0,
-        "p100": 3.217
+        "p100": 7.623
       },
       "elevation": {
         "symmetric": false,
-        "vmin": 519.667,
-        "vmax": 522.926,
-        "p0": 519.667,
-        "p100": 522.926
+        "vmin": 510.92,
+        "vmax": 524.698,
+        "p0": 510.92,
+        "p100": 524.698
       },
       "intensity": {
         "symmetric": false,
-        "vmin": 2048.0,
-        "vmax": 27392.0,
-        "p0": 2048.0,
-        "p100": 27392.0
+        "vmin": 1536.0,
+        "vmax": 25088.0,
+        "p0": 1536.0,
+        "p100": 25088.0
       },
       "return_number": {
         "symmetric": false,
@@ -1244,19 +1659,19 @@
       },
       "scan_angle_rank": {
         "symmetric": false,
-        "vmin": -17.0,
-        "vmax": 25.0,
-        "p0": -17.0,
-        "p100": 25.0
+        "vmin": -16.0,
+        "vmax": 28.0,
+        "p0": -16.0,
+        "p100": 28.0
       }
     },
     "cae2": {
       "NDCI": {
         "symmetric": false,
-        "vmin": 0.03923,
-        "vmax": 0.72881,
-        "p0": 0.03923,
-        "p100": 0.72881
+        "vmin": 0.04212,
+        "vmax": 0.72341,
+        "p0": 0.04212,
+        "p100": 0.72341
       },
       "NDVI": {
         "p0": -0.2949,
@@ -1278,31 +1693,31 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 9.62405,
-        "vmax": 31.56219,
-        "p0": 9.62405,
-        "p100": 31.56219
+        "vmin": 9.95337,
+        "vmax": 31.32255,
+        "p0": 9.95337,
+        "p100": 31.32255
       },
       "canopy": {
         "symmetric": false,
         "vmin": 0.0,
-        "vmax": 3.217,
+        "vmax": 7.623,
         "p0": 0.0,
-        "p100": 3.217
+        "p100": 7.623
       },
       "elevation": {
         "symmetric": false,
-        "vmin": 519.667,
-        "vmax": 522.926,
-        "p0": 519.667,
-        "p100": 522.926
+        "vmin": 510.92,
+        "vmax": 524.698,
+        "p0": 510.92,
+        "p100": 524.698
       },
       "intensity": {
         "symmetric": false,
-        "vmin": 2048.0,
-        "vmax": 27392.0,
-        "p0": 2048.0,
-        "p100": 27392.0
+        "vmin": 1536.0,
+        "vmax": 25088.0,
+        "p0": 1536.0,
+        "p100": 25088.0
       },
       "return_number": {
         "symmetric": false,
@@ -1313,10 +1728,10 @@
       },
       "scan_angle_rank": {
         "symmetric": false,
-        "vmin": -17.0,
-        "vmax": 25.0,
-        "p0": -17.0,
-        "p100": 25.0
+        "vmin": -16.0,
+        "vmax": 28.0,
+        "p0": -16.0,
+        "p100": 28.0
       }
     },
     "__all__": {
@@ -1340,38 +1755,38 @@
       },
       "NDCI": {
         "symmetric": false,
-        "vmin": 0.0344,
-        "vmax": 0.75908,
-        "p0": 0.0344,
-        "p100": 0.75908
+        "vmin": 0.03972,
+        "vmax": 0.75227,
+        "p0": 0.03972,
+        "p100": 0.75227
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 9.95812,
-        "vmax": 30.54705,
-        "p0": 9.95812,
-        "p100": 30.54705
+        "vmin": 10.28005,
+        "vmax": 30.30831,
+        "p0": 10.28005,
+        "p100": 30.30831
       },
       "canopy": {
         "symmetric": false,
         "vmin": 0.0,
-        "vmax": 3.217,
+        "vmax": 7.623,
         "p0": 0.0,
-        "p100": 3.217
+        "p100": 7.623
       },
       "elevation": {
         "symmetric": false,
-        "vmin": 519.667,
-        "vmax": 522.926,
-        "p0": 519.667,
-        "p100": 522.926
+        "vmin": 510.92,
+        "vmax": 524.698,
+        "p0": 510.92,
+        "p100": 524.698
       },
       "intensity": {
         "symmetric": false,
-        "vmin": 2048.0,
-        "vmax": 27392.0,
-        "p0": 2048.0,
-        "p100": 27392.0
+        "vmin": 1536.0,
+        "vmax": 25088.0,
+        "p0": 1536.0,
+        "p100": 25088.0
       },
       "return_number": {
         "symmetric": false,
@@ -1382,15 +1797,17 @@
       },
       "scan_angle_rank": {
         "symmetric": false,
-        "vmin": -17.0,
-        "vmax": 25.0,
-        "p0": -17.0,
-        "p100": 25.0
+        "vmin": -16.0,
+        "vmax": 28.0,
+        "p0": -16.0,
+        "p100": 28.0
       }
     }
   },
   "las_available_periods": [
-    "2026_03_27"
+    "2026_03_27",
+    "2026_05_22",
+    "2026_06_19"
   ],
   "reference_crs": "EPSG:4326",
   "predio_crs": "EPSG:32719"
