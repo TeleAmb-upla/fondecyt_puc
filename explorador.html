@@ -308,6 +308,41 @@
     }
     .chart-wrap h2 { font-family: Outfit, sans-serif; font-size: 0.95rem; color: var(--puc-blue); }
     .chart-wrap .sub { font-size: 0.75rem; color: var(--muted); margin: 2px 0 8px; }
+    .chart-wrap__head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px 16px;
+      margin-bottom: 4px;
+    }
+    .chart-wrap__titles { min-width: 0; flex: 1 1 12rem; }
+    .chart-wrap__titles h2 { margin: 0; }
+    .chart-wrap__titles .sub { margin: 2px 0 0; }
+    .chart-layer-field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 0 0 auto;
+      min-width: 9.5rem;
+    }
+    .chart-layer-field label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .chart-layer-field select {
+      font: inherit;
+      font-size: 0.85rem;
+      padding: 5px 8px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(0, 51, 102, 0.22);
+      background: #fff;
+      color: var(--puc-blue);
+      max-width: 12rem;
+    }
     .chart-canvas { height: min(26vh, 200px); }
     .drone-opacity {
       display: flex;
@@ -733,8 +768,22 @@
         </div>
       </div>
       <section class="chart-wrap">
-        <h2>Seguimiento por vuelo (media por predio)</h2>
-        <p class="sub" id="droneChartSub">Tres predios · altura media de dosel por vuelo</p>
+        <div class="chart-wrap__head">
+          <div class="chart-wrap__titles">
+            <h2>Seguimiento por vuelo (media por predio)</h2>
+            <p class="sub" id="droneChartSub">Tres predios · media del índice o LiDAR por fecha de vuelo</p>
+          </div>
+          <div class="chart-layer-field">
+            <label for="selDroneChartLayer">Capa / índice</label>
+            <select id="selDroneChartLayer" aria-label="Capa del gráfico dron">
+              <option value="ndvi">NDVI</option>
+              <option value="ndwi">NDWI</option>
+              <option value="ndci">NDCI</option>
+              <option value="thermal">Térmico</option>
+              <option value="lidar">LiDAR (dosel)</option>
+            </select>
+          </div>
+        </div>
         <div class="chart-canvas"><canvas id="droneChart"></canvas></div>
       </section>
     </div>
@@ -2014,18 +2063,34 @@
     const ctx = document.getElementById('droneChart');
     if (!ctx || !state.droneTs || !state.droneTs.periods) return;
     const labels = state.droneTs.periods.map(p => p.label || p.key);
-    const actualBand = 'mean_canopy';
-    const actualBlock = state.droneTs.las_series || {};
+    const chartLayer = droneChartLayerKey();
+    const seriesBlock = (state.droneTs.series && state.droneTs.series[chartLayer.toUpperCase()])
+      || (state.droneTs.series && state.droneTs.series[chartLayer])
+      || null;
+    const lasBlock = state.droneTs.las_series || {};
+    const useLidar = chartLayer === 'lidar';
+    const actualBand = useLidar ? 'mean_canopy' : chartLayer.toUpperCase();
+
+    function valuesForPredio(wid) {
+      if (useLidar) {
+        let vals = (lasBlock.mean_canopy && lasBlock.mean_canopy[wid]) || [];
+        if (!vals.length && lasBlock.mean_z) vals = lasBlock.mean_z[wid] || [];
+        return vals;
+      }
+      return (seriesBlock && seriesBlock[wid]) || [];
+    }
+
     const yLim = (function () {
       const vals = [];
       predioIds().forEach(wid => {
-        const arr = (actualBlock[actualBand] && actualBlock[actualBand][wid]) || [];
-        arr.forEach(v => { if (v != null && Number.isFinite(v)) vals.push(v); });
+        valuesForPredio(wid).forEach(v => {
+          if (v != null && Number.isFinite(v)) vals.push(v);
+        });
       });
       if (!vals.length) return {};
       let lo = Math.min(...vals), hi = Math.max(...vals);
       if (lo === hi) {
-        const eps = Math.max(Math.abs(lo) * 0.05, 0.5);
+        const eps = Math.max(Math.abs(lo) * 0.05, useLidar ? 0.5 : 0.02);
         lo -= eps; hi += eps;
       } else {
         const pad = (hi - lo) * 0.06;
@@ -2033,22 +2098,29 @@
       }
       return { min: lo, max: hi };
     })();
-    const yTitle = 'Altura media dosel (m)';
+
+    let yTitle;
+    if (useLidar) {
+      yTitle = 'Altura media dosel (m)';
+    } else {
+      const im = indexMeta(actualBand) || {};
+      yTitle = (im.label || actualBand) + (im.unit ? ' (' + im.unit + ')' : '');
+    }
+
     const datasets = predioIds().map(wid => {
-      let vals = (actualBlock[actualBand] && actualBlock[actualBand][wid]) || [];
-      if (!vals.length && actualBand === 'mean_canopy' && actualBlock.mean_z) {
-        vals = actualBlock.mean_z[wid] || [];
-      }
-      const col = state.meta.predios[wid].color || '#333';
+      const col = (state.droneMeta && state.droneMeta.predios && state.droneMeta.predios[wid]
+        || state.meta.predios[wid] || {}).color || '#333';
+      const name = (state.droneMeta && state.droneMeta.predios && state.droneMeta.predios[wid]
+        || state.meta.predios[wid] || {}).name || wid;
       return {
-        label: state.meta.predios[wid].name || wid,
-        data: vals,
+        label: name,
+        data: valuesForPredio(wid),
         borderColor: col,
         backgroundColor: col + '44',
         borderWidth: 2,
         pointRadius: 4,
         pointHoverRadius: 6,
-        spanGaps: false,
+        spanGaps: true,
         tension: 0.12
       };
     });
@@ -2083,7 +2155,59 @@
     });
     const sub = document.getElementById('droneChartSub');
     if (sub) {
-      sub.textContent = 'Tres predios · altura media de dosel por vuelo (vuelos con LiDAR)';
+      if (useLidar) {
+        sub.textContent = 'Tres predios · altura media de dosel por vuelo (solo fechas con LiDAR)';
+      } else {
+        sub.textContent = 'Tres predios · media de ' + (yTitle || actualBand) + ' por fecha de vuelo';
+      }
+    }
+    syncDroneLayerSelectors();
+  }
+
+  function droneChartLayerKey() {
+    const layer = String(state.droneLayer || '').toLowerCase();
+    if (layer === 'lidar' || layer === 'las') return 'lidar';
+    if (isDroneSpectralLayer(layer)) return layer;
+    return 'ndvi';
+  }
+
+  function syncDroneLayerSelectors() {
+    const chartKey = droneChartLayerKey();
+    const chartSel = document.getElementById('selDroneChartLayer');
+    if (chartSel && chartSel.value !== chartKey) chartSel.value = chartKey;
+    const sideSel = document.getElementById('selDroneLayer');
+    if (!sideSel) return;
+    const mapLayer = String(state.droneLayer || '').toLowerCase();
+    if (mapLayer === 'rgb') return;
+    if (sideSel.value !== mapLayer && [...sideSel.options].some(o => o.value === mapLayer)) {
+      sideSel.value = mapLayer;
+    }
+  }
+
+  function setDroneLayer(layer, { fromChart } = {}) {
+    const next = String(layer || '').toLowerCase();
+    if (!next) return;
+    if (fromChart) {
+      state.droneLayer = next === 'lidar' ? 'lidar' : next;
+    } else {
+      state.droneLayer = next;
+    }
+    const sideSel = document.getElementById('selDroneLayer');
+    if (sideSel && [...sideSel.options].some(o => o.value === state.droneLayer)) {
+      sideSel.value = state.droneLayer;
+    }
+    const chartSel = document.getElementById('selDroneChartLayer');
+    const chartKey = droneChartLayerKey();
+    if (chartSel && chartSel.value !== chartKey) chartSel.value = chartKey;
+    fillPredioSelector();
+    updateLidarAttrFieldsVisibility();
+    if (state.source === 'drone') {
+      ensureLasFlightDate();
+      refreshDroneDateSelect();
+      buildDronePeriodToolbar();
+      updateDroneUi();
+    } else {
+      updateMapLayers();
     }
   }
 
@@ -2257,16 +2381,14 @@
         updateDroneUi();
       });
       document.getElementById('selDroneLayer').addEventListener('change', e => {
-        state.droneLayer = e.target.value;
-        fillPredioSelector();
-        updateLidarAttrFieldsVisibility();
-        if (state.source === 'drone') {
-          ensureLasFlightDate();
-          refreshDroneDateSelect();
-          buildDronePeriodToolbar();
-          updateDroneUi();
-        } else updateMapLayers();
+        setDroneLayer(e.target.value, { fromChart: false });
       });
+      const chartLayerSel = document.getElementById('selDroneChartLayer');
+      if (chartLayerSel) {
+        chartLayerSel.addEventListener('change', e => {
+          setDroneLayer(e.target.value, { fromChart: true });
+        });
+      }
       document.getElementById('selLidarAttr').addEventListener('change', e => {
         state.lidarAttribute = e.target.value;
         if (state.source === 'drone' && isLidarLayer()) {
