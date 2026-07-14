@@ -100,6 +100,36 @@ WEBP_QUALITY = 86
 WEBP_UPSCALE_MIN_SIDE = 384
 
 
+def _infer_index_divisor(arr: np.ndarray, band_names: list[str]) -> float:
+    """
+    Detecta el factor Int16 del GeoTIFF semanal.
+
+    Histórico Pumahuida: ×100. Assets nuevos (update_s2_weekly_collection): ×1000.
+    Si los valores ya son físicos (|NDVI| ≲ 2), no se escala.
+    """
+    try:
+        idx = next(i for i, n in enumerate(band_names) if n == "NDVI")
+    except StopIteration:
+        idx = 0
+    sample = arr[idx] if arr.ndim == 3 else arr
+    finite = sample[np.isfinite(sample)]
+    if finite.size == 0:
+        return DIVISOR_DEFAULT
+    p98 = float(np.nanpercentile(np.abs(finite.astype(np.float64)), 98))
+    if p98 > 150.0:
+        return 1000.0
+    if p98 > 2.0:
+        return 100.0
+    return 1.0
+
+
+def _band_divisors(band_names: list[str], default: float) -> np.ndarray:
+    return np.array(
+        [BAND_DIVISOR_OVERRIDE.get(b, default) for b in band_names],
+        dtype=np.float32,
+    ).reshape(-1, 1, 1)
+
+
 def discover_weekly_tifs(tif_dir: Path) -> list[dict]:
     rows: list[dict] = []
     for path in sorted(tif_dir.glob("Y*_W*.tif")):
@@ -172,11 +202,8 @@ def _read_bands_normalized(ds) -> tuple[np.ndarray, list[str]]:
         arr = np.where(arr == ds.nodata, np.nan, arr)
     for sentinel in SENTINEL_VALUES:
         arr = np.where(arr == sentinel, np.nan, arr)
-    divisors = np.array(
-        [BAND_DIVISOR_OVERRIDE.get(b, DIVISOR_DEFAULT) for b in band_names],
-        dtype=np.float32,
-    ).reshape(-1, 1, 1)
-    arr = arr / divisors[: arr.shape[0]]
+    default = _infer_index_divisor(arr, band_names)
+    arr = arr / _band_divisors(band_names, default)
     return arr, band_names
 
 
@@ -225,11 +252,8 @@ def extract_parcel_means_from_tif(
             clipped = np.where(clipped == ds.nodata, np.nan, clipped)
         for sentinel in SENTINEL_VALUES:
             clipped = np.where(clipped == sentinel, np.nan, clipped)
-        divisors = np.array(
-            [BAND_DIVISOR_OVERRIDE.get(b, DIVISOR_DEFAULT) for b in band_names],
-            dtype=np.float32,
-        ).reshape(-1, 1, 1)
-        clipped = clipped / divisors[: clipped.shape[0]]
+        default = _infer_index_divisor(clipped, band_names)
+        clipped = clipped / _band_divisors(band_names, default)[: clipped.shape[0]]
         means: dict[str, float | None] = {}
         for i, band in enumerate(band_names):
             if band in SKIP_BANDS:
