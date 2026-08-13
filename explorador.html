@@ -25,6 +25,11 @@
     html, body { height: 100%; overflow: hidden; font-family: 'Source Sans 3', system-ui, sans-serif; color: var(--ink); }
     .app { position: relative; width: 100%; height: 100dvh; background: #0d120f; }
     #map { position: absolute; inset: 0; z-index: 0; }
+    .sat-raster-overlay,
+    .leaflet-image-layer.sat-raster-overlay,
+    img.sat-raster-overlay {
+      image-rendering: auto !important;
+    }
     .panel {
       position: absolute; z-index: 500;
       left: max(12px, env(safe-area-inset-left));
@@ -137,6 +142,7 @@
       background: linear-gradient(90deg, var(--puc-gold), var(--accent));
     }
     label, .lbl { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 10px 0 4px; }
+    label[hidden], select[hidden] { display: none !important; }
     select { width: 100%; padding: 8px 10px; border-radius: 10px; border: 1px solid rgba(0,51,102,.15); font: inherit; background: #fff; }
     .source-box { margin-top: 8px; padding: 10px; border-radius: 14px; background: rgba(0,51,102,.04); border: 1px solid rgba(0,51,102,.08); }
     .source-box__title { font-size: 0.72rem; font-weight: 700; color: var(--puc-blue); margin-bottom: 8px; }
@@ -344,6 +350,7 @@
       max-width: 12rem;
     }
     .chart-canvas { height: min(26vh, 200px); }
+    .chart-canvas[hidden] { display: none; }
     .drone-opacity {
       display: flex;
       flex-direction: column;
@@ -720,6 +727,11 @@
       <label for="selPredio">Predio</label>
       <select id="selPredio"></select>
       <div id="satFields">
+        <label for="selSatProduct">Satélite</label>
+        <select id="selSatProduct" aria-label="Producto satelital">
+          <option value="sentinel2">Sentinel-2 (óptico)</option>
+          <option value="sentinel1">Sentinel-1 (SAR)</option>
+        </select>
         <label for="selBand">Índice / banda</label>
         <select id="selBand"></select>
       </div>
@@ -754,7 +766,7 @@
       </div>
       <section class="chart-wrap">
         <h2>Seguimiento semanal (media por predio)</h2>
-        <p class="sub">Tres predios · eje Y ajustado a los datos del índice seleccionado</p>
+        <p class="sub" id="satChartSub">Tres predios · eje Y ajustado a los datos del índice seleccionado</p>
         <div class="chart-canvas"><canvas id="weeklyChart"></canvas></div>
       </section>
     </div>
@@ -802,6 +814,7 @@
     manifest: null, meta: null, ts: null, aoi: null,
     droneMeta: null, droneTs: null,
     source: 'sentinel2',
+    satProduct: 'sentinel2', satBundles: {},
     predio: null, band: 'NDVI', tIndex: 0,
     droneDate: '', dronePeriodIndex: 0, droneLayer: 'rgb', lidarAttribute: 'canopy', droneOpacity: 0.85,
     lidarClassColors: null,
@@ -1037,6 +1050,10 @@
     return (Math.round(n * 10000) / 10000).toString();
   }
 
+  function isSatelliteMode() {
+    return state.source === 'sentinel2';
+  }
+
   function applyColorbar() {
     const box = document.getElementById('colorbarBox');
     const gEl = document.getElementById('cbGradient');
@@ -1076,14 +1093,14 @@
           return;
         }
       }
-    } else if (state.source !== 'sentinel2') {
+    } else if (!isSatelliteMode()) {
       box.style.display = 'none';
       box.setAttribute('aria-hidden', 'true');
       return;
     } else {
       band = state.band;
     }
-    if (state.source === 'sentinel2') {
+    if (isSatelliteMode()) {
       im = indexMeta(band);
     }
     if (!im || im.visual_only) {
@@ -1177,13 +1194,22 @@
     fillPredioSelector();
     const bSel = document.getElementById('selBand');
     bSel.innerHTML = '';
-    Object.keys(state.meta.indices || {}).sort().forEach(b => {
+    const indices = state.meta.indices || {};
+    // `order` permite agrupar por familia (p. ej. SAR); sin él, orden alfabético.
+    Object.keys(indices).sort((a, b) => {
+      const oa = Number.isFinite(indices[a].order) ? indices[a].order : Infinity;
+      const ob = Number.isFinite(indices[b].order) ? indices[b].order : Infinity;
+      return oa === ob ? a.localeCompare(b) : oa - ob;
+    }).forEach(b => {
+      if (indices[b].hidden) return;
       const o = document.createElement('option');
       o.value = b;
-      o.textContent = state.meta.indices[b].label || b;
+      o.textContent = indices[b].label || b;
       bSel.appendChild(o);
     });
-    state.band = state.ts.default_band || 'NDVI';
+    const fallback = state.ts.default_band || 'NDVI';
+    const allowed = new Set(Array.from(bSel.options).map(o => o.value));
+    state.band = allowed.has(fallback) ? fallback : (bSel.options[0] && bSel.options[0].value);
     bSel.value = state.band;
     const last = state.meta.last_timeline_key;
     const idx = state.meta.timeline.findIndex(t => t.key === last);
@@ -1832,6 +1858,7 @@
     document.getElementById('zoomIn').onclick = () => state.map.zoomIn();
     document.getElementById('zoomOut').onclick = () => state.map.zoomOut();
     document.getElementById('zoomFit').onclick = () => setDefaultMapView();
+    state.map.on('zoomend moveend', scheduleSatPredioClips);
   }
 
   function applyPredioHighlight() {
@@ -1855,6 +1882,98 @@
     state.rasterLayers = [];
   }
 
+  function unionLeafletBounds(a, b) {
+    if (!a) return b || null;
+    if (!b) return a;
+    return [
+      [Math.min(a[0][0], b[0][0]), Math.min(a[0][1], b[0][1])],
+      [Math.max(a[1][0], b[1][0]), Math.max(a[1][1], b[1][1])]
+    ];
+  }
+
+  function predioFeature(wid) {
+    if (!state.aoi || !state.aoi.features) return null;
+    return state.aoi.features.find(f => String(f.properties.predio_id) === String(wid)) || null;
+  }
+
+  function geometryExteriorRings(geom) {
+    if (!geom) return [];
+    if (geom.type === 'Polygon') return [geom.coordinates[0]];
+    if (geom.type === 'MultiPolygon') return geom.coordinates.map(p => p[0]);
+    return [];
+  }
+
+  function latLngRingToOverlayLocal(ring, overlay, map) {
+    const el = overlay && overlay.getElement && overlay.getElement();
+    if (!el || !ring || !ring.length || !overlay.getBounds) return [];
+    const bounds = overlay.getBounds();
+    if (!bounds || !bounds.isValid()) return [];
+    const nw = map.latLngToLayerPoint(bounds.getNorthWest());
+    const se = map.latLngToLayerPoint(bounds.getSouthEast());
+    const w = el.offsetWidth || 1;
+    const h = el.offsetHeight || 1;
+    let dx = se.x - nw.x;
+    let dy = se.y - nw.y;
+    if (Math.abs(dx) < 1e-9) dx = 1e-9;
+    if (Math.abs(dy) < 1e-9) dy = 1e-9;
+    return ring.map(c => {
+      const lp = map.latLngToLayerPoint(L.latLng(c[1], c[0]));
+      return L.point((lp.x - nw.x) / dx * w, (lp.y - nw.y) / dy * h);
+    });
+  }
+
+  function ringsToClipPath(ringsLocal) {
+    if (!ringsLocal || !ringsLocal.length) return '';
+    if (ringsLocal.length === 1) {
+      const pts = ringsLocal[0];
+      if (!pts || pts.length < 3) return '';
+      return 'polygon(' + pts.map(p => Math.round(p.x) + 'px ' + Math.round(p.y) + 'px').join(', ') + ')';
+    }
+    const parts = [];
+    ringsLocal.forEach(points => {
+      if (!points || points.length < 3) return;
+      parts.push('M ' + points.map(p => Math.round(p.x) + ' ' + Math.round(p.y)).join(' L ') + ' Z');
+    });
+    return parts.length ? 'path("' + parts.join(' ') + '")' : '';
+  }
+
+  function applyPredioClipToOverlay(overlay, wid) {
+    if (!overlay || !state.map) return false;
+    const el = overlay.getElement && overlay.getElement();
+    if (!el) return false;
+    const feat = predioFeature(wid);
+    const rings = geometryExteriorRings(feat && feat.geometry);
+    if (!rings.length) {
+      el.style.clipPath = '';
+      return true;
+    }
+    const img = el.tagName === 'IMG' ? el : el.querySelector('img');
+    if (img && (!img.complete || !img.naturalWidth)) return false;
+    if ((el.offsetWidth || 0) < 8 || (el.offsetHeight || 0) < 8) return false;
+    const local = [];
+    rings.forEach(ring => {
+      const pts = latLngRingToOverlayLocal(ring, overlay, state.map);
+      if (pts.length >= 3) local.push(pts);
+    });
+    el.style.clipPath = ringsToClipPath(local) || '';
+    el.style.imageRendering = 'auto';
+    return true;
+  }
+
+  function scheduleSatPredioClips() {
+    if (state.source === 'drone') return;
+    state.rasterLayers.forEach(ly => {
+      if (!ly || !ly._pucPredioId) return;
+      if (!applyPredioClipToOverlay(ly, ly._pucPredioId)) {
+        const el = ly.getElement && ly.getElement();
+        const img = el && (el.tagName === 'IMG' ? el : el.querySelector('img'));
+        if (img && !img.complete) {
+          img.addEventListener('load', () => applyPredioClipToOverlay(ly, ly._pucPredioId), { once: true });
+        }
+      }
+    });
+  }
+
   function updateSatelliteRaster() {
     clearRasterLayers();
     const t = currentTimeline();
@@ -1865,13 +1984,21 @@
       const r = state.meta.rasters[key];
       const w = state.meta.predios[wid];
       if (!r || !r.p) return;
-      const bounds = r.leaflet_bounds || (w && w.leaflet_bounds);
+      const bounds = unionLeafletBounds(r.leaflet_bounds, w && w.leaflet_bounds);
       if (!bounds) return;
       const op = isAllPredios() ? 0.72 : 0.92;
-      const ly = L.imageOverlay(BASE + r.p, bounds, { opacity: op, interactive: false });
+      const ly = L.imageOverlay(BASE + r.p, bounds, {
+        opacity: op,
+        interactive: false,
+        className: 'sat-raster-overlay',
+        crossOrigin: true
+      });
+      ly._pucPredioId = wid;
       ly.addTo(state.map);
+      ly.on('load', () => applyPredioClipToOverlay(ly, wid));
       state.rasterLayers.push(ly);
     });
+    requestAnimationFrame(scheduleSatPredioClips);
   }
 
   function updateDroneOpacityVisibility() {
@@ -1979,7 +2106,7 @@
   }
 
   function updateWeekUi() {
-    if (state.source !== 'sentinel2') return;
+    if (!isSatelliteMode()) return;
     const t = currentTimeline();
     if (state.chart) {
       state.chart.options.plugins.pucWeekLine.index = state.tIndex;
@@ -1991,8 +2118,20 @@
 
   function buildChart() {
     const ctx = document.getElementById('weeklyChart');
-    const labels = state.meta.timeline.map(t => t.label);
     const band = state.band;
+    const im = indexMeta(band) || {};
+    const canvasWrap = document.querySelector('#satBottom .chart-canvas');
+    const sub = document.getElementById('satChartSub');
+    // Los compuestos RGB (CROP, REACTIV…) no tienen media por predio que graficar.
+    if (im.visual_only) {
+      if (state.chart) { state.chart.destroy(); state.chart = null; }
+      if (canvasWrap) canvasWrap.hidden = true;
+      if (sub) sub.textContent = (im.label || band) + ' · compuesto visual, sin serie temporal';
+      return;
+    }
+    if (canvasWrap) canvasWrap.hidden = false;
+    if (sub) sub.textContent = satProductText().sub;
+    const labels = state.meta.timeline.map(t => t.label);
     const yLim = yLimitsForBand(band);
     const datasets = predioIds().map(wid => {
       const vals = (state.ts.series[band] && state.ts.series[band][wid]) || [];
@@ -2005,7 +2144,7 @@
         borderWidth: 2,
         pointRadius: 2,
         pointHoverRadius: 5,
-        spanGaps: false,
+        spanGaps: true,
         tension: 0.12
       };
     });
@@ -2030,7 +2169,7 @@
           }
         },
         onClick: (_, elems) => {
-          if (elems.length && state.source === 'sentinel2') {
+          if (elems.length && isSatelliteMode()) {
             state.tIndex = elems[0].index;
             buildPeriodToolbar();
             updateWeekUi();
@@ -2257,7 +2396,7 @@
       droneBottom.setAttribute('aria-hidden', sat ? 'true' : 'false');
     }
     document.getElementById('sourceHint').textContent = sat
-      ? 'Satélite: semanas ISO y todos los índices del compuesto S2.'
+      ? satProductText().hint
       : 'Dron: fechas de vuelo · RGB, índices y térmico · LAS en 3D por predio.';
     fillPredioSelector();
     if (!sat) {
@@ -2272,6 +2411,49 @@
     updateDroneOpacityVisibility();
     updateMapLayers();
     applyColorbar();
+  }
+
+  const SAT_PRODUCT_TEXT = {
+    sentinel2: {
+      hint: 'Satélite: semanas ISO y todos los índices del compuesto S2.',
+      sub: 'Tres predios · eje Y ajustado a los datos del índice seleccionado'
+    },
+    sentinel1: {
+      hint: 'Satélite: Sentinel-1 SAR (C-band GRD), mismas semanas ISO, sin nubes.',
+      sub: 'Tres predios · retrodispersión γ0 e índices SAR por semana ISO'
+    }
+  };
+
+  function satProductText() {
+    return SAT_PRODUCT_TEXT[state.satProduct] || SAT_PRODUCT_TEXT.sentinel2;
+  }
+
+  /** Deja el selector de producto coherente con los bundles realmente cargados. */
+  function syncSatProductSelector() {
+    const sel = document.getElementById('selSatProduct');
+    if (!sel) return;
+    Array.from(sel.options).forEach(opt => {
+      opt.disabled = !state.satBundles[opt.value];
+    });
+    if (!state.satBundles[state.satProduct]) state.satProduct = 'sentinel2';
+    sel.value = state.satProduct;
+    sel.hidden = Object.keys(state.satBundles).length < 2;
+    const lbl = document.querySelector('label[for="selSatProduct"]');
+    if (lbl) lbl.hidden = sel.hidden;
+  }
+
+  function setSatProduct(product) {
+    const bundle = state.satBundles[product];
+    if (!bundle || product === state.satProduct) return;
+    state.satProduct = product;
+    state.meta = bundle.meta;
+    state.ts = bundle.ts;
+    document.getElementById('selSatProduct').value = product;
+    document.getElementById('sourceHint').textContent = satProductText().hint;
+    fillSelectors();
+    applyPredioHighlight();
+    buildChart();
+    updateWeekUi();
   }
 
   function onBandChange() {
@@ -2329,9 +2511,23 @@
         fetchJson(s2.timeseries_path),
         fetchJson(state.manifest.aoi_path)
       ]);
+      state.satBundles.sentinel2 = { meta, ts };
       state.meta = meta;
       state.ts = ts;
       state.aoi = aoi;
+
+      const s1 = state.manifest.sources.sentinel1;
+      const s1Ready = s1 && s1.has_data && s1.metadata_path && s1.timeseries_path;
+      if (s1Ready) {
+        try {
+          const [s1Meta, s1Ts] = await Promise.all([
+            fetchJson(s1.metadata_path),
+            fetchJson(s1.timeseries_path)
+          ]);
+          state.satBundles.sentinel1 = { meta: s1Meta, ts: s1Ts };
+        } catch (_) {}
+      }
+      syncSatProductSelector();
 
       const droneSrc = state.manifest.sources.drone;
       const droneReady = droneSrc && droneSrc.has_data && droneSrc.metadata_path;
@@ -2360,6 +2556,9 @@
 
       document.getElementById('selPredio').addEventListener('change', onParcelChange);
       document.getElementById('selBand').addEventListener('change', onBandChange);
+      document.getElementById('selSatProduct').addEventListener('change', e => {
+        setSatProduct(e.target.value);
+      });
       document.getElementById('pillSat').addEventListener('click', () => setSource('sentinel2'));
       document.getElementById('pillDrone').addEventListener('click', () => {
         if (!pillDrone.disabled) setSource('drone');
