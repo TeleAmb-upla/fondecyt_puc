@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T18:04:42+00:00",
+  "generated_at": "2026-08-13T18:18:26+00:00",
   "default_band": "NDVI",
   "indices": {
     "NDVI": {
@@ -1314,9 +1314,9 @@
       "period_key": "2026_05_22",
       "predio_id": "exotico",
       "z_unit": "canopy_m",
-      "ground_z": 510.8988037109375,
+      "ground_z": -6.28249979019165,
       "zmin": 0.0,
-      "zmax": 4.9931,
+      "zmax": 5.0798,
       "attribute_ids": [
         "canopy",
         "elevation",
@@ -1333,9 +1333,9 @@
       "period_key": "2026_05_22",
       "predio_id": "cae1",
       "z_unit": "canopy_m",
-      "ground_z": 510.8764953613281,
+      "ground_z": -6.33620023727417,
       "zmin": 0.0,
-      "zmax": 10.2715,
+      "zmax": 7.6995,
       "attribute_ids": [
         "canopy",
         "elevation",
@@ -1352,9 +1352,9 @@
       "period_key": "2026_05_22",
       "predio_id": "cae2",
       "z_unit": "canopy_m",
-      "ground_z": 510.96551513671875,
+      "ground_z": -6.288700103759766,
       "zmin": 0.0,
-      "zmax": 11.3653,
+      "zmax": 8.6796,
       "attribute_ids": [
         "canopy",
         "elevation",
