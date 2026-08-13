@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T15:44:28+00:00",
+  "generated_at": "2026-08-13T18:04:42+00:00",
   "default_band": "NDVI",
   "indices": {
     "NDVI": {
@@ -1259,7 +1259,7 @@
       "z_unit": "canopy_m",
       "ground_z": 519.7348022460938,
       "zmin": 0.0,
-      "zmax": 4.9022,
+      "zmax": 4.9341,
       "attribute_ids": [
         "canopy",
         "elevation",
@@ -1278,7 +1278,7 @@
       "z_unit": "canopy_m",
       "ground_z": 519.6561889648438,
       "zmin": 0.0,
-      "zmax": 7.8976,
+      "zmax": 7.7676,
       "attribute_ids": [
         "canopy",
         "elevation",
@@ -1297,7 +1297,7 @@
       "z_unit": "canopy_m",
       "ground_z": 519.7141723632812,
       "zmin": 0.0,
-      "zmax": 8.742,
+      "zmax": 8.838,
       "attribute_ids": [
         "canopy",
         "elevation",
@@ -1371,9 +1371,9 @@
       "period_key": "2026_06_19",
       "predio_id": "exotico",
       "z_unit": "canopy_m",
-      "ground_z": 522.1840209960938,
+      "ground_z": -4.697299957275391,
       "zmin": 0.0,
-      "zmax": 5.3504,
+      "zmax": 5.0496,
       "attribute_ids": [
         "canopy",
         "elevation",
@@ -1390,9 +1390,9 @@
       "period_key": "2026_06_19",
       "predio_id": "cae1",
       "z_unit": "canopy_m",
-      "ground_z": 522.2459106445312,
+      "ground_z": -4.750100135803223,
       "zmin": 0.0,
-      "zmax": 3.8222,
+      "zmax": 7.7449,
       "attribute_ids": [
         "canopy",
         "elevation",
@@ -1409,9 +1409,9 @@
       "period_key": "2026_06_19",
       "predio_id": "cae2",
       "z_unit": "canopy_m",
-      "ground_z": 522.27197265625,
+      "ground_z": -4.708799839019775,
       "zmin": 0.0,
-      "zmax": 4.8566,
+      "zmax": 8.7469,
       "attribute_ids": [
         "canopy",
         "elevation",
