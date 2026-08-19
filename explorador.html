@@ -193,6 +193,29 @@
     .source-pill:disabled { opacity: .45; cursor: not-allowed; }
     .hint { font-size: 0.78rem; color: var(--muted); margin-top: 6px; line-height: 1.35; }
     .hint--warn { color: #9a6700; background: #fff8e6; padding: 8px 10px; border-radius: 10px; margin-top: 8px; }
+    .index-help {
+      margin: 6px 0 2px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(29, 107, 74, 0.06);
+      border: 1px solid rgba(29, 107, 74, 0.12);
+    }
+    .index-help[hidden] { display: none !important; }
+    .index-help__text {
+      margin: 0;
+      font-size: 0.76rem;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+    .index-help__link {
+      display: inline-block;
+      margin-top: 5px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .index-help__link:hover { text-decoration: underline; }
     #droneFields[hidden] { display: none !important; }
     #lidarAttrFields[hidden] { display: none !important; }
     .map-zoom-pills {
@@ -734,6 +757,10 @@
         </select>
         <label for="selBand">Índice / banda</label>
         <select id="selBand"></select>
+        <div class="index-help" id="indexHelp" hidden>
+          <p class="index-help__text" id="indexHelpText"></p>
+          <a class="index-help__link" id="indexHelpLink" href="#" target="_blank" rel="noopener noreferrer">Ver referencia</a>
+        </div>
       </div>
       <div id="droneFields" hidden>
         <label for="selDroneDate">Fecha de vuelo</label>
@@ -890,6 +917,177 @@
     const u = String(band || '').toUpperCase();
     if (ix[u]) return ix[u];
     return null;
+  }
+
+  /** Textos cortos + enlaces Sentinel Hub (solo modo satélite). */
+  const SH_S2 = 'https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/';
+  const SH_S1 = 'https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-1/';
+  const INDEX_HELP = {
+    sentinel2: {
+      NDVI: {
+        text: 'Índice de vegetación normalizado (NIR–rojo). Valores altos ≈ dosel verde vigoroso; cerca de 0 ≈ suelo desnudo o senescente.',
+        url: SH_S2 + 'ndvi/'
+      },
+      NDMI: {
+        text: 'Humedad foliar relativa (NIR–SWIR). Útil para estrés hídrico: valores más bajos suelen indicar menos agua en la vegetación.',
+        url: SH_S2 + 'ndmi/'
+      },
+      NDWI: {
+        text: 'Índice de agua (verde–NIR). Destaca cuerpos de agua y superficie húmeda frente a vegetación y suelo seco.',
+        url: SH_S2 + 'ndwi/'
+      },
+      MNDWI: {
+        text: 'NDWI modificado (verde–SWIR). Mejora la separación agua / suelo construido respecto al NDWI clásico.',
+        url: SH_S2 + 'mndwi/'
+      },
+      GNDVI: {
+        text: 'NDVI con banda verde en lugar de rojo. Más sensible a clorofila en etapas de dosel denso.',
+        url: SH_S2 + 'gndvi/'
+      },
+      EVI: {
+        text: 'Vegetación mejorada (NIR, rojo, azul). Corrige suelo y atmósfera; útil cuando el NDVI se satura.',
+        url: SH_S2 + 'evi/'
+      },
+      EVI2: {
+        text: 'Variante de EVI sin banda azul. Similar al EVI cuando no se dispone de B02 de calidad.',
+        url: SH_S2 + 'evi2/'
+      },
+      SAVI: {
+        text: 'Vegetación ajustada al suelo. Reduce el efecto del suelo desnudo en coberturas bajas o tempranas.',
+        url: SH_S2 + 'savi/'
+      },
+      MSAVI: {
+        text: 'SAVI modificado. Ajuste dinámico al suelo; útil en cultivos con cobertura incompleta.',
+        url: SH_S2 + 'msavi/'
+      },
+      ARI: {
+        text: 'Índice de antocianinas (verde–red edge). Aumenta con pigmentos de estrés o senescencia.',
+        url: SH_S2 + 'ari/'
+      },
+      MARI: {
+        text: 'ARI modificado. Variante más estable del índice de antocianinas sobre vegetación.',
+        url: SH_S2 + 'mari/'
+      },
+      ARVI: {
+        text: 'Vegetación resistente a atmósfera (NIR–rojo con azul). Menos sensible a aerosoles que el NDVI.',
+        url: SH_S2 + 'arvi/'
+      },
+      CHL_REDEDGE: {
+        text: 'Clorofila en red-edge. Relaciona B5/B4 con contenido relativo de clorofila foliar.',
+        url: SH_S2 + 'chl_rededge/'
+      },
+      KNDVI: {
+        text: 'NDVI con núcleo (kernel). Alternativa al NDVI con respuesta más lineal en coberturas densas.',
+        url: SH_S2 + 'kndvi/'
+      },
+      MCARI: {
+        text: 'Absorción de clorofila modificada. Sensible a clorofila y LAI; usa rojo y red-edge.',
+        url: SH_S2 + 'mcari/'
+      },
+      MSI: {
+        text: 'Índice de humedad (SWIR/NIR). Valores altos suelen indicar menor contenido de agua foliar.',
+        url: SH_S2 + 'msi/'
+      },
+      NDMISTRESS: {
+        text: 'NDMI orientado a estrés hídrico de cultivo. Útil para detectar déficit de humedad en el dosel.',
+        url: SH_S2 + 'ndmi/'
+      },
+      NDII: {
+        text: 'Índice de infrarrojo normalizado (NIR–SWIR). Relacionado con agua y biomasa seca en la canopia.',
+        url: SH_S2 + 'ndii/'
+      },
+      NDCI: {
+        text: 'Clorofila normalizada (red-edge–rojo). Proxy de clorofila en agua o vegetación con red-edge.',
+        url: SH_S2 + 'ndci/'
+      },
+      PSSRB1: {
+        text: 'Pigmento específico (rojo / NIR). Relacionado con clorofila por unidad de área foliar.',
+        url: SH_S2 + 'pssrb1/'
+      },
+      SIPI1: {
+        text: 'Índice de pigmentos estructurales. Relaciona carotenos/clorofila; útil ante estrés o senescencia.',
+        url: SH_S2 + 'sipi1/'
+      },
+      PSRI: {
+        text: 'Reflectancia de senescencia vegetal. Aumenta cuando cae la clorofila y suben carotenoides.',
+        url: SH_S2 + 'psri/'
+      },
+      LAI: {
+        text: 'Índice de área foliar (m² hoja / m² suelo). Estimación biofísica tipo SNAP sobre Sentinel-2.',
+        url: SH_S2 + 'lai/'
+      },
+      LEAF_CHL: {
+        text: 'Clorofila foliar (Cab). Contenido de clorofila por área de hoja, producto biofísico S2.',
+        url: SH_S2 + 'chl_rededge/'
+      },
+      CANOPY_CHL: {
+        text: 'Clorofila de dosel (LAI × Cab). Integra densidad foliar y clorofila a escala de parcela.',
+        url: SH_S2 + 'lai/'
+      },
+      FAPAR: {
+        text: 'Fracción de radiación fotosintéticamente activa absorbida (0–1). Proxy de actividad del dosel.',
+        url: SH_S2 + 'fapar/'
+      },
+      FCOVER: {
+        text: 'Fracción de cobertura vegetal verde (0–1). Porción del suelo cubierta por vegetación.',
+        url: SH_S2 + 'fcover/'
+      },
+      CLEAR_PIXEL_COUNT: {
+        text: 'Conteo de píxeles claros (sin nube/sombra) que entraron al compuesto semanal. 0 = semana sin dato óptico usable.',
+        url: null
+      }
+    },
+    sentinel1: {
+      RVI: {
+        text: 'Radar Vegetation Index = 4·VH/(VV+VH). Mide aleatoriedad del backscatter: sube con dosel más denso o estructurado (sin nubes).',
+        url: SH_S1 + 'radar_vegetation_index_code_dual_polarimetric/',
+        linkLabel: 'Ver en Sentinel Hub'
+      },
+      VV_DB: {
+        text: 'Backscatter VV en dB. En la práctica: σ⁰ de Sentinel-1 pasado a γ⁰ con γ⁰ ≈ σ⁰ / cos(θ) (ángulo del elipsoide). Sirve para ver respuesta de la superficie (humedad, rugosidad). No es un índice de Sentinel Hub.',
+        url: 'https://developers.google.com/earth-engine/guides/sentinel1',
+        linkLabel: 'Referencia GEE (σ⁰)'
+      },
+      VH_DB: {
+        text: 'Backscatter VH en dB. Misma conversión γ⁰ ≈ σ⁰ / cos(θ) que VV. La polarización cruzada responde más a la estructura/volumen de la vegetación. No es un índice de Sentinel Hub.',
+        url: 'https://developers.google.com/earth-engine/guides/sentinel1',
+        linkLabel: 'Referencia GEE (σ⁰)'
+      },
+      SSM: {
+        text: 'Humedad relativa superficial (cambio VV, estilo TU Wien). Escala 0–1 relativa al historial del píxel; no es humedad volumétrica absoluta.',
+        url: SH_S1 + 'soil_moisture_estimation/',
+        linkLabel: 'Ver en Sentinel Hub'
+      }
+    }
+  };
+
+  function updateIndexHelp() {
+    const box = document.getElementById('indexHelp');
+    const textEl = document.getElementById('indexHelpText');
+    const linkEl = document.getElementById('indexHelpLink');
+    if (!box || !textEl || !linkEl) return;
+    if (!isSatelliteMode()) {
+      box.hidden = true;
+      return;
+    }
+    const product = state.satProduct || 'sentinel2';
+    const band = String(state.band || '').toUpperCase();
+    const info = (INDEX_HELP[product] && INDEX_HELP[product][band]) || null;
+    if (!info || !info.text) {
+      box.hidden = true;
+      return;
+    }
+    textEl.textContent = info.text;
+    if (info.url) {
+      linkEl.hidden = false;
+      linkEl.href = info.url;
+      const isHub = String(info.url).includes('sentinel-hub.com');
+      linkEl.textContent = info.linkLabel || (isHub ? 'Ver en Sentinel Hub' : 'Ver referencia');
+    } else {
+      linkEl.hidden = true;
+      linkEl.removeAttribute('href');
+    }
+    box.hidden = false;
   }
 
   function stretchForLidarAttr(attrId) {
@@ -1211,6 +1409,7 @@
     const allowed = new Set(Array.from(bSel.options).map(o => o.value));
     state.band = allowed.has(fallback) ? fallback : (bSel.options[0] && bSel.options[0].value);
     bSel.value = state.band;
+    updateIndexHelp();
     const last = state.meta.last_timeline_key;
     const idx = state.meta.timeline.findIndex(t => t.key === last);
     state.tIndex = idx >= 0 ? idx : state.meta.timeline.length - 1;
@@ -2411,6 +2610,7 @@
     updateDroneOpacityVisibility();
     updateMapLayers();
     applyColorbar();
+    updateIndexHelp();
   }
 
   const SAT_PRODUCT_TEXT = {
@@ -2458,6 +2658,7 @@
 
   function onBandChange() {
     state.band = document.getElementById('selBand').value;
+    updateIndexHelp();
     buildChart();
     updateMapLayers();
     applyColorbar();
