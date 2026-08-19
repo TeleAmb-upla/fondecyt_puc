@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T14:58:57+00:00",
+  "generated_at": "2026-08-19T15:22:07+00:00",
   "default_band": "NDVI",
   "indices": {
     "NDVI": {
@@ -458,8 +458,8 @@
       "period_key": "2026_04_24",
       "predio_id": "exotico",
       "index": "thermal",
-      "vmin": 10.10541,
-      "vmax": 29.82678,
+      "vmin": 10.44643,
+      "vmax": 29.44069,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -556,8 +556,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae1",
       "index": "thermal",
-      "vmin": 10.73029,
-      "vmax": 29.69597,
+      "vmin": 10.96593,
+      "vmax": 29.16635,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -654,8 +654,8 @@
       "period_key": "2026_04_24",
       "predio_id": "cae2",
       "index": "thermal",
-      "vmin": 9.95337,
-      "vmax": 31.32255,
+      "vmin": 10.21134,
+      "vmax": 30.95809,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -752,8 +752,8 @@
       "period_key": "2026_05_22",
       "predio_id": "exotico",
       "index": "thermal",
-      "vmin": 10.10541,
-      "vmax": 29.82678,
+      "vmin": 10.44643,
+      "vmax": 29.44069,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -850,8 +850,8 @@
       "period_key": "2026_05_22",
       "predio_id": "cae1",
       "index": "thermal",
-      "vmin": 10.73029,
-      "vmax": 29.69597,
+      "vmin": 10.96593,
+      "vmax": 29.16635,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -948,8 +948,8 @@
       "period_key": "2026_05_22",
       "predio_id": "cae2",
       "index": "thermal",
-      "vmin": 9.95337,
-      "vmax": 31.32255,
+      "vmin": 10.21134,
+      "vmax": 30.95809,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -1046,8 +1046,8 @@
       "period_key": "2026_06_19",
       "predio_id": "exotico",
       "index": "thermal",
-      "vmin": 10.10541,
-      "vmax": 29.82678,
+      "vmin": 10.44643,
+      "vmax": 29.44069,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -1144,8 +1144,8 @@
       "period_key": "2026_06_19",
       "predio_id": "cae1",
       "index": "thermal",
-      "vmin": 10.73029,
-      "vmax": 29.69597,
+      "vmin": 10.96593,
+      "vmax": 29.16635,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -1242,8 +1242,8 @@
       "period_key": "2026_06_19",
       "predio_id": "cae2",
       "index": "thermal",
-      "vmin": 9.95337,
-      "vmax": 31.32255,
+      "vmin": 10.21134,
+      "vmax": 30.95809,
       "colormap": "inferno",
       "leaflet_bounds": [
         [
@@ -1334,6 +1334,26 @@
         ]
       ]
     },
+    "exotico_2026_08_14_thermal": {
+      "p": "drone/rasters/exotico_2026_08_14_thermal.webp",
+      "l": "Predio exótico · 14/08/2026 · Temperatura",
+      "period_key": "2026_08_14",
+      "predio_id": "exotico",
+      "index": "thermal",
+      "vmin": 10.44643,
+      "vmax": 29.44069,
+      "colormap": "inferno",
+      "leaflet_bounds": [
+        [
+          -33.35452814644737,
+          -70.69156868390827
+        ],
+        [
+          -33.354305780693885,
+          -70.69137786531645
+        ]
+      ]
+    },
     "cae1_2026_08_14_ndci": {
       "p": "drone/rasters/cae1_2026_08_14_ndci.webp",
       "l": "Predio CAE 1 · 14/08/2026 · NDCI",
@@ -1412,6 +1432,26 @@
         ]
       ]
     },
+    "cae1_2026_08_14_thermal": {
+      "p": "drone/rasters/cae1_2026_08_14_thermal.webp",
+      "l": "Predio CAE 1 · 14/08/2026 · Temperatura",
+      "period_key": "2026_08_14",
+      "predio_id": "cae1",
+      "index": "thermal",
+      "vmin": 10.96593,
+      "vmax": 29.16635,
+      "colormap": "inferno",
+      "leaflet_bounds": [
+        [
+          -33.35446930731599,
+          -70.69129469357567
+        ],
+        [
+          -33.354246599658296,
+          -70.6911055369926
+        ]
+      ]
+    },
     "cae2_2026_08_14_ndci": {
       "p": "drone/rasters/cae2_2026_08_14_ndci.webp",
       "l": "Predio CAE 2 · 14/08/2026 · NDCI",
@@ -1479,6 +1519,26 @@
       "predio_id": "cae2",
       "index": "rgb",
       "visual_only": true,
+      "leaflet_bounds": [
+        [
+          -33.354969597564754,
+          -70.69132559268132
+        ],
+        [
+          -33.35446603706764,
+          -70.69100293422201
+        ]
+      ]
+    },
+    "cae2_2026_08_14_thermal": {
+      "p": "drone/rasters/cae2_2026_08_14_thermal.webp",
+      "l": "Predio CAE 2 · 14/08/2026 · Temperatura",
+      "period_key": "2026_08_14",
+      "predio_id": "cae2",
+      "index": "thermal",
+      "vmin": 10.21134,
+      "vmax": 30.95809,
+      "colormap": "inferno",
       "leaflet_bounds": [
         [
           -33.354969597564754,
@@ -1853,10 +1913,10 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 10.10541,
-        "vmax": 29.82678,
-        "p0": 10.10541,
-        "p100": 29.82678
+        "vmin": 10.44643,
+        "vmax": 29.44069,
+        "p0": 10.44643,
+        "p100": 29.44069
       },
       "canopy": {
         "symmetric": false,
@@ -1922,10 +1982,10 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 10.73029,
-        "vmax": 29.69597,
-        "p0": 10.73029,
-        "p100": 29.69597
+        "vmin": 10.96593,
+        "vmax": 29.16635,
+        "p0": 10.96593,
+        "p100": 29.16635
       },
       "canopy": {
         "symmetric": false,
@@ -1991,10 +2051,10 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 9.95337,
-        "vmax": 31.32255,
-        "p0": 9.95337,
-        "p100": 31.32255
+        "vmin": 10.21134,
+        "vmax": 30.95809,
+        "p0": 10.21134,
+        "p100": 30.95809
       },
       "canopy": {
         "symmetric": false,
@@ -2060,10 +2120,10 @@
       },
       "THERMAL": {
         "symmetric": false,
-        "vmin": 10.28005,
-        "vmax": 30.30831,
-        "p0": 10.28005,
-        "p100": 30.30831
+        "vmin": 10.55546,
+        "vmax": 29.87172,
+        "p0": 10.55546,
+        "p100": 29.87172
       },
       "canopy": {
         "symmetric": false,
