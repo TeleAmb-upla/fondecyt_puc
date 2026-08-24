@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T15:02:20+00:00",
+  "generated_at": "2026-08-24T15:38:44+00:00",
   "default_band": "NDVI",
   "indices": {
     "NDVI": {
@@ -583,9 +583,21 @@
       "week": 32,
       "key": "2026_w32",
       "label": "2026 · S32"
+    },
+    {
+      "year": 2026,
+      "week": 33,
+      "key": "2026_w33",
+      "label": "2026 · S33"
+    },
+    {
+      "year": 2026,
+      "week": 34,
+      "key": "2026_w34",
+      "label": "2026 · S34"
     }
   ],
-  "last_timeline_key": "2026_w32",
+  "last_timeline_key": "2026_w34",
   "rasters": {
     "exotico_2025_w35_ndvi": {
       "p": "sentinel2/rasters/exotico_2025_w35_ndvi.webp",
@@ -930,8 +942,8 @@
       "week": 35,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -2694,8 +2706,8 @@
       "week": 36,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -4458,8 +4470,8 @@
       "week": 37,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -6222,8 +6234,8 @@
       "week": 38,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -7986,8 +7998,8 @@
       "week": 39,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -9750,8 +9762,8 @@
       "week": 40,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -11514,8 +11526,8 @@
       "week": 41,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -13278,8 +13290,8 @@
       "week": 42,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -15042,8 +15054,8 @@
       "week": 43,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -16806,8 +16818,8 @@
       "week": 44,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -18570,8 +18582,8 @@
       "week": 45,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -20334,8 +20346,8 @@
       "week": 46,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -22098,8 +22110,8 @@
       "week": 47,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -23862,8 +23874,8 @@
       "week": 48,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -25626,8 +25638,8 @@
       "week": 49,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -27390,8 +27402,8 @@
       "week": 50,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -29154,8 +29166,8 @@
       "week": 51,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -30918,8 +30930,8 @@
       "week": 52,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -32682,8 +32694,8 @@
       "week": 1,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -34446,8 +34458,8 @@
       "week": 2,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -36210,8 +36222,8 @@
       "week": 3,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -37974,8 +37986,8 @@
       "week": 4,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -39738,8 +39750,8 @@
       "week": 5,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -41502,8 +41514,8 @@
       "week": 6,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -43266,8 +43278,8 @@
       "week": 7,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -45030,8 +45042,8 @@
       "week": 8,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -46794,8 +46806,8 @@
       "week": 9,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -48558,8 +48570,8 @@
       "week": 10,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -50322,8 +50334,8 @@
       "week": 11,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -52086,8 +52098,8 @@
       "week": 12,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -53850,8 +53862,8 @@
       "week": 13,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -55614,8 +55626,8 @@
       "week": 14,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -57378,8 +57390,8 @@
       "week": 15,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -59142,8 +59154,8 @@
       "week": 16,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -60906,8 +60918,8 @@
       "week": 17,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -62670,8 +62682,8 @@
       "week": 18,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -64434,8 +64446,8 @@
       "week": 19,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -66198,8 +66210,8 @@
       "week": 20,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -67962,8 +67974,8 @@
       "week": 21,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -69726,8 +69738,8 @@
       "week": 22,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -71490,8 +71502,8 @@
       "week": 23,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -73254,8 +73266,8 @@
       "week": 24,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -75018,8 +75030,8 @@
       "week": 25,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -76782,8 +76794,8 @@
       "week": 26,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -78546,8 +78558,8 @@
       "week": 27,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -80310,8 +80322,8 @@
       "week": 28,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -82074,8 +82086,8 @@
       "week": 29,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -83838,8 +83850,8 @@
       "week": 30,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -85602,8 +85614,8 @@
       "week": 31,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -87366,8 +87378,8 @@
       "week": 32,
       "predio_id": "exotico",
       "band": "NDMISTRESS",
-      "vmin": -0.17,
-      "vmax": 0.17,
+      "vmin": -0.19,
+      "vmax": 0.19,
       "colormap": "RdYlBu_r",
       "leaflet_bounds": [
         [
@@ -88786,6 +88798,3534 @@
           -70.69078784268048
         ]
       ]
+    },
+    "exotico_2026_w33_ndvi": {
+      "p": "sentinel2/rasters/exotico_2026_w33_ndvi.webp",
+      "l": "Predio exótico · 2026 · S33 · NDVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "NDVI",
+      "vmin": -0.62,
+      "vmax": 0.62,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_ndmi": {
+      "p": "sentinel2/rasters/exotico_2026_w33_ndmi.webp",
+      "l": "Predio exótico · 2026 · S33 · NDMI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "NDMI",
+      "vmin": -0.24,
+      "vmax": 0.24,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_ndwi": {
+      "p": "sentinel2/rasters/exotico_2026_w33_ndwi.webp",
+      "l": "Predio exótico · 2026 · S33 · NDWI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "NDWI",
+      "vmin": -0.62,
+      "vmax": 0.62,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_mndwi": {
+      "p": "sentinel2/rasters/exotico_2026_w33_mndwi.webp",
+      "l": "Predio exótico · 2026 · S33 · MNDWI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "MNDWI",
+      "vmin": -0.515,
+      "vmax": 0.515,
+      "colormap": "Blues",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_gndvi": {
+      "p": "sentinel2/rasters/exotico_2026_w33_gndvi.webp",
+      "l": "Predio exótico · 2026 · S33 · GNDVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "GNDVI",
+      "vmin": -0.62,
+      "vmax": 0.62,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_evi": {
+      "p": "sentinel2/rasters/exotico_2026_w33_evi.webp",
+      "l": "Predio exótico · 2026 · S33 · EVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "EVI",
+      "vmin": -0.38,
+      "vmax": 0.38,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_savi": {
+      "p": "sentinel2/rasters/exotico_2026_w33_savi.webp",
+      "l": "Predio exótico · 2026 · S33 · SAVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "SAVI",
+      "vmin": -0.37,
+      "vmax": 0.37,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_msavi": {
+      "p": "sentinel2/rasters/exotico_2026_w33_msavi.webp",
+      "l": "Predio exótico · 2026 · S33 · MSAVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "MSAVI",
+      "vmin": -0.35,
+      "vmax": 0.35,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_ari": {
+      "p": "sentinel2/rasters/exotico_2026_w33_ari.webp",
+      "l": "Predio exótico · 2026 · S33 · ARI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "ARI",
+      "vmin": 1.793,
+      "vmax": 9.442,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_mari": {
+      "p": "sentinel2/rasters/exotico_2026_w33_mari.webp",
+      "l": "Predio exótico · 2026 · S33 · MARI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "MARI",
+      "vmin": 0.286,
+      "vmax": 1.52,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_arvi": {
+      "p": "sentinel2/rasters/exotico_2026_w33_arvi.webp",
+      "l": "Predio exótico · 2026 · S33 · ARVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "ARVI",
+      "vmin": -0.57,
+      "vmax": 0.57,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_chl_rededge": {
+      "p": "sentinel2/rasters/exotico_2026_w33_chl_rededge.webp",
+      "l": "Predio exótico · 2026 · S33 · Chl rededge",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "CHL_REDEDGE",
+      "vmin": 0.25,
+      "vmax": 1.11,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_evi2": {
+      "p": "sentinel2/rasters/exotico_2026_w33_evi2.webp",
+      "l": "Predio exótico · 2026 · S33 · EVI2",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "EVI2",
+      "vmin": -0.37,
+      "vmax": 0.37,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_kndvi": {
+      "p": "sentinel2/rasters/exotico_2026_w33_kndvi.webp",
+      "l": "Predio exótico · 2026 · S33 · ",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "KNDVI",
+      "vmin": -0.36,
+      "vmax": 0.36,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_mcari": {
+      "p": "sentinel2/rasters/exotico_2026_w33_mcari.webp",
+      "l": "Predio exótico · 2026 · S33 · MCARI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "MCARI",
+      "vmin": 0.0,
+      "vmax": 0.09,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_msi": {
+      "p": "sentinel2/rasters/exotico_2026_w33_msi.webp",
+      "l": "Predio exótico · 2026 · S33 · MSI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "MSI",
+      "vmin": 0.61,
+      "vmax": 1.143,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_ndmistress": {
+      "p": "sentinel2/rasters/exotico_2026_w33_ndmistress.webp",
+      "l": "Predio exótico · 2026 · S33 · NDMI stress",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "NDMISTRESS",
+      "vmin": -0.19,
+      "vmax": 0.19,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_ndii": {
+      "p": "sentinel2/rasters/exotico_2026_w33_ndii.webp",
+      "l": "Predio exótico · 2026 · S33 · NDII",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "NDII",
+      "vmin": -0.24,
+      "vmax": 0.24,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_ndci": {
+      "p": "sentinel2/rasters/exotico_2026_w33_ndci.webp",
+      "l": "Predio exótico · 2026 · S33 · NDCI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "NDCI",
+      "vmin": -0.3,
+      "vmax": 0.3,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_pssrb1": {
+      "p": "sentinel2/rasters/exotico_2026_w33_pssrb1.webp",
+      "l": "Predio exótico · 2026 · S33 · PSSRB1",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "PSSRB1",
+      "vmin": 1.719,
+      "vmax": 4.2,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_sipi1": {
+      "p": "sentinel2/rasters/exotico_2026_w33_sipi1.webp",
+      "l": "Predio exótico · 2026 · S33 · SIPI1",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "SIPI1",
+      "vmin": 1.052,
+      "vmax": 1.69,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_psri": {
+      "p": "sentinel2/rasters/exotico_2026_w33_psri.webp",
+      "l": "Predio exótico · 2026 · S33 · PSRI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "PSRI",
+      "vmin": -0.326,
+      "vmax": 0.326,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_lai": {
+      "p": "sentinel2/rasters/exotico_2026_w33_lai.webp",
+      "l": "Predio exótico · 2026 · S33 · LAI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "LAI",
+      "vmin": 0.144,
+      "vmax": 0.87,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_leaf_chl": {
+      "p": "sentinel2/rasters/exotico_2026_w33_leaf_chl.webp",
+      "l": "Predio exótico · 2026 · S33 · Leaf chlorophyll",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "LEAF_CHL",
+      "vmin": 10.205,
+      "vmax": 39.78,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_canopy_chl": {
+      "p": "sentinel2/rasters/exotico_2026_w33_canopy_chl.webp",
+      "l": "Predio exótico · 2026 · S33 · Canopy chlorophyll",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "CANOPY_CHL",
+      "vmin": 1.535,
+      "vmax": 34.62,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_fapar": {
+      "p": "sentinel2/rasters/exotico_2026_w33_fapar.webp",
+      "l": "Predio exótico · 2026 · S33 · FAPAR",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "FAPAR",
+      "vmin": 0.131,
+      "vmax": 0.42,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_fcover": {
+      "p": "sentinel2/rasters/exotico_2026_w33_fcover.webp",
+      "l": "Predio exótico · 2026 · S33 · FCOVER",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "FCOVER",
+      "vmin": 0.1,
+      "vmax": 0.31,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w33_clear_pixel_count": {
+      "p": "sentinel2/rasters/exotico_2026_w33_clear_pixel_count.webp",
+      "l": "Predio exótico · 2026 · S33 · Clear pixels",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "exotico",
+      "band": "CLEAR_PIXEL_COUNT",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "cae1_2026_w33_ndvi": {
+      "p": "sentinel2/rasters/cae1_2026_w33_ndvi.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · NDVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "NDVI",
+      "vmin": -0.64,
+      "vmax": 0.64,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_ndmi": {
+      "p": "sentinel2/rasters/cae1_2026_w33_ndmi.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · NDMI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "NDMI",
+      "vmin": -0.341,
+      "vmax": 0.341,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_ndwi": {
+      "p": "sentinel2/rasters/cae1_2026_w33_ndwi.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · NDWI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "NDWI",
+      "vmin": -0.64,
+      "vmax": 0.64,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_mndwi": {
+      "p": "sentinel2/rasters/cae1_2026_w33_mndwi.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · MNDWI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "MNDWI",
+      "vmin": -0.518,
+      "vmax": 0.518,
+      "colormap": "Blues",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_gndvi": {
+      "p": "sentinel2/rasters/cae1_2026_w33_gndvi.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · GNDVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "GNDVI",
+      "vmin": -0.64,
+      "vmax": 0.64,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_evi": {
+      "p": "sentinel2/rasters/cae1_2026_w33_evi.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · EVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "EVI",
+      "vmin": -0.37,
+      "vmax": 0.37,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_savi": {
+      "p": "sentinel2/rasters/cae1_2026_w33_savi.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · SAVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "SAVI",
+      "vmin": -0.35,
+      "vmax": 0.35,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_msavi": {
+      "p": "sentinel2/rasters/cae1_2026_w33_msavi.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · MSAVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "MSAVI",
+      "vmin": -0.32,
+      "vmax": 0.32,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_ari": {
+      "p": "sentinel2/rasters/cae1_2026_w33_ari.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · ARI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "ARI",
+      "vmin": 1.394,
+      "vmax": 17.152,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_mari": {
+      "p": "sentinel2/rasters/cae1_2026_w33_mari.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · MARI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "MARI",
+      "vmin": 0.259,
+      "vmax": 2.585,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_arvi": {
+      "p": "sentinel2/rasters/cae1_2026_w33_arvi.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · ARVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "ARVI",
+      "vmin": -0.68,
+      "vmax": 0.68,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_chl_rededge": {
+      "p": "sentinel2/rasters/cae1_2026_w33_chl_rededge.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · Chl rededge",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "CHL_REDEDGE",
+      "vmin": 0.39,
+      "vmax": 1.55,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_evi2": {
+      "p": "sentinel2/rasters/cae1_2026_w33_evi2.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · EVI2",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "EVI2",
+      "vmin": -0.35,
+      "vmax": 0.35,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_kndvi": {
+      "p": "sentinel2/rasters/cae1_2026_w33_kndvi.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · ",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "KNDVI",
+      "vmin": -0.39,
+      "vmax": 0.39,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_mcari": {
+      "p": "sentinel2/rasters/cae1_2026_w33_mcari.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · MCARI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "MCARI",
+      "vmin": 0.008,
+      "vmax": 0.081,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_msi": {
+      "p": "sentinel2/rasters/cae1_2026_w33_msi.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · MSI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "MSI",
+      "vmin": 0.492,
+      "vmax": 1.02,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_ndmistress": {
+      "p": "sentinel2/rasters/cae1_2026_w33_ndmistress.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · NDMI stress",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "NDMISTRESS",
+      "vmin": -0.33,
+      "vmax": 0.33,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_ndii": {
+      "p": "sentinel2/rasters/cae1_2026_w33_ndii.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · NDII",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "NDII",
+      "vmin": -0.341,
+      "vmax": 0.341,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_ndci": {
+      "p": "sentinel2/rasters/cae1_2026_w33_ndci.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · NDCI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "NDCI",
+      "vmin": -0.362,
+      "vmax": 0.362,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_pssrb1": {
+      "p": "sentinel2/rasters/cae1_2026_w33_pssrb1.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · PSSRB1",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "PSSRB1",
+      "vmin": 1.65,
+      "vmax": 4.52,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_sipi1": {
+      "p": "sentinel2/rasters/cae1_2026_w33_sipi1.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · SIPI1",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "SIPI1",
+      "vmin": 0.955,
+      "vmax": 1.76,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_psri": {
+      "p": "sentinel2/rasters/cae1_2026_w33_psri.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · PSRI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "PSRI",
+      "vmin": -0.28,
+      "vmax": 0.28,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_lai": {
+      "p": "sentinel2/rasters/cae1_2026_w33_lai.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · LAI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "LAI",
+      "vmin": 0.2,
+      "vmax": 1.32,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_leaf_chl": {
+      "p": "sentinel2/rasters/cae1_2026_w33_leaf_chl.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · Leaf chlorophyll",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "LEAF_CHL",
+      "vmin": 13.5,
+      "vmax": 59.4,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_canopy_chl": {
+      "p": "sentinel2/rasters/cae1_2026_w33_canopy_chl.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · Canopy chlorophyll",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "CANOPY_CHL",
+      "vmin": 2.74,
+      "vmax": 76.88,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_fapar": {
+      "p": "sentinel2/rasters/cae1_2026_w33_fapar.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · FAPAR",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "FAPAR",
+      "vmin": 0.14,
+      "vmax": 0.52,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_fcover": {
+      "p": "sentinel2/rasters/cae1_2026_w33_fcover.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · FCOVER",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "FCOVER",
+      "vmin": 0.1,
+      "vmax": 0.39,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w33_clear_pixel_count": {
+      "p": "sentinel2/rasters/cae1_2026_w33_clear_pixel_count.webp",
+      "l": "Predio CAE 1 · 2026 · S33 · Clear pixels",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae1",
+      "band": "CLEAR_PIXEL_COUNT",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae2_2026_w33_ndvi": {
+      "p": "sentinel2/rasters/cae2_2026_w33_ndvi.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · NDVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "NDVI",
+      "vmin": -0.77,
+      "vmax": 0.77,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_ndmi": {
+      "p": "sentinel2/rasters/cae2_2026_w33_ndmi.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · NDMI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "NDMI",
+      "vmin": -0.349,
+      "vmax": 0.349,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_ndwi": {
+      "p": "sentinel2/rasters/cae2_2026_w33_ndwi.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · NDWI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "NDWI",
+      "vmin": -0.74,
+      "vmax": 0.74,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_mndwi": {
+      "p": "sentinel2/rasters/cae2_2026_w33_mndwi.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · MNDWI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "MNDWI",
+      "vmin": -0.63,
+      "vmax": 0.63,
+      "colormap": "Blues",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_gndvi": {
+      "p": "sentinel2/rasters/cae2_2026_w33_gndvi.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · GNDVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "GNDVI",
+      "vmin": -0.74,
+      "vmax": 0.74,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_evi": {
+      "p": "sentinel2/rasters/cae2_2026_w33_evi.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · EVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "EVI",
+      "vmin": -0.41,
+      "vmax": 0.41,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_savi": {
+      "p": "sentinel2/rasters/cae2_2026_w33_savi.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · SAVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "SAVI",
+      "vmin": -0.38,
+      "vmax": 0.38,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_msavi": {
+      "p": "sentinel2/rasters/cae2_2026_w33_msavi.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · MSAVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "MSAVI",
+      "vmin": -0.36,
+      "vmax": 0.36,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_ari": {
+      "p": "sentinel2/rasters/cae2_2026_w33_ari.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · ARI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "ARI",
+      "vmin": 1.25,
+      "vmax": 21.785,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_mari": {
+      "p": "sentinel2/rasters/cae2_2026_w33_mari.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · MARI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "MARI",
+      "vmin": 0.2,
+      "vmax": 4.16,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_arvi": {
+      "p": "sentinel2/rasters/cae2_2026_w33_arvi.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · ARVI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "ARVI",
+      "vmin": -0.79,
+      "vmax": 0.79,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_chl_rededge": {
+      "p": "sentinel2/rasters/cae2_2026_w33_chl_rededge.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · Chl rededge",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "CHL_REDEDGE",
+      "vmin": 0.2,
+      "vmax": 1.88,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_evi2": {
+      "p": "sentinel2/rasters/cae2_2026_w33_evi2.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · EVI2",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "EVI2",
+      "vmin": -0.38,
+      "vmax": 0.38,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_kndvi": {
+      "p": "sentinel2/rasters/cae2_2026_w33_kndvi.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · ",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "KNDVI",
+      "vmin": -0.54,
+      "vmax": 0.54,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_mcari": {
+      "p": "sentinel2/rasters/cae2_2026_w33_mcari.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · MCARI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "MCARI",
+      "vmin": -0.01,
+      "vmax": 0.14,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_msi": {
+      "p": "sentinel2/rasters/cae2_2026_w33_msi.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · MSI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "MSI",
+      "vmin": 0.482,
+      "vmax": 1.21,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_ndmistress": {
+      "p": "sentinel2/rasters/cae2_2026_w33_ndmistress.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · NDMI stress",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "NDMISTRESS",
+      "vmin": -0.32,
+      "vmax": 0.32,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_ndii": {
+      "p": "sentinel2/rasters/cae2_2026_w33_ndii.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · NDII",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "NDII",
+      "vmin": -0.349,
+      "vmax": 0.349,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_ndci": {
+      "p": "sentinel2/rasters/cae2_2026_w33_ndci.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · NDCI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "NDCI",
+      "vmin": -0.49,
+      "vmax": 0.49,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_pssrb1": {
+      "p": "sentinel2/rasters/cae2_2026_w33_pssrb1.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · PSSRB1",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "PSSRB1",
+      "vmin": 1.6,
+      "vmax": 7.86,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_sipi1": {
+      "p": "sentinel2/rasters/cae2_2026_w33_sipi1.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · SIPI1",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "SIPI1",
+      "vmin": 0.867,
+      "vmax": 2.11,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_psri": {
+      "p": "sentinel2/rasters/cae2_2026_w33_psri.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · PSRI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "PSRI",
+      "vmin": -0.34,
+      "vmax": 0.34,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_lai": {
+      "p": "sentinel2/rasters/cae2_2026_w33_lai.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · LAI",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "LAI",
+      "vmin": 0.13,
+      "vmax": 1.44,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_leaf_chl": {
+      "p": "sentinel2/rasters/cae2_2026_w33_leaf_chl.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · Leaf chlorophyll",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "LEAF_CHL",
+      "vmin": 9.21,
+      "vmax": 71.46,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_canopy_chl": {
+      "p": "sentinel2/rasters/cae2_2026_w33_canopy_chl.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · Canopy chlorophyll",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "CANOPY_CHL",
+      "vmin": 1.26,
+      "vmax": 98.16,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_fapar": {
+      "p": "sentinel2/rasters/cae2_2026_w33_fapar.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · FAPAR",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "FAPAR",
+      "vmin": 0.1,
+      "vmax": 0.55,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_fcover": {
+      "p": "sentinel2/rasters/cae2_2026_w33_fcover.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · FCOVER",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "FCOVER",
+      "vmin": 0.07,
+      "vmax": 0.41,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w33_clear_pixel_count": {
+      "p": "sentinel2/rasters/cae2_2026_w33_clear_pixel_count.webp",
+      "l": "Predio CAE 2 · 2026 · S33 · Clear pixels",
+      "year": 2026,
+      "week": 33,
+      "predio_id": "cae2",
+      "band": "CLEAR_PIXEL_COUNT",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "exotico_2026_w34_ndvi": {
+      "p": "sentinel2/rasters/exotico_2026_w34_ndvi.webp",
+      "l": "Predio exótico · 2026 · S34 · NDVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "NDVI",
+      "vmin": -0.62,
+      "vmax": 0.62,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_ndmi": {
+      "p": "sentinel2/rasters/exotico_2026_w34_ndmi.webp",
+      "l": "Predio exótico · 2026 · S34 · NDMI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "NDMI",
+      "vmin": -0.24,
+      "vmax": 0.24,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_ndwi": {
+      "p": "sentinel2/rasters/exotico_2026_w34_ndwi.webp",
+      "l": "Predio exótico · 2026 · S34 · NDWI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "NDWI",
+      "vmin": -0.62,
+      "vmax": 0.62,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_mndwi": {
+      "p": "sentinel2/rasters/exotico_2026_w34_mndwi.webp",
+      "l": "Predio exótico · 2026 · S34 · MNDWI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "MNDWI",
+      "vmin": -0.515,
+      "vmax": 0.515,
+      "colormap": "Blues",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_gndvi": {
+      "p": "sentinel2/rasters/exotico_2026_w34_gndvi.webp",
+      "l": "Predio exótico · 2026 · S34 · GNDVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "GNDVI",
+      "vmin": -0.62,
+      "vmax": 0.62,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_evi": {
+      "p": "sentinel2/rasters/exotico_2026_w34_evi.webp",
+      "l": "Predio exótico · 2026 · S34 · EVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "EVI",
+      "vmin": -0.38,
+      "vmax": 0.38,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_savi": {
+      "p": "sentinel2/rasters/exotico_2026_w34_savi.webp",
+      "l": "Predio exótico · 2026 · S34 · SAVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "SAVI",
+      "vmin": -0.37,
+      "vmax": 0.37,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_msavi": {
+      "p": "sentinel2/rasters/exotico_2026_w34_msavi.webp",
+      "l": "Predio exótico · 2026 · S34 · MSAVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "MSAVI",
+      "vmin": -0.35,
+      "vmax": 0.35,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_ari": {
+      "p": "sentinel2/rasters/exotico_2026_w34_ari.webp",
+      "l": "Predio exótico · 2026 · S34 · ARI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "ARI",
+      "vmin": 1.793,
+      "vmax": 9.442,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_mari": {
+      "p": "sentinel2/rasters/exotico_2026_w34_mari.webp",
+      "l": "Predio exótico · 2026 · S34 · MARI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "MARI",
+      "vmin": 0.286,
+      "vmax": 1.52,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_arvi": {
+      "p": "sentinel2/rasters/exotico_2026_w34_arvi.webp",
+      "l": "Predio exótico · 2026 · S34 · ARVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "ARVI",
+      "vmin": -0.57,
+      "vmax": 0.57,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_chl_rededge": {
+      "p": "sentinel2/rasters/exotico_2026_w34_chl_rededge.webp",
+      "l": "Predio exótico · 2026 · S34 · Chl rededge",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "CHL_REDEDGE",
+      "vmin": 0.25,
+      "vmax": 1.11,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_evi2": {
+      "p": "sentinel2/rasters/exotico_2026_w34_evi2.webp",
+      "l": "Predio exótico · 2026 · S34 · EVI2",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "EVI2",
+      "vmin": -0.37,
+      "vmax": 0.37,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_kndvi": {
+      "p": "sentinel2/rasters/exotico_2026_w34_kndvi.webp",
+      "l": "Predio exótico · 2026 · S34 · ",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "KNDVI",
+      "vmin": -0.36,
+      "vmax": 0.36,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_mcari": {
+      "p": "sentinel2/rasters/exotico_2026_w34_mcari.webp",
+      "l": "Predio exótico · 2026 · S34 · MCARI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "MCARI",
+      "vmin": 0.0,
+      "vmax": 0.09,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_msi": {
+      "p": "sentinel2/rasters/exotico_2026_w34_msi.webp",
+      "l": "Predio exótico · 2026 · S34 · MSI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "MSI",
+      "vmin": 0.61,
+      "vmax": 1.143,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_ndmistress": {
+      "p": "sentinel2/rasters/exotico_2026_w34_ndmistress.webp",
+      "l": "Predio exótico · 2026 · S34 · NDMI stress",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "NDMISTRESS",
+      "vmin": -0.19,
+      "vmax": 0.19,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_ndii": {
+      "p": "sentinel2/rasters/exotico_2026_w34_ndii.webp",
+      "l": "Predio exótico · 2026 · S34 · NDII",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "NDII",
+      "vmin": -0.24,
+      "vmax": 0.24,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_ndci": {
+      "p": "sentinel2/rasters/exotico_2026_w34_ndci.webp",
+      "l": "Predio exótico · 2026 · S34 · NDCI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "NDCI",
+      "vmin": -0.3,
+      "vmax": 0.3,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_pssrb1": {
+      "p": "sentinel2/rasters/exotico_2026_w34_pssrb1.webp",
+      "l": "Predio exótico · 2026 · S34 · PSSRB1",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "PSSRB1",
+      "vmin": 1.719,
+      "vmax": 4.2,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_sipi1": {
+      "p": "sentinel2/rasters/exotico_2026_w34_sipi1.webp",
+      "l": "Predio exótico · 2026 · S34 · SIPI1",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "SIPI1",
+      "vmin": 1.052,
+      "vmax": 1.69,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_psri": {
+      "p": "sentinel2/rasters/exotico_2026_w34_psri.webp",
+      "l": "Predio exótico · 2026 · S34 · PSRI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "PSRI",
+      "vmin": -0.326,
+      "vmax": 0.326,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_lai": {
+      "p": "sentinel2/rasters/exotico_2026_w34_lai.webp",
+      "l": "Predio exótico · 2026 · S34 · LAI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "LAI",
+      "vmin": 0.144,
+      "vmax": 0.87,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_leaf_chl": {
+      "p": "sentinel2/rasters/exotico_2026_w34_leaf_chl.webp",
+      "l": "Predio exótico · 2026 · S34 · Leaf chlorophyll",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "LEAF_CHL",
+      "vmin": 10.205,
+      "vmax": 39.78,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_canopy_chl": {
+      "p": "sentinel2/rasters/exotico_2026_w34_canopy_chl.webp",
+      "l": "Predio exótico · 2026 · S34 · Canopy chlorophyll",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "CANOPY_CHL",
+      "vmin": 1.535,
+      "vmax": 34.62,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_fapar": {
+      "p": "sentinel2/rasters/exotico_2026_w34_fapar.webp",
+      "l": "Predio exótico · 2026 · S34 · FAPAR",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "FAPAR",
+      "vmin": 0.131,
+      "vmax": 0.42,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_fcover": {
+      "p": "sentinel2/rasters/exotico_2026_w34_fcover.webp",
+      "l": "Predio exótico · 2026 · S34 · FCOVER",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "FCOVER",
+      "vmin": 0.1,
+      "vmax": 0.31,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "exotico_2026_w34_clear_pixel_count": {
+      "p": "sentinel2/rasters/exotico_2026_w34_clear_pixel_count.webp",
+      "l": "Predio exótico · 2026 · S34 · Clear pixels",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "exotico",
+      "band": "CLEAR_PIXEL_COUNT",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.35470780868237,
+          -70.69178377470638
+        ],
+        [
+          -33.354126118458886,
+          -70.69116277451835
+        ]
+      ]
+    },
+    "cae1_2026_w34_ndvi": {
+      "p": "sentinel2/rasters/cae1_2026_w34_ndvi.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · NDVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "NDVI",
+      "vmin": -0.64,
+      "vmax": 0.64,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_ndmi": {
+      "p": "sentinel2/rasters/cae1_2026_w34_ndmi.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · NDMI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "NDMI",
+      "vmin": -0.341,
+      "vmax": 0.341,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_ndwi": {
+      "p": "sentinel2/rasters/cae1_2026_w34_ndwi.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · NDWI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "NDWI",
+      "vmin": -0.64,
+      "vmax": 0.64,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_mndwi": {
+      "p": "sentinel2/rasters/cae1_2026_w34_mndwi.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · MNDWI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "MNDWI",
+      "vmin": -0.518,
+      "vmax": 0.518,
+      "colormap": "Blues",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_gndvi": {
+      "p": "sentinel2/rasters/cae1_2026_w34_gndvi.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · GNDVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "GNDVI",
+      "vmin": -0.64,
+      "vmax": 0.64,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_evi": {
+      "p": "sentinel2/rasters/cae1_2026_w34_evi.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · EVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "EVI",
+      "vmin": -0.37,
+      "vmax": 0.37,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_savi": {
+      "p": "sentinel2/rasters/cae1_2026_w34_savi.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · SAVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "SAVI",
+      "vmin": -0.35,
+      "vmax": 0.35,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_msavi": {
+      "p": "sentinel2/rasters/cae1_2026_w34_msavi.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · MSAVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "MSAVI",
+      "vmin": -0.32,
+      "vmax": 0.32,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_ari": {
+      "p": "sentinel2/rasters/cae1_2026_w34_ari.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · ARI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "ARI",
+      "vmin": 1.394,
+      "vmax": 17.152,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_mari": {
+      "p": "sentinel2/rasters/cae1_2026_w34_mari.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · MARI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "MARI",
+      "vmin": 0.259,
+      "vmax": 2.585,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_arvi": {
+      "p": "sentinel2/rasters/cae1_2026_w34_arvi.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · ARVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "ARVI",
+      "vmin": -0.68,
+      "vmax": 0.68,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_chl_rededge": {
+      "p": "sentinel2/rasters/cae1_2026_w34_chl_rededge.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · Chl rededge",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "CHL_REDEDGE",
+      "vmin": 0.39,
+      "vmax": 1.55,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_evi2": {
+      "p": "sentinel2/rasters/cae1_2026_w34_evi2.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · EVI2",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "EVI2",
+      "vmin": -0.35,
+      "vmax": 0.35,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_kndvi": {
+      "p": "sentinel2/rasters/cae1_2026_w34_kndvi.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · ",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "KNDVI",
+      "vmin": -0.39,
+      "vmax": 0.39,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_mcari": {
+      "p": "sentinel2/rasters/cae1_2026_w34_mcari.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · MCARI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "MCARI",
+      "vmin": 0.008,
+      "vmax": 0.081,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_msi": {
+      "p": "sentinel2/rasters/cae1_2026_w34_msi.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · MSI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "MSI",
+      "vmin": 0.492,
+      "vmax": 1.02,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_ndmistress": {
+      "p": "sentinel2/rasters/cae1_2026_w34_ndmistress.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · NDMI stress",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "NDMISTRESS",
+      "vmin": -0.33,
+      "vmax": 0.33,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_ndii": {
+      "p": "sentinel2/rasters/cae1_2026_w34_ndii.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · NDII",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "NDII",
+      "vmin": -0.341,
+      "vmax": 0.341,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_ndci": {
+      "p": "sentinel2/rasters/cae1_2026_w34_ndci.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · NDCI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "NDCI",
+      "vmin": -0.362,
+      "vmax": 0.362,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_pssrb1": {
+      "p": "sentinel2/rasters/cae1_2026_w34_pssrb1.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · PSSRB1",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "PSSRB1",
+      "vmin": 1.65,
+      "vmax": 4.52,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_sipi1": {
+      "p": "sentinel2/rasters/cae1_2026_w34_sipi1.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · SIPI1",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "SIPI1",
+      "vmin": 0.955,
+      "vmax": 1.76,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_psri": {
+      "p": "sentinel2/rasters/cae1_2026_w34_psri.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · PSRI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "PSRI",
+      "vmin": -0.28,
+      "vmax": 0.28,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_lai": {
+      "p": "sentinel2/rasters/cae1_2026_w34_lai.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · LAI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "LAI",
+      "vmin": 0.2,
+      "vmax": 1.32,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_leaf_chl": {
+      "p": "sentinel2/rasters/cae1_2026_w34_leaf_chl.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · Leaf chlorophyll",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "LEAF_CHL",
+      "vmin": 13.5,
+      "vmax": 59.4,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_canopy_chl": {
+      "p": "sentinel2/rasters/cae1_2026_w34_canopy_chl.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · Canopy chlorophyll",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "CANOPY_CHL",
+      "vmin": 2.74,
+      "vmax": 76.88,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_fapar": {
+      "p": "sentinel2/rasters/cae1_2026_w34_fapar.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · FAPAR",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "FAPAR",
+      "vmin": 0.14,
+      "vmax": 0.52,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_fcover": {
+      "p": "sentinel2/rasters/cae1_2026_w34_fcover.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · FCOVER",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "FCOVER",
+      "vmin": 0.1,
+      "vmax": 0.39,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae1_2026_w34_clear_pixel_count": {
+      "p": "sentinel2/rasters/cae1_2026_w34_clear_pixel_count.webp",
+      "l": "Predio CAE 1 · 2026 · S34 · Clear pixels",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae1",
+      "band": "CLEAR_PIXEL_COUNT",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.354648969550986,
+          -70.69150978422796
+        ],
+        [
+          -33.3540669374233,
+          -70.6908904463403
+        ]
+      ]
+    },
+    "cae2_2026_w34_ndvi": {
+      "p": "sentinel2/rasters/cae2_2026_w34_ndvi.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · NDVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "NDVI",
+      "vmin": -0.77,
+      "vmax": 0.77,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_ndmi": {
+      "p": "sentinel2/rasters/cae2_2026_w34_ndmi.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · NDMI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "NDMI",
+      "vmin": -0.349,
+      "vmax": 0.349,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_ndwi": {
+      "p": "sentinel2/rasters/cae2_2026_w34_ndwi.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · NDWI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "NDWI",
+      "vmin": -0.74,
+      "vmax": 0.74,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_mndwi": {
+      "p": "sentinel2/rasters/cae2_2026_w34_mndwi.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · MNDWI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "MNDWI",
+      "vmin": -0.63,
+      "vmax": 0.63,
+      "colormap": "Blues",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_gndvi": {
+      "p": "sentinel2/rasters/cae2_2026_w34_gndvi.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · GNDVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "GNDVI",
+      "vmin": -0.74,
+      "vmax": 0.74,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_evi": {
+      "p": "sentinel2/rasters/cae2_2026_w34_evi.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · EVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "EVI",
+      "vmin": -0.41,
+      "vmax": 0.41,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_savi": {
+      "p": "sentinel2/rasters/cae2_2026_w34_savi.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · SAVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "SAVI",
+      "vmin": -0.38,
+      "vmax": 0.38,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_msavi": {
+      "p": "sentinel2/rasters/cae2_2026_w34_msavi.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · MSAVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "MSAVI",
+      "vmin": -0.36,
+      "vmax": 0.36,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_ari": {
+      "p": "sentinel2/rasters/cae2_2026_w34_ari.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · ARI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "ARI",
+      "vmin": 1.25,
+      "vmax": 21.785,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_mari": {
+      "p": "sentinel2/rasters/cae2_2026_w34_mari.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · MARI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "MARI",
+      "vmin": 0.2,
+      "vmax": 4.16,
+      "colormap": "RdPu",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_arvi": {
+      "p": "sentinel2/rasters/cae2_2026_w34_arvi.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · ARVI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "ARVI",
+      "vmin": -0.79,
+      "vmax": 0.79,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_chl_rededge": {
+      "p": "sentinel2/rasters/cae2_2026_w34_chl_rededge.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · Chl rededge",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "CHL_REDEDGE",
+      "vmin": 0.2,
+      "vmax": 1.88,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_evi2": {
+      "p": "sentinel2/rasters/cae2_2026_w34_evi2.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · EVI2",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "EVI2",
+      "vmin": -0.38,
+      "vmax": 0.38,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_kndvi": {
+      "p": "sentinel2/rasters/cae2_2026_w34_kndvi.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · ",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "KNDVI",
+      "vmin": -0.54,
+      "vmax": 0.54,
+      "colormap": "RdYlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_mcari": {
+      "p": "sentinel2/rasters/cae2_2026_w34_mcari.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · MCARI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "MCARI",
+      "vmin": -0.01,
+      "vmax": 0.14,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_msi": {
+      "p": "sentinel2/rasters/cae2_2026_w34_msi.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · MSI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "MSI",
+      "vmin": 0.482,
+      "vmax": 1.21,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_ndmistress": {
+      "p": "sentinel2/rasters/cae2_2026_w34_ndmistress.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · NDMI stress",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "NDMISTRESS",
+      "vmin": -0.32,
+      "vmax": 0.32,
+      "colormap": "RdYlBu_r",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_ndii": {
+      "p": "sentinel2/rasters/cae2_2026_w34_ndii.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · NDII",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "NDII",
+      "vmin": -0.349,
+      "vmax": 0.349,
+      "colormap": "RdYlBu",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_ndci": {
+      "p": "sentinel2/rasters/cae2_2026_w34_ndci.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · NDCI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "NDCI",
+      "vmin": -0.49,
+      "vmax": 0.49,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_pssrb1": {
+      "p": "sentinel2/rasters/cae2_2026_w34_pssrb1.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · PSSRB1",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "PSSRB1",
+      "vmin": 1.6,
+      "vmax": 7.86,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_sipi1": {
+      "p": "sentinel2/rasters/cae2_2026_w34_sipi1.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · SIPI1",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "SIPI1",
+      "vmin": 0.867,
+      "vmax": 2.11,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_psri": {
+      "p": "sentinel2/rasters/cae2_2026_w34_psri.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · PSRI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "PSRI",
+      "vmin": -0.34,
+      "vmax": 0.34,
+      "colormap": "RdYlGn_r",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_lai": {
+      "p": "sentinel2/rasters/cae2_2026_w34_lai.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · LAI",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "LAI",
+      "vmin": 0.13,
+      "vmax": 1.44,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_leaf_chl": {
+      "p": "sentinel2/rasters/cae2_2026_w34_leaf_chl.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · Leaf chlorophyll",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "LEAF_CHL",
+      "vmin": 9.21,
+      "vmax": 71.46,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_canopy_chl": {
+      "p": "sentinel2/rasters/cae2_2026_w34_canopy_chl.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · Canopy chlorophyll",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "CANOPY_CHL",
+      "vmin": 1.26,
+      "vmax": 98.16,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_fapar": {
+      "p": "sentinel2/rasters/cae2_2026_w34_fapar.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · FAPAR",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "FAPAR",
+      "vmin": 0.1,
+      "vmax": 0.55,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_fcover": {
+      "p": "sentinel2/rasters/cae2_2026_w34_fcover.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · FCOVER",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "FCOVER",
+      "vmin": 0.07,
+      "vmax": 0.41,
+      "colormap": "YlGn",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
+    },
+    "cae2_2026_w34_clear_pixel_count": {
+      "p": "sentinel2/rasters/cae2_2026_w34_clear_pixel_count.webp",
+      "l": "Predio CAE 2 · 2026 · S34 · Clear pixels",
+      "year": 2026,
+      "week": 34,
+      "predio_id": "cae2",
+      "band": "CLEAR_PIXEL_COUNT",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "colormap": "viridis",
+      "leaflet_bounds": [
+        [
+          -33.35514925979975,
+          -70.69154068422286
+        ],
+        [
+          -33.35428637483264,
+          -70.69078784268048
+        ]
+      ]
     }
   },
   "stretch_by_predio": {
@@ -88933,12 +92473,12 @@
       },
       "NDMISTRESS": {
         "p0": -0.06,
-        "p100": 0.17,
+        "p100": 0.19,
         "center": 0.0,
-        "spread": 0.17,
+        "spread": 0.19,
         "symmetric": true,
-        "vmin": -0.17,
-        "vmax": 0.17
+        "vmin": -0.19,
+        "vmax": 0.19
       },
       "NDII": {
         "p0": -0.07,
@@ -88973,7 +92513,7 @@
         "vmax": 1.69
       },
       "PSRI": {
-        "p0": 0.06,
+        "p0": 0.05,
         "p100": 0.326,
         "center": 0.0,
         "spread": 0.326,

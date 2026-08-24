@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T15:02:20+00:00",
+  "generated_at": "2026-08-24T15:38:44+00:00",
   "default_band": "NDVI",
   "timeline": [
     {
@@ -301,6 +301,18 @@
       "week": 32,
       "key": "2026_w32",
       "label": "2026 · S32"
+    },
+    {
+      "year": 2026,
+      "week": 33,
+      "key": "2026_w33",
+      "label": "2026 · S33"
+    },
+    {
+      "year": 2026,
+      "week": 34,
+      "key": "2026_w34",
+      "label": "2026 · S34"
     }
   ],
   "series": {
@@ -355,7 +367,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.466
       ],
       "cae1": [
         null,
@@ -407,7 +421,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.4825
       ],
       "cae2": [
         null,
@@ -459,7 +475,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.4971
       ]
     },
     "NDMI": {
@@ -513,7 +531,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.146
       ],
       "cae1": [
         null,
@@ -565,7 +585,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.165
       ],
       "cae2": [
         null,
@@ -617,7 +639,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.1586
       ]
     },
     "NDWI": {
@@ -671,7 +695,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        -0.444
       ],
       "cae1": [
         null,
@@ -723,7 +749,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        -0.4675
       ],
       "cae2": [
         null,
@@ -775,7 +803,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        -0.4686
       ]
     },
     "MNDWI": {
@@ -829,7 +859,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        -0.32
       ],
       "cae1": [
         null,
@@ -881,7 +913,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        -0.33
       ],
       "cae2": [
         null,
@@ -933,7 +967,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        -0.3329
       ]
     },
     "GNDVI": {
@@ -987,7 +1023,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.444
       ],
       "cae1": [
         null,
@@ -1039,7 +1077,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.4675
       ],
       "cae2": [
         null,
@@ -1091,7 +1131,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.4686
       ]
     },
     "EVI": {
@@ -1145,7 +1187,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.246
       ],
       "cae1": [
         null,
@@ -1197,7 +1241,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.2475
       ],
       "cae2": [
         null,
@@ -1249,7 +1295,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.2414
       ]
     },
     "SAVI": {
@@ -1303,7 +1351,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.23
       ],
       "cae1": [
         null,
@@ -1355,7 +1405,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.2325
       ],
       "cae2": [
         null,
@@ -1407,7 +1459,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.2307
       ]
     },
     "MSAVI": {
@@ -1461,7 +1515,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.194
       ],
       "cae1": [
         null,
@@ -1513,7 +1569,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.1975
       ],
       "cae2": [
         null,
@@ -1565,7 +1623,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.1964
       ]
     },
     "ARI": {
@@ -1619,7 +1679,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        4.652
       ],
       "cae1": [
         null,
@@ -1671,7 +1733,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        5.0625
       ],
       "cae2": [
         null,
@@ -1723,7 +1787,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        5.8186
       ]
     },
     "MARI": {
@@ -1777,7 +1843,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.806
       ],
       "cae1": [
         null,
@@ -1829,7 +1897,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.8325
       ],
       "cae2": [
         null,
@@ -1881,7 +1951,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.9693
       ]
     },
     "ARVI": {
@@ -1935,7 +2007,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.486
       ],
       "cae1": [
         null,
@@ -1987,7 +2061,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.4775
       ],
       "cae2": [
         null,
@@ -2039,7 +2115,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.5143
       ]
     },
     "CHL_REDEDGE": {
@@ -2093,7 +2171,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.71
       ],
       "cae1": [
         null,
@@ -2145,7 +2225,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.78
       ],
       "cae2": [
         null,
@@ -2197,7 +2279,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.7857
       ]
     },
     "EVI2": {
@@ -2251,7 +2335,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.222
       ],
       "cae1": [
         null,
@@ -2303,7 +2389,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.22
       ],
       "cae2": [
         null,
@@ -2355,7 +2443,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.2186
       ]
     },
     "KNDVI": {
@@ -2409,7 +2499,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.214
       ],
       "cae1": [
         null,
@@ -2461,7 +2553,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.2275
       ],
       "cae2": [
         null,
@@ -2513,7 +2607,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.2436
       ]
     },
     "MCARI": {
@@ -2567,7 +2663,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.048
       ],
       "cae1": [
         null,
@@ -2619,7 +2717,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.04
       ],
       "cae2": [
         null,
@@ -2671,7 +2771,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.0514
       ]
     },
     "MSI": {
@@ -2725,7 +2827,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.742
       ],
       "cae1": [
         null,
@@ -2777,7 +2881,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.7175
       ],
       "cae2": [
         null,
@@ -2829,7 +2935,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.7264
       ]
     },
     "NDMISTRESS": {
@@ -2883,7 +2991,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.178
       ],
       "cae1": [
         null,
@@ -2935,7 +3045,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.165
       ],
       "cae2": [
         null,
@@ -2987,7 +3099,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.1836
       ]
     },
     "NDII": {
@@ -3041,7 +3155,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.146
       ],
       "cae1": [
         null,
@@ -3093,7 +3209,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.165
       ],
       "cae2": [
         null,
@@ -3145,7 +3263,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.1586
       ]
     },
     "NDCI": {
@@ -3199,7 +3319,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.218
       ],
       "cae1": [
         null,
@@ -3251,7 +3373,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.2025
       ],
       "cae2": [
         null,
@@ -3303,7 +3427,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.2457
       ]
     },
     "PSSRB1": {
@@ -3357,7 +3483,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        2.76
       ],
       "cae1": [
         null,
@@ -3409,7 +3537,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        2.865
       ],
       "cae2": [
         null,
@@ -3461,7 +3591,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        3.0014
       ]
     },
     "SIPI1": {
@@ -3515,7 +3647,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        1.11
       ],
       "cae1": [
         null,
@@ -3567,7 +3701,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        1.0725
       ],
       "cae2": [
         null,
@@ -3619,7 +3755,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        1.0379
       ]
     },
     "PSRI": {
@@ -3673,7 +3811,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.072
       ],
       "cae1": [
         null,
@@ -3725,7 +3865,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.07
       ],
       "cae2": [
         null,
@@ -3777,7 +3919,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.0629
       ]
     },
     "LAI": {
@@ -3831,7 +3975,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.714
       ],
       "cae1": [
         null,
@@ -3883,7 +4029,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.675
       ],
       "cae2": [
         null,
@@ -3935,7 +4083,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.7314
       ]
     },
     "LEAF_CHL": {
@@ -3989,7 +4139,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        26.904
       ],
       "cae1": [
         null,
@@ -4041,7 +4193,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        27.4375
       ],
       "cae2": [
         null,
@@ -4093,7 +4247,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        28.9107
       ]
     },
     "CANOPY_CHL": {
@@ -4147,7 +4303,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        19.386
       ],
       "cae1": [
         null,
@@ -4199,7 +4357,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        18.9975
       ],
       "cae2": [
         null,
@@ -4251,7 +4411,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        21.5671
       ]
     },
     "FAPAR": {
@@ -4305,7 +4467,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.336
       ],
       "cae1": [
         null,
@@ -4357,7 +4521,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.325
       ],
       "cae2": [
         null,
@@ -4409,7 +4575,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.3436
       ]
     },
     "FCOVER": {
@@ -4463,7 +4631,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.256
       ],
       "cae1": [
         null,
@@ -4515,7 +4685,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.2325
       ],
       "cae2": [
         null,
@@ -4567,7 +4739,9 @@
         null,
         null,
         null,
-        null
+        null,
+        null,
+        0.2536
       ]
     },
     "CLEAR_PIXEL_COUNT": {
@@ -4621,7 +4795,9 @@
         0.0,
         0.0,
         0.0,
-        0.0
+        0.0,
+        0.0,
+        1.0
       ],
       "cae1": [
         0.0,
@@ -4673,7 +4849,9 @@
         0.0,
         0.0,
         0.0,
-        0.0
+        0.0,
+        0.0,
+        1.0
       ],
       "cae2": [
         0.0,
@@ -4725,7 +4903,9 @@
         0.0,
         0.0,
         0.0,
-        0.0
+        0.0,
+        0.0,
+        1.0
       ]
     }
   },
@@ -5011,5 +5191,5 @@
       "fallback_vmax": 30.0
     }
   },
-  "last_timeline_key": "2026_w32"
+  "last_timeline_key": "2026_w34"
 }
